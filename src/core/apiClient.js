@@ -11,7 +11,6 @@ const apiClient = axios.create({
     timeout: 15000,
 });
 
-// Retry logic for rate limits & 202 processing
 async function requestWithRetry(config, retries = 3) {
     try {
         const response = await apiClient(config);
@@ -19,14 +18,12 @@ async function requestWithRetry(config, retries = 3) {
     } catch (error) {
         const status = error.response?.status;
 
-        // Handle 202 (GitHub stats still generating)
         if (status === 202 && retries > 0) {
-            console.log("⏳ Data processing, retrying...");
+            console.log("⏳ GitHub processing data... retrying");
             await new Promise((res) => setTimeout(res, 2000));
             return requestWithRetry(config, retries - 1);
         }
 
-        // Handle rate limit
         if (status === 403 && retries > 0) {
             console.log("⚠️ Rate limited. Waiting 5 seconds...");
             await new Promise((res) => setTimeout(res, 5000));
@@ -37,6 +34,4 @@ async function requestWithRetry(config, retries = 3) {
     }
 }
 
-module.exports = {
-    requestWithRetry,
-};
+module.exports = { requestWithRetry };

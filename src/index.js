@@ -1,31 +1,22 @@
 require("dotenv").config();
-const axios = require("axios");
 
-console.log("\n📌 PROCESS.ENV CONTENTS:");
-console.log({
-    GITHUB_USERNAME: process.env.GITHUB_USERNAME,
-    GITHUB_TOKEN: process.env.GITHUB_TOKEN,
-});
+const githubConfig = require("./config/githubConfig");
+const { fetchAllRepos } = require("./services/repoService");
+const { buildBasicStats } = require("./aggregator/statsAggregator");
 
-async function testConnection() {
+async function run() {
     try {
-        const url = `https://api.github.com/users/${process.env.GITHUB_USERNAME}`;
-        console.log("\n📡 Requesting URL:", url);
+        console.log("🚀 Starting GitInsight Engine Phase 1...\n");
 
-        const response = await axios.get(url, {
-            headers: {
-                Authorization: `Bearer ${process.env.GITHUB_TOKEN}`,
-                Accept: "application/vnd.github+json",
-                "X-GitHub-Api-Version": "2022-11-28",
-            },
-        });
+        const repos = await fetchAllRepos();
 
-        console.log("\n✅ API Connected Successfully!");
-        console.log("Username from API:", response.data.login);
+        const stats = buildBasicStats(githubConfig.username, repos);
+
+        console.log("\n📊 Basic GitHub Stats:");
+        console.log(JSON.stringify(stats, null, 2));
     } catch (error) {
-        console.error("\n❌ API Error:");
-        console.error(error.response?.data || error.message);
+        console.error("❌ Error:", error.message);
     }
 }
 
-testConnection();
+run();
