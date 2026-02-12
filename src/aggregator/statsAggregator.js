@@ -10,7 +10,8 @@ function buildStats(
     repos,
     languageStats,
     totalContributions,
-    trafficStats
+    trafficStats,
+    codeStats
 ) {
     return {
         username,
@@ -22,6 +23,7 @@ function buildStats(
         topRepo: calculateTopRepo(repos),
         averageStarsPerRepo: calculateAverageStars(repos),
         traffic: trafficStats,
+        codeStats,
     };
 }
 
