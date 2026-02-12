@@ -3,12 +3,12 @@ const path = require("path");
 
 const CACHE_TTL_MS = 60 * 60 * 1000; // 1 hour
 
-function getCacheFilePath() {
-    return path.join(__dirname, "../../output/stats.json");
+function getCacheFilePath(username) {
+    return path.join(__dirname, `../../output/${username}.json`);
 }
 
-function isCacheValid() {
-    const filePath = getCacheFilePath();
+function isCacheValid(username) {
+    const filePath = getCacheFilePath(username);
 
     if (!fs.existsSync(filePath)) {
         return false;
@@ -20,8 +20,8 @@ function isCacheValid() {
     return fileAge < CACHE_TTL_MS;
 }
 
-function readCache() {
-    const filePath = getCacheFilePath();
+function readCache(username) {
+    const filePath = getCacheFilePath(username);
 
     if (!fs.existsSync(filePath)) {
         return null;
@@ -34,4 +34,5 @@ function readCache() {
 module.exports = {
     isCacheValid,
     readCache,
+    getCacheFilePath,
 };

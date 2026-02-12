@@ -1,0 +1,35 @@
+{
+  "username": "Abhi-lash19",
+  "totalRepos": 13,
+  "totalStars": 0,
+  "totalForks": 0,
+  "languages": {
+    "TypeScript": "52.57",
+    "JavaScript": "19.23",
+    "Python": "11.69",
+    "HTML": "5.25",
+    "EJS": "3.94",
+    "CSS": "3.64",
+    "HCL": "1.97",
+    "Shell": "0.57",
+    "Java": "0.44",
+    "Dockerfile": "0.29",
+    "Jupyter Notebook": "0.25",
+    "Makefile": "0.17"
+  },
+  "totalContributions": 198,
+  "topRepo": {
+    "name": "3d-portfolio",
+    "stars": 0
+  },
+  "averageStarsPerRepo": "0.00",
+  "traffic": {
+    "totalViews": 223,
+    "totalUniqueVisitors": 13
+  },
+  "codeStats": {
+    "totalLinesAdded": 30934,
+    "totalLinesDeleted": 3166,
+    "netLines": 27768
+  }
+}

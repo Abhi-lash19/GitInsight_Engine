@@ -1,16 +1,15 @@
 const fs = require("fs");
 const path = require("path");
 
-async function writeStatsToFile(data) {
+async function writeStatsToFile(username, data) {
     try {
         const outputDir = path.join(__dirname, "../../output");
 
-        // Ensure output directory exists
         if (!fs.existsSync(outputDir)) {
             fs.mkdirSync(outputDir, { recursive: true });
         }
 
-        const filePath = path.join(outputDir, "stats.json");
+        const filePath = path.join(outputDir, `${username}.json`);
 
         fs.writeFileSync(filePath, JSON.stringify(data, null, 2));
 
