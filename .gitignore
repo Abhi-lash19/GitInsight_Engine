@@ -1,3 +1,5 @@
 node_modules
 .env
+output/
 output/stats.json
+output/Abhi-lash19.json
