@@ -2,8 +2,8 @@
 require("dotenv").config();
 
 const yargs = require("yargs");
-const chalk = require("chalk");
-const ora = require("ora");
+const chalk = require("chalk").default;
+const ora = require("ora").default;
 
 const githubConfig = require("./config/githubConfig");
 const { fetchAllRepos } = require("./services/repoService");
