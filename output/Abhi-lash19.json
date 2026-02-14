@@ -4,20 +4,20 @@
   "totalStars": 0,
   "totalForks": 0,
   "languages": {
-    "TypeScript": "52.43",
-    "JavaScript": "19.45",
-    "Python": "11.66",
-    "HTML": "5.23",
-    "EJS": "3.93",
-    "CSS": "3.62",
-    "HCL": "1.96",
+    "TypeScript": "52.02",
+    "JavaScript": "20.08",
+    "Python": "11.57",
+    "HTML": "5.19",
+    "EJS": "3.90",
+    "CSS": "3.60",
+    "HCL": "1.95",
     "Shell": "0.56",
-    "Java": "0.44",
+    "Java": "0.43",
     "Dockerfile": "0.29",
     "Jupyter Notebook": "0.25",
     "Makefile": "0.17"
   },
-  "totalContributions": 202,
+  "totalContributions": 204,
   "topRepo": {
     "name": "3d-portfolio",
     "stars": 0
@@ -28,8 +28,8 @@
     "totalUniqueVisitors": 0
   },
   "codeStats": {
-    "totalLinesAdded": 0,
-    "totalLinesDeleted": 0,
-    "netLines": 0
+    "totalLinesAdded": 81021,
+    "totalLinesDeleted": 4076,
+    "netLines": 76945
   }
 }

@@ -14,6 +14,8 @@ const { calculateCodeFrequencyStats } = require("./services/codeFrequencyService
 const { buildStats } = require("./aggregator/statsAggregator");
 const { writeStatsToFile } = require("./output/writeJson");
 const { isCacheValid, readCache } = require("./output/cacheManager");
+const { generateAllCards } = require("./generators/generateAllCards");
+
 
 // ---------------- CLI CONFIG ----------------
 
@@ -99,6 +101,7 @@ async function run() {
         console.log(JSON.stringify(stats, null, 2));
 
         await writeStatsToFile(activeUsername, stats);
+        generateAllCards(activeUsername, stats);
 
         console.log(chalk.green("\n✅ Done\n"));
     } catch (error) {

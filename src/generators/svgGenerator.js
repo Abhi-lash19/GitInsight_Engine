@@ -2,18 +2,18 @@ const fs = require("fs");
 const path = require("path");
 
 /**
- * Base SVG card generator
+ * Base SVG card generator (modern theme)
  */
 function createCard({ title, lines }) {
-    const width = 400;
-    const height = 180;
+    const width = 420;
+    const height = 190;
 
-    const lineHeight = 24;
+    const lineHeight = 26;
 
     const textLines = lines
         .map(
             (line, index) => `
-        <text x="20" y="${70 + index * lineHeight}" fill="#c9d1d9" font-size="16">
+        <text x="24" y="${80 + index * lineHeight}" fill="#e6edf3" font-size="16">
             ${line}
         </text>`
         )
@@ -21,9 +21,16 @@ function createCard({ title, lines }) {
 
     return `
 <svg width="${width}" height="${height}" viewBox="0 0 ${width} ${height}" xmlns="http://www.w3.org/2000/svg">
-    <rect width="100%" height="100%" rx="14" fill="#0d1117"/>
-    
-    <text x="20" y="40" fill="#58a6ff" font-size="20" font-weight="bold">
+    <defs>
+        <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0%" stop-color="#0d1117"/>
+            <stop offset="100%" stop-color="#161b22"/>
+        </linearGradient>
+    </defs>
+
+    <rect width="100%" height="100%" rx="16" fill="url(#bg)" stroke="#30363d"/>
+
+    <text x="24" y="42" fill="#58a6ff" font-size="20" font-weight="600">
         ${title}
     </text>
 
