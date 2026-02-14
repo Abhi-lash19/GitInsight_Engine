@@ -34,6 +34,35 @@ const argv = yargs(process.argv.slice(2))
     .help()
     .alias("help", "h").argv;
 
+
+// ---------------- HELPER: ANALYTICS PIPELINE ----------------
+
+async function computeAnalytics(activeUsername, repos) {
+    const analyticsSpinner = ora("Calculating analytics...").start();
+
+    const [
+        languageStats,
+        totalContributions,
+        trafficStats,
+        codeStats,
+    ] = await Promise.all([
+        calculateLanguageStats(repos),
+        fetchTotalContributions(activeUsername),
+        calculateTrafficStats(repos),
+        calculateCodeFrequencyStats(repos),
+    ]);
+
+    analyticsSpinner.succeed("Analytics complete");
+
+    return {
+        languageStats,
+        totalContributions,
+        trafficStats,
+        codeStats,
+    };
+}
+
+
 // ---------------- MAIN EXECUTION ----------------
 
 async function run() {
@@ -67,26 +96,16 @@ async function run() {
         // Override config username
         githubConfig.username = activeUsername;
 
-        const spinner = ora("Fetching repositories...").start();
-
+        const repoSpinner = ora("Fetching repositories...").start();
         const repos = await fetchAllRepos();
-        spinner.succeed("Repositories fetched");
+        repoSpinner.succeed("Repositories fetched");
 
-        const analyticsSpinner = ora("Calculating analytics...").start();
-
-        const [
+        const {
             languageStats,
             totalContributions,
             trafficStats,
             codeStats,
-        ] = await Promise.all([
-            calculateLanguageStats(repos),
-            fetchTotalContributions(activeUsername),
-            calculateTrafficStats(repos),
-            calculateCodeFrequencyStats(repos),
-        ]);
-
-        analyticsSpinner.succeed("Analytics complete");
+        } = await computeAnalytics(activeUsername, repos);
 
         const stats = buildStats(
             activeUsername,
