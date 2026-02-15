@@ -2,11 +2,24 @@ const { requestWithRetry } = require("../core/apiClient");
 const githubConfig = require("../config/githubConfig");
 const limit = require("../core/rateLimiter");
 
+const {
+    isRepoCacheValid,
+    readRepoCache,
+    writeRepoCache,
+} = require('../cache/cacheManager');
+
 async function fetchRepoLanguages(repoName) {
-    return requestWithRetry({
+    if (isRepoCacheValid(githubConfig.username, repoName, "languages")) {
+        return readRepoCache(githubConfig.username, repoName, "languages");
+    }
+
+    const data = await requestWithRetry({
         method: "GET",
         url: `/repos/${githubConfig.username}/${repoName}/languages`,
     });
+
+    writeRepoCache(githubConfig.username, repoName, "languages", data);
+    return data;
 }
 
 async function calculateLanguageStats(repos) {

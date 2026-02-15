@@ -2,19 +2,29 @@ const { requestWithRetry } = require("../core/apiClient");
 const githubConfig = require("../config/githubConfig");
 const limit = require("../core/rateLimiter");
 
+const {
+    isRepoCacheValid,
+    readRepoCache,
+    writeRepoCache,
+} = require('../cache/cacheManager');
+
 async function fetchRepoCodeFrequency(repoName) {
+    if (isRepoCacheValid(githubConfig.username, repoName, "codefreq")) {
+        return readRepoCache(githubConfig.username, repoName, "codefreq");
+    }
+
     try {
         const data = await requestWithRetry(
             {
                 method: "GET",
                 url: `/repos/${githubConfig.username}/${repoName}/stats/code_frequency`,
             },
-            5 // extra retries for 202 processing
+            5
         );
 
+        writeRepoCache(githubConfig.username, repoName, "codefreq", data || []);
         return data || [];
-    } catch (error) {
-        console.log(`⚠️ Skipping code frequency for ${repoName}`);
+    } catch {
         return [];
     }
 }

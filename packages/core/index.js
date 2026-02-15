@@ -1,4 +1,3 @@
-#!/usr/bin/env node
 require("dotenv").config();
 
 const yargs = require("yargs");
@@ -11,31 +10,11 @@ const { calculateLanguageStats } = require("./services/languageService");
 const { fetchTotalContributions } = require("./services/contributionService");
 const { calculateTrafficStats } = require("./services/trafficService");
 const { calculateCodeFrequencyStats } = require("./services/codeFrequencyService");
+const { calculateAdvancedCommitStats } = require("./services/advancedStatsService");
 const { buildStats } = require("./aggregator/statsAggregator");
 const { writeStatsToFile } = require("./output/writeJson");
-const { isCacheValid, readCache } = require("./output/cacheManager");
+const { isCacheValid, readCache } = require('./cache/cacheManager');
 const { generateAllCards } = require("./generators/generateAllCards");
-
-
-// ---------------- CLI CONFIG ----------------
-
-const argv = yargs(process.argv.slice(2))
-    .option("user", {
-        alias: "u",
-        type: "string",
-        description: "GitHub username to analyze",
-    })
-    .option("refresh", {
-        alias: "r",
-        type: "boolean",
-        description: "Force refresh (ignore cache)",
-        default: false,
-    })
-    .help()
-    .alias("help", "h").argv;
-
-
-// ---------------- HELPER: ANALYTICS PIPELINE ----------------
 
 async function computeAnalytics(activeUsername, repos) {
     const analyticsSpinner = ora("Calculating analytics...").start();
@@ -62,10 +41,22 @@ async function computeAnalytics(activeUsername, repos) {
     };
 }
 
+async function runCLI() {
+    const argv = yargs(process.argv.slice(2))
+        .option("user", {
+            alias: "u",
+            type: "string",
+            description: "GitHub username to analyze",
+        })
+        .option("refresh", {
+            alias: "r",
+            type: "boolean",
+            description: "Force refresh (ignore cache)",
+            default: false,
+        })
+        .help()
+        .alias("help", "h").argv;
 
-// ---------------- MAIN EXECUTION ----------------
-
-async function run() {
     try {
         const activeUsername = argv.user || githubConfig.username;
 
@@ -82,10 +73,8 @@ async function run() {
         console.log(chalk.white(`👤 Target User: ${activeUsername}`));
         console.log(chalk.white(`🔄 Force Refresh: ${argv.refresh ? "YES" : "NO"}\n`));
 
-        // Cache check
         if (!argv.refresh && isCacheValid(activeUsername)) {
             console.log(chalk.yellow("⚡ Using cached stats (within TTL)\n"));
-
             const cachedStats = readCache(activeUsername);
             console.log(JSON.stringify(cachedStats, null, 2));
             return;
@@ -93,7 +82,6 @@ async function run() {
 
         console.log(chalk.gray("♻️ Computing fresh stats...\n"));
 
-        // Override config username
         githubConfig.username = activeUsername;
 
         const repoSpinner = ora("Fetching repositories...").start();
@@ -107,13 +95,19 @@ async function run() {
             codeStats,
         } = await computeAnalytics(activeUsername, repos);
 
+        const advancedStats = await calculateAdvancedCommitStats(
+            repos,
+            languageStats
+        );
+
         const stats = buildStats(
             activeUsername,
             repos,
             languageStats,
             totalContributions,
             trafficStats,
-            codeStats
+            codeStats,
+            advancedStats
         );
 
         console.log(chalk.green("\n📊 GitHub Stats:\n"));
@@ -128,4 +122,4 @@ async function run() {
     }
 }
 
-run();
+module.exports = { runCLI };
