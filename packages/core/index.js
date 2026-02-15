@@ -10,6 +10,7 @@ const { calculateLanguageStats } = require("./services/languageService");
 const { fetchTotalContributions } = require("./services/contributionService");
 const { calculateTrafficStats } = require("./services/trafficService");
 const { calculateCodeFrequencyStats } = require("./services/codeFrequencyService");
+const { calculateAdvancedCommitStats } = require("./services/advancedStatsService");
 const { buildStats } = require("./aggregator/statsAggregator");
 const { writeStatsToFile } = require("./output/writeJson");
 const { isCacheValid, readCache } = require("./output/cacheManager");
@@ -94,13 +95,19 @@ async function runCLI() {
             codeStats,
         } = await computeAnalytics(activeUsername, repos);
 
+        const advancedStats = await calculateAdvancedCommitStats(
+            repos,
+            languageStats
+        );
+
         const stats = buildStats(
             activeUsername,
             repos,
             languageStats,
             totalContributions,
             trafficStats,
-            codeStats
+            codeStats,
+            advancedStats
         );
 
         console.log(chalk.green("\n📊 GitHub Stats:\n"));
