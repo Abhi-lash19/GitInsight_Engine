@@ -10,6 +10,7 @@ const { generateReadmeSnippet } = require("./readmeSnippet");
  * Generate all cards + README snippet
  */
 function generateAllCards(username, stats) {
+    const start = Date.now();
     console.log("\n🎨 Generating README cards...\n");
 
     generateOverviewCard(username, stats);
@@ -17,7 +18,7 @@ function generateAllCards(username, stats) {
 
     generateReadmeSnippet(username);
 
-    console.log("\n✅ Cards + README snippet generated\n");
+    console.log(`\n✅ Cards generated in ${Date.now() - start}ms\n`);
 }
 
 module.exports = { generateAllCards };

@@ -13,7 +13,7 @@ const { calculateCodeFrequencyStats } = require("./services/codeFrequencyService
 const { calculateAdvancedCommitStats } = require("./services/advancedStatsService");
 const { buildStats } = require("./aggregator/statsAggregator");
 const { writeStatsToFile } = require("./output/writeJson");
-const { isCacheValid, readCache } = require("./output/cacheManager");
+const { isCacheValid, readCache } = require('./cache/cacheManager');
 const { generateAllCards } = require("./generators/generateAllCards");
 
 async function computeAnalytics(activeUsername, repos) {

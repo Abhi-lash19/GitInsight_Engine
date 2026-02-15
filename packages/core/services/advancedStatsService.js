@@ -1,8 +1,17 @@
 const { requestWithRetry } = require("../core/apiClient");
 const githubConfig = require("../config/githubConfig");
 const limit = require("../core/rateLimiter");
+const {
+    isRepoCacheValid,
+    readRepoCache,
+    writeRepoCache,
+} = require('../cache/cacheManager');
 
 async function fetchCommitActivity(repoName) {
+    if (isRepoCacheValid(githubConfig.username, repoName, "commit")) {
+        return readRepoCache(githubConfig.username, repoName, "commit");
+    }
+
     try {
         const data = await requestWithRetry(
             {
@@ -12,11 +21,8 @@ async function fetchCommitActivity(repoName) {
             5
         );
 
-        if (Array.isArray(data)) {
-            return data;
-        }
-
-        return [];
+        writeRepoCache(githubConfig.username, repoName, "commit", data || []);
+        return data || [];
     } catch {
         return [];
     }

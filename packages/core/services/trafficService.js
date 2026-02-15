@@ -9,13 +9,13 @@ async function fetchRepoTraffic(repoName) {
             url: `/repos/${githubConfig.username}/${repoName}/traffic/views`,
         });
 
+        if (!data) return { views: 0, uniques: 0 };
+
         return {
             views: data.count || 0,
             uniques: data.uniques || 0,
         };
-    } catch (error) {
-        // Traffic may fail if permissions missing
-        console.log(`⚠️ Skipping traffic for ${repoName}`);
+    } catch {
         return { views: 0, uniques: 0 };
     }
 }
@@ -24,7 +24,7 @@ async function calculateTrafficStats(repos) {
     let totalViews = 0;
     let totalUniqueVisitors = 0;
 
-    console.log("\n👀 Fetching traffic data for each repository...");
+    console.log("\n👀 Fetching traffic data (best effort)...");
 
     const tasks = repos.map((repo) =>
         limit(async () => {
@@ -35,8 +35,6 @@ async function calculateTrafficStats(repos) {
     );
 
     await Promise.all(tasks);
-
-    console.log("✅ Traffic aggregation complete");
 
     return {
         totalViews,
