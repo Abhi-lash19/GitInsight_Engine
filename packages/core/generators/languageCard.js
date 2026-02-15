@@ -1,25 +1,12 @@
 const { saveSVG } = require("./svgGenerator");
+const { getTheme } = require("../themes");
 
 /**
  * Generate language bar chart SVG (modern style)
  */
 function generateLanguageCard(username, languages) {
-    const theme = (process.env.CARD_THEME || "dark").toLowerCase();
-
-    const isLight = theme === "light";
-
-    const colors = {
-        bgStart: isLight ? "#f6f8fa" : "#0d1117",
-        bgEnd: isLight ? "#ffffff" : "#161b22",
-        border: isLight ? "#d0d7de" : "#30363d",
-        title: isLight ? "#0969da" : "#58a6ff",
-        text: isLight ? "#24292f" : "#c9d1d9",
-        subText: isLight ? "#57606a" : "#8b949e",
-        barBg1: isLight ? "#eaeef2" : "#21262d",
-        barBg2: isLight ? "#d8dee4" : "#30363d",
-        bar1: isLight ? "#218bff" : "#58a6ff",
-        bar2: isLight ? "#0969da" : "#1f6feb",
-    };
+    const theme = getTheme(process.env.CARD_THEME || "dark");
+    const colors = theme.colors;
 
     const languageColors = {
         TypeScript: "#3178c6",

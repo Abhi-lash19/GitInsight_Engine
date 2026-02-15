@@ -11,9 +11,11 @@ const { generateReadmeSnippet } = require("./readmeSnippet");
  */
 function generateAllCards(username, stats) {
     const start = Date.now();
+    const theme = process.env.CARD_THEME || "dark";
+
     console.log("\n🎨 Generating README cards...\n");
 
-    generateOverviewCard(username, stats);
+    generateOverviewCard(username, stats, theme);
     generateLanguageCard(username, stats.languages);
 
     generateReadmeSnippet(username);

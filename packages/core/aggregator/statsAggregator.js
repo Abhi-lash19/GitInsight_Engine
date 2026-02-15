@@ -5,6 +5,8 @@ const {
     calculateAverageStars,
 } = require("../services/analyticsService");
 
+const { calculateInsights } = require("../analytics/insightsEngine");
+
 function buildStats(
     username,
     repos,
@@ -14,6 +16,13 @@ function buildStats(
     codeStats,
     advancedStats = {}
 ) {
+    const insights = calculateInsights({
+        totalCommits: advancedStats.totalCommits,
+        weeklyCommitTrend: advancedStats.weeklyCommitTrend,
+        codeStats,
+        repos,
+    });
+
     return {
         username,
         totalRepos: repos.length,
@@ -26,6 +35,7 @@ function buildStats(
         traffic: trafficStats,
         codeStats,
         ...advancedStats,
+        insights, // NEW FIELD (non-breaking)
     };
 }
 
