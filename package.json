@@ -1,12 +1,18 @@
 {
-  "name": "gitinsight_engine",
+  "name": "gitinsight-engine",
+  "private": true,
   "version": "1.0.0",
-  "main": "src/index.js",
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "main": "apps/cli/index.js",
   "bin": {
-    "gitpulse": "./src/index.js"
+    "gitpulse": "apps/cli/index.js"
   },
   "scripts": {
-    "dev": "node src/index.js",
+    "dev": "node apps/cli/index.js",
+    "start": "node apps/cli/index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
