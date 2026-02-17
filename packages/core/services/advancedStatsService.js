@@ -1,69 +1,112 @@
-const { requestWithRetry } = require("../core/apiClient");
+const { requestWithRetry } = require("../clients/apiClient");
 const githubConfig = require("../config/githubConfig");
-const limit = require("../core/rateLimiter");
+const limit = require("../clients/rateLimiter");
 const {
     isRepoCacheValid,
     readRepoCache,
     writeRepoCache,
 } = require('../cache/cacheManager');
 
-async function fetchCommitActivity(repoName) {
-    if (isRepoCacheValid(githubConfig.username, repoName, "commit")) {
-        return readRepoCache(githubConfig.username, repoName, "commit");
+const MAX_PAGES = 10;
+
+async function fetchAllCommits(repoName) {
+    if (isRepoCacheValid(githubConfig.username, repoName, "commits_full")) {
+        return readRepoCache(githubConfig.username, repoName, "commits_full");
     }
 
-    try {
-        const data = await requestWithRetry(
+    let page = 1;
+    let allCommits = [];
+
+    while (page <= MAX_PAGES) {
+        const commits = await requestWithRetry(
             {
                 method: "GET",
-                url: `/repos/${githubConfig.username}/${repoName}/stats/commit_activity`,
+                url: `/repos/${githubConfig.username}/${repoName}/commits`,
+                params: {
+                    per_page: 100,
+                    page,
+                },
             },
             5
         );
 
-        writeRepoCache(githubConfig.username, repoName, "commit", data || []);
-        return data || [];
-    } catch {
-        return [];
+        if (!Array.isArray(commits) || commits.length === 0) break;
+
+        allCommits = allCommits.concat(commits);
+
+        if (commits.length < 100) break;
+
+        page++;
     }
+
+    writeRepoCache(githubConfig.username, repoName, "commits_full", allCommits);
+    return allCommits;
+}
+
+async function fetchCommitDetails(repoName, sha) {
+    return requestWithRetry(
+        {
+            method: "GET",
+            url: `/repos/${githubConfig.username}/${repoName}/commits/${sha}`,
+        },
+        5
+    );
+}
+
+function getWeekIndex(date) {
+    const now = new Date();
+    const diffInMs = now - date;
+    const diffInWeeks = Math.floor(diffInMs / (1000 * 60 * 60 * 24 * 7));
+
+    if (diffInWeeks >= 0 && diffInWeeks < 52) {
+        return 51 - diffInWeeks;
+    }
+
+    return null;
 }
 
 async function calculateAdvancedCommitStats(repos, languageStats) {
     const commitsPerRepo = {};
     const weeklyCommitTrend = new Array(52).fill(0);
+
     let totalCommits = 0;
+    let totalLinesAdded = 0;
+    let totalLinesDeleted = 0;
 
     const tasks = repos.map((repo) =>
         limit(async () => {
-            const weeklyData = await fetchCommitActivity(repo.name);
+            const commits = await fetchAllCommits(repo.name);
 
-            if (!Array.isArray(weeklyData)) {
+            if (!Array.isArray(commits)) {
                 commitsPerRepo[repo.name] = 0;
                 return;
             }
 
-            let repoCommits = 0;
+            commitsPerRepo[repo.name] = commits.length;
+            totalCommits += commits.length;
 
-            weeklyData.forEach((week, index) => {
-                if (!week || typeof week !== "object") return;
+            for (const commit of commits) {
+                if (!commit || !commit.sha) continue;
 
-                const commits = week.total || 0;
+                const commitDate = new Date(commit.commit.author.date);
+                const weekIndex = getWeekIndex(commitDate);
 
-                repoCommits += commits;
-
-                if (index < 52) {
-                    weeklyCommitTrend[index] += commits;
+                if (weekIndex !== null) {
+                    weeklyCommitTrend[weekIndex]++;
                 }
-            });
 
-            commitsPerRepo[repo.name] = repoCommits;
-            totalCommits += repoCommits;
+                const details = await fetchCommitDetails(repo.name, commit.sha);
+
+                if (details && details.stats) {
+                    totalLinesAdded += details.stats.additions || 0;
+                    totalLinesDeleted += details.stats.deletions || 0;
+                }
+            }
         })
     );
 
     await Promise.all(tasks);
 
-    // Estimate commits by language
     const commitsByLanguage = {};
     Object.entries(languageStats || {}).forEach(([lang, percent]) => {
         const numericPercent = parseFloat(percent);
@@ -79,6 +122,11 @@ async function calculateAdvancedCommitStats(repos, languageStats) {
         commitsPerRepo,
         weeklyCommitTrend,
         commitsByLanguage,
+        codeStats: {
+            totalLinesAdded,
+            totalLinesDeleted,
+            netLines: totalLinesAdded - totalLinesDeleted,
+        },
     };
 }
 

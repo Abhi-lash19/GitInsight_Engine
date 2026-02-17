@@ -11,8 +11,10 @@
     "gitpulse": "apps/cli/index.js"
   },
   "scripts": {
-    "dev": "node apps/cli/index.js",
-    "start": "node apps/cli/index.js",
+    "dev": "node apps/api-server/server.js",
+    "dev:api": "node apps/api-server/server.js",
+    "dev:cli": "node apps/cli/index.js",
+    "start": "node apps/api-server/server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {

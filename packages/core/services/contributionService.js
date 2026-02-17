@@ -1,7 +1,7 @@
-const { graphqlRequest } = require("../core/graphqlClient");
+const { graphqlRequest } = require("../clients/graphqlClient");
 
 async function fetchTotalContributions(username) {
-    const query = `
+  const query = `
     query($username: String!) {
       user(login: $username) {
         contributionsCollection {
@@ -13,12 +13,12 @@ async function fetchTotalContributions(username) {
     }
   `;
 
-    const data = await graphqlRequest(query, { username });
+  const data = await graphqlRequest(query, { username });
 
-    return (
-        data.user?.contributionsCollection?.contributionCalendar
-            ?.totalContributions || 0
-    );
+  return (
+    data.user?.contributionsCollection?.contributionCalendar
+      ?.totalContributions || 0
+  );
 }
 
 module.exports = { fetchTotalContributions };

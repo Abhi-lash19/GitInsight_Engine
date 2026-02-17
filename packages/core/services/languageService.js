@@ -1,6 +1,6 @@
-const { requestWithRetry } = require("../core/apiClient");
+const { requestWithRetry } = require("../clients/apiClient");
 const githubConfig = require("../config/githubConfig");
-const limit = require("../core/rateLimiter");
+const limit = require("../clients/rateLimiter");
 
 const {
     isRepoCacheValid,
