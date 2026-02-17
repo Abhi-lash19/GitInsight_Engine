@@ -1,5 +1,6 @@
-const { requestWithRetry } = require("../core/apiClient");
+const { requestWithRetry } = require("../clients/apiClient");
 const githubConfig = require("../config/githubConfig");
+const { readCache } = require("../cache/cacheManager");
 
 async function fetchAllRepos() {
     let page = 1;
@@ -18,6 +19,13 @@ async function fetchAllRepos() {
                 page: page,
             },
         });
+
+        // If GitHub returns 304, use cached repos instead
+        if (!repos || !Array.isArray(repos)) {
+            console.log("⚡ Using cached repository data");
+            const cached = readCache(githubConfig.username);
+            return cached?.repos || [];
+        }
 
         allRepos = allRepos.concat(repos);
 
