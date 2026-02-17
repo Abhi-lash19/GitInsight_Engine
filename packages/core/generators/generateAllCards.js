@@ -2,8 +2,9 @@
  * Orchestrator to generate all README cards
  */
 
-const { generateOverviewCard } = require("./overviewCard");
-const { generateLanguageCard } = require("./languageCard");
+const { renderOverviewCard } = require("./overviewCard");
+const { renderLanguageCard } = require("./languageCard");
+const { saveSVG } = require("./svgGenerator");
 const { generateReadmeSnippet } = require("./readmeSnippet");
 
 /**
@@ -15,8 +16,11 @@ function generateAllCards(username, stats) {
 
     console.log("\n🎨 Generating README cards...\n");
 
-    generateOverviewCard(username, stats, theme);
-    generateLanguageCard(username, stats.languages);
+    const overviewSvg = renderOverviewCard(stats, { theme });
+    const languageSvg = renderLanguageCard(stats.languages, { theme });
+
+    saveSVG(username, "overview", overviewSvg);
+    saveSVG(username, "languages", languageSvg);
 
     generateReadmeSnippet(username);
 

@@ -1,12 +1,17 @@
-const { saveSVG } = require("./svgGenerator");
 const { getTheme } = require("../themes");
 
 /**
  * Generate language bar chart SVG (modern style)
  */
-function generateLanguageCard(username, languages) {
-    const theme = getTheme(process.env.CARD_THEME || "dark");
-    const colors = theme.colors;
+function renderLanguageCard(languages, options = {}) {
+    const {
+        theme = "dark",
+        compact = false,
+        animate = true,
+    } = options;
+
+    const themeObj = getTheme(theme);
+    const colors = themeObj.colors;
 
     const languageColors = {
         TypeScript: "#3178c6",
@@ -57,9 +62,13 @@ function generateLanguageCard(username, languages) {
         <rect x="${labelWidth}" y="${y}" width="${maxWidth}" height="${barHeight}" rx="8" fill="url(#barBg)"/>
 
         <!-- Animated progress bar -->
+        ${animate ? `
         <rect x="${labelWidth}" y="${y}" width="0" height="${barHeight}" rx="8" fill="url(#barGrad)">
             <animate attributeName="width" from="0" to="${barWidth}" dur="0.9s" fill="freeze" />
         </rect>
+        ` : `
+        <rect x="${labelWidth}" y="${y}" width="${barWidth}" height="${barHeight}" rx="8" fill="url(#barGrad)" />
+        `}
 
         <!-- Percentage -->
         <text x="${labelWidth + maxWidth + 8}" y="${y + 13}" fill="${colors.subText}" font-size="12" font-weight="600">
@@ -108,7 +117,7 @@ function generateLanguageCard(username, languages) {
 </svg>
 `;
 
-    saveSVG(username, "languages", svg);
+    return svg;
 }
 
-module.exports = { generateLanguageCard };
+module.exports = { renderLanguageCard };
