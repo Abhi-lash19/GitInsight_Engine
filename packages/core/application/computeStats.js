@@ -6,8 +6,13 @@ const { calculateTrafficStats } = require("../services/trafficService");
 const { calculateCodeFrequencyStats } = require("../services/codeFrequencyService");
 const { calculateAdvancedCommitStats } = require("../services/advancedStatsService");
 const { buildStats } = require("../aggregator/statsAggregator");
+const { getApiCache, setApiCache } = require("../cache/cacheManager");
 
 async function computeStats(username) {
+    const cacheKey = `stats:${username}`;
+    const cached = await getApiCache(cacheKey);
+    if (cached) return cached;
+
     githubConfig.username = username;
 
     const repos = await fetchAllRepos();
@@ -29,7 +34,7 @@ async function computeStats(username) {
         languageStats
     );
 
-    return buildStats(
+    const stats = buildStats(
         username,
         repos,
         languageStats,
@@ -38,6 +43,10 @@ async function computeStats(username) {
         codeStats,
         advancedStats
     );
+
+    await setApiCache(cacheKey, stats);
+
+    return stats;
 }
 
 module.exports = { computeStats };

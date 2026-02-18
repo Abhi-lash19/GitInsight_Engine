@@ -1,10 +1,15 @@
 const fs = require("fs");
 const path = require("path");
+const { redis } = require("./redisClient");
 
 const OUTPUT_DIR = path.resolve(process.cwd(), "output");
 const REPO_CACHE_DIR = path.join(OUTPUT_DIR, "repo-cache");
 
-const CACHE_TTL_MS = 60 * 60 * 1000; // 1 hour
+const CACHE_TTL_MS = process.env.CACHE_TTL
+    ? Number(process.env.CACHE_TTL) * 1000
+    : 60 * 60 * 1000; // 1 hour
+
+const memoryCache = new Map();
 
 function ensureDir(dir) {
     if (!fs.existsSync(dir)) {
@@ -73,6 +78,22 @@ function writeRepoCache(username, repoName, type, data) {
     fs.writeFileSync(filePath, JSON.stringify(data));
 }
 
+async function getApiCache(key) {
+    if (redis) {
+        const value = await redis.get(key);
+        if (value) return JSON.parse(value);
+    }
+
+    return memoryCache.get(key) || null;
+}
+
+async function setApiCache(key, value) {
+    if (redis) {
+        await redis.set(key, JSON.stringify(value), "EX", CACHE_TTL_MS / 1000);
+    }
+    memoryCache.set(key, value);
+}
+
 module.exports = {
     isCacheValid,
     readCache,
@@ -80,4 +101,6 @@ module.exports = {
     isRepoCacheValid,
     readRepoCache,
     writeRepoCache,
+    getApiCache,
+    setApiCache,
 };

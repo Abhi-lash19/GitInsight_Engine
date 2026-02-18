@@ -1,6 +1,7 @@
 const { requestWithRetry } = require("../clients/apiClient");
 const githubConfig = require("../config/githubConfig");
 const limit = require("../clients/rateLimiter");
+const pLimit = require("p-limit");
 const {
     isRepoCacheValid,
     readRepoCache,
@@ -8,6 +9,10 @@ const {
 } = require('../cache/cacheManager');
 
 const MAX_PAGES = 10;
+const COMMIT_DETAIL_CONCURRENCY = 3;
+const detailLimit = pLimit(COMMIT_DETAIL_CONCURRENCY);
+
+const ONE_YEAR_MS = 1000 * 60 * 60 * 24 * 365;
 
 async function fetchAllCommits(repoName) {
     if (isRepoCacheValid(githubConfig.username, repoName, "commits_full")) {
@@ -73,6 +78,8 @@ async function calculateAdvancedCommitStats(repos, languageStats) {
     let totalLinesAdded = 0;
     let totalLinesDeleted = 0;
 
+    const detailMemo = new Map();
+
     const tasks = repos.map((repo) =>
         limit(async () => {
             const commits = await fetchAllCommits(repo.name);
@@ -85,23 +92,38 @@ async function calculateAdvancedCommitStats(repos, languageStats) {
             commitsPerRepo[repo.name] = commits.length;
             totalCommits += commits.length;
 
-            for (const commit of commits) {
-                if (!commit || !commit.sha) continue;
+            const recentCommits = commits.filter(commit => {
+                if (!commit || !commit.commit?.author?.date) return false;
+                const d = new Date(commit.commit.author.date);
+                return Date.now() - d.getTime() < ONE_YEAR_MS;
+            });
 
-                const commitDate = new Date(commit.commit.author.date);
-                const weekIndex = getWeekIndex(commitDate);
+            await Promise.all(
+                recentCommits.map(commit =>
+                    detailLimit(async () => {
+                        if (!commit || !commit.sha) return;
 
-                if (weekIndex !== null) {
-                    weeklyCommitTrend[weekIndex]++;
-                }
+                        const commitDate = new Date(commit.commit.author.date);
+                        const weekIndex = getWeekIndex(commitDate);
 
-                const details = await fetchCommitDetails(repo.name, commit.sha);
+                        if (weekIndex !== null) {
+                            weeklyCommitTrend[weekIndex]++;
+                        }
 
-                if (details && details.stats) {
-                    totalLinesAdded += details.stats.additions || 0;
-                    totalLinesDeleted += details.stats.deletions || 0;
-                }
-            }
+                        if (!detailMemo.has(commit.sha)) {
+                            const details = await fetchCommitDetails(repo.name, commit.sha);
+                            detailMemo.set(commit.sha, details);
+                        }
+
+                        const details = detailMemo.get(commit.sha);
+
+                        if (details && details.stats) {
+                            totalLinesAdded += details.stats.additions || 0;
+                            totalLinesDeleted += details.stats.deletions || 0;
+                        }
+                    })
+                )
+            );
         })
     );
 
