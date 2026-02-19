@@ -75,7 +75,7 @@ function readRepoCache(username, repoName, type) {
 
 function writeRepoCache(username, repoName, type, data) {
     const filePath = getRepoCacheFile(username, repoName, type);
-    fs.writeFileSync(filePath, JSON.stringify(data));
+    fs.writeFileSync(filePath, JSON.stringify(data, null, 2));
 }
 
 async function getApiCache(key) {
