@@ -1,5 +1,6 @@
 const axios = require("axios");
 const githubConfig = require("../config/githubConfig");
+const { getApiCache, setApiCache } = require("../cache/cacheManager");
 
 const apiClient = axios.create({
     baseURL: githubConfig.restBaseUrl,
@@ -11,18 +12,45 @@ const apiClient = axios.create({
     timeout: 15000,
 });
 
+function buildCacheKey(config) {
+    const params = config.params ? JSON.stringify(config.params) : "";
+    return `api:${config.method}:${config.url}:${params}`;
+}
+
 async function requestWithRetry(config, retries = 6) {
     const start = Date.now();
+    const cacheKey = buildCacheKey(config);
+
+    const cached = await getApiCache(cacheKey);
+    const headers = config.headers || {};
+
+    if (cached?.etag) {
+        headers["If-None-Match"] = cached.etag;
+    }
 
     try {
-        const response = await apiClient(config);
+        const response = await apiClient({ ...config, headers });
 
         console.log(`⏱ ${config.url} → ${Date.now() - start}ms`);
+
+        if (response.headers?.etag) {
+            await setApiCache(cacheKey, {
+                etag: response.headers.etag,
+                data: response.data,
+            });
+        }
+
         return response.data;
 
     } catch (error) {
         const status = error.response?.status;
-        const headers = error.response?.headers;
+        const resHeaders = error.response?.headers;
+
+        // 304 → use cached response
+        if (status === 304 && cached?.data) {
+            console.log(`🧠 Cache hit (ETag): ${config.url}`);
+            return cached.data;
+        }
 
         // 🔄 GitHub stats still generating (code frequency endpoint)
         if (status === 202 && retries > 0) {
@@ -33,8 +61,8 @@ async function requestWithRetry(config, retries = 6) {
         }
 
         // 🚦 Rate limit handling
-        if (status === 403 && headers?.["x-ratelimit-remaining"] === "0") {
-            const resetTime = parseInt(headers["x-ratelimit-reset"], 10) * 1000;
+        if (status === 403 && resHeaders?.["x-ratelimit-remaining"] === "0") {
+            const resetTime = parseInt(resHeaders["x-ratelimit-reset"], 10) * 1000;
             const waitTime = resetTime - Date.now();
 
             if (waitTime > 0 && retries > 0) {
