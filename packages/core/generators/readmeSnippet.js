@@ -12,6 +12,7 @@ function generateReadmeSnippet(username) {
 
 ![Overview](./output/cards/${username}-overview.svg)
 ![Languages](./output/cards/${username}-languages.svg)
+![Insights](./output/cards/${username}-insights.svg)
 `;
 
     const filePath = path.join(outputDir, `${username}-README-snippet.md`);
