@@ -6,6 +6,7 @@ const { renderOverviewCard } = require("./overviewCard");
 const { renderLanguageCard } = require("./languageCard");
 const { saveSVG } = require("./svgGenerator");
 const { generateReadmeSnippet } = require("./readmeSnippet");
+const { renderInsightsCard } = require("./insightsCard");
 
 /**
  * Generate all cards + README snippet
@@ -18,9 +19,11 @@ function generateAllCards(username, stats) {
 
     const overviewSvg = renderOverviewCard(stats, { theme });
     const languageSvg = renderLanguageCard(stats.languages, { theme });
+    const insightsSvg = renderInsightsCard(stats, { theme });
 
     saveSVG(username, "overview", overviewSvg);
     saveSVG(username, "languages", languageSvg);
+    saveSVG(username, "insights", insightsSvg);
 
     generateReadmeSnippet(username);
 
