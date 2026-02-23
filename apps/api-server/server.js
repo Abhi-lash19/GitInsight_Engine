@@ -33,6 +33,14 @@ function parseOptions(query) {
     };
 }
 
+function setSvgHeaders(reply, svg) {
+    const etag = `"${Buffer.from(svg).toString("base64").slice(0, 32)}"`;
+
+    reply.header("Cache-Control", "public, max-age=300, s-maxage=600, stale-while-revalidate=30");
+    reply.header("ETag", etag);
+    reply.header("Content-Type", "image/svg+xml");
+}
+
 /**
  * =========================
  * Stats JSON Endpoint (unchanged)
@@ -61,13 +69,17 @@ fastify.get("/api/v1/cards/overview/:username", async (req, reply) => {
     const cacheKey = `card:overview:${req.params.username}:${JSON.stringify(options)}`;
 
     const cached = await getApiCache(cacheKey);
-    if (cached) return reply.type("image/svg+xml").send(cached);
+    if (cached) {
+        setSvgHeaders(reply, cached);
+        return reply.send(cached);
+    }
 
     const stats = await computeStats(req.params.username);
     const svg = renderOverviewCard(stats, options);
 
     await setApiCache(cacheKey, svg);
-    reply.type("image/svg+xml").send(svg);
+    setSvgHeaders(reply, svg);
+    return reply.send(svg);
 });
 
 /**
@@ -80,13 +92,17 @@ fastify.get("/api/v1/cards/languages/:username", async (req, reply) => {
     const cacheKey = `card:lang:${req.params.username}:${JSON.stringify(options)}`;
 
     const cached = await getApiCache(cacheKey);
-    if (cached) return reply.type("image/svg+xml").send(cached);
+    if (cached) {
+        setSvgHeaders(reply, cached);
+        return reply.send(cached);
+    }
 
     const stats = await computeStats(req.params.username);
     const svg = renderLanguageCard(stats.languages, options);
 
     await setApiCache(cacheKey, svg);
-    reply.type("image/svg+xml").send(svg);
+    setSvgHeaders(reply, svg);
+    return reply.send(svg);
 });
 
 /**
@@ -96,11 +112,20 @@ fastify.get("/api/v1/cards/languages/:username", async (req, reply) => {
  */
 fastify.get("/api/v1/cards/commits/:username", async (req, reply) => {
     const options = parseOptions(req.query);
+    const cacheKey = `card:commits:${req.params.username}:${JSON.stringify(options)}`;
+
+    const cached = await getApiCache(cacheKey);
+    if (cached) {
+        setSvgHeaders(reply, cached);
+        return reply.send(cached);
+    }
+
     const stats = await computeStats(req.params.username);
     const svg = renderCommitsCard(stats, options);
 
-    setCachingHeaders(reply, svg);
-    reply.type("image/svg+xml").send(svg);
+    await setApiCache(cacheKey, svg);
+    setSvgHeaders(reply, svg);
+    return reply.send(svg);
 });
 
 /**
@@ -110,11 +135,20 @@ fastify.get("/api/v1/cards/commits/:username", async (req, reply) => {
  */
 fastify.get("/api/v1/cards/codestats/:username", async (req, reply) => {
     const options = parseOptions(req.query);
+    const cacheKey = `card:codestats:${req.params.username}:${JSON.stringify(options)}`;
+
+    const cached = await getApiCache(cacheKey);
+    if (cached) {
+        setSvgHeaders(reply, cached);
+        return reply.send(cached);
+    }
+
     const stats = await computeStats(req.params.username);
     const svg = renderCodeStatsCard(stats, options);
 
-    setCachingHeaders(reply, svg);
-    reply.type("image/svg+xml").send(svg);
+    await setApiCache(cacheKey, svg);
+    setSvgHeaders(reply, svg);
+    return reply.send(svg);
 });
 
 /**
@@ -127,13 +161,17 @@ fastify.get("/api/v1/cards/insights/:username", async (req, reply) => {
     const cacheKey = `card:insights:${req.params.username}:${JSON.stringify(options)}`;
 
     const cached = await getApiCache(cacheKey);
-    if (cached) return reply.type("image/svg+xml").send(cached);
+    if (cached) {
+        setSvgHeaders(reply, cached);
+        return reply.send(cached);
+    }
 
     const stats = await computeStats(req.params.username);
     const svg = renderInsightsCard(stats, options);
 
     await setApiCache(cacheKey, svg);
-    reply.type("image/svg+xml").send(svg);
+    setSvgHeaders(reply, svg);
+    return reply.send(svg);
 });
 
 fastify.listen({ port: 3000, host: "0.0.0.0" })

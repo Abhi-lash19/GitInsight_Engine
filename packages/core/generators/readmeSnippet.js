@@ -7,12 +7,21 @@ const path = require("path");
 function generateReadmeSnippet(username) {
     const outputDir = path.join(__dirname, "../../output");
 
+    const baseUrl = process.env.PUBLIC_STATS_BASE_URL || null;
+
+    const card = (name) =>
+        baseUrl
+            ? `${baseUrl}/api/v1/cards/${name}/${username}`
+            : `./cards/${username}-${name}.svg`;
+
     const snippet = `
 ## 📊 GitHub Stats
 
-![Overview](./packages/output/cards/${username}-overview.svg)
-![Languages](./packages/output/cards/${username}-languages.svg)
-![Insights](./packages/output/cards/${username}-insights.svg)
+![Overview](${card("overview")})
+![Languages](${card("languages")})
+![Insights](${card("insights")})
+![Commits](${card("commits")})
+![Code Stats](${card("codestats")})
 `;
 
     const filePath = path.join(outputDir, `${username}-README-snippet.md`);
