@@ -66,7 +66,7 @@ async function runCLI() {
                     "❌ No username provided. Use --user <username> or set GITHUB_USERNAME in .env"
                 )
             );
-            process.exit(1);
+            throw new Error("Username missing");
         }
 
         console.log(chalk.cyan.bold("\n🚀 GitInsight Engine\n"));
@@ -77,6 +77,7 @@ async function runCLI() {
             console.log(chalk.yellow("⚡ Using cached stats (within TTL)\n"));
             const cachedStats = readCache(activeUsername);
             console.log(JSON.stringify(cachedStats, null, 2));
+            console.log(chalk.green("\n✅ Done\n"));
             return;
         }
 
@@ -119,6 +120,7 @@ async function runCLI() {
         console.log(chalk.green("\n✅ Done\n"));
     } catch (error) {
         console.log(chalk.red("\n❌ Error:"), error.message);
+        throw error; // lets bin exit with code 1
     }
 }
 
