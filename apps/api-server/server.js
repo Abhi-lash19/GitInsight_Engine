@@ -9,6 +9,7 @@ const { renderLanguageCard } = require("../../packages/core/generators/languageC
 const { renderCommitsCard } = require("../../packages/core/generators/commitsCard");
 const { renderCodeStatsCard } = require("../../packages/core/generators/codeStatsCard");
 const { renderInsightsCard } = require("../../packages/core/generators/insightsCard");
+const { renderHeatmapCard } = require("../../packages/core/generators/heatmapCard");
 
 const { getApiCache, setApiCache } = require("../../packages/core/cache/cacheManager");
 
@@ -168,6 +169,29 @@ fastify.get("/api/v1/cards/insights/:username", async (req, reply) => {
 
     const stats = await computeStats(req.params.username);
     const svg = renderInsightsCard(stats, options);
+
+    await setApiCache(cacheKey, svg);
+    setSvgHeaders(reply, svg);
+    return reply.send(svg);
+});
+
+/**
+ * =========================
+ * Heatmap Card
+ * =========================
+ */
+fastify.get("/api/v1/cards/heatmap/:username", async (req, reply) => {
+    const options = parseOptions(req.query);
+    const cacheKey = `card:heatmap:${req.params.username}:${JSON.stringify(options)}`;
+
+    const cached = await getApiCache(cacheKey);
+    if (cached) {
+        setSvgHeaders(reply, cached);
+        return reply.send(cached);
+    }
+
+    const stats = await computeStats(req.params.username);
+    const svg = renderHeatmapCard(stats, options);
 
     await setApiCache(cacheKey, svg);
     setSvgHeaders(reply, svg);

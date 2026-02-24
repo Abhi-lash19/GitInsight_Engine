@@ -51,7 +51,7 @@ function createCard({ title, lines, themeName = "dark" }) {
  * Save SVG to output/cards folder
  */
 function saveSVG(username, name, svgContent) {
-    const outputDir = path.join(__dirname, "../../output/cards");
+    const outputDir = path.join(process.cwd(), "cards");
 
     if (!fs.existsSync(outputDir)) {
         fs.mkdirSync(outputDir, { recursive: true });

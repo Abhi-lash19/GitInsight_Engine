@@ -9,6 +9,7 @@ const { generateReadmeSnippet } = require("./readmeSnippet");
 const { renderInsightsCard } = require("./insightsCard");
 const { renderCommitsCard } = require("./commitsCard");
 const { renderCodeStatsCard } = require("./codeStatsCard");
+const { renderHeatmapCard } = require("./heatmapCard");
 
 /**
  * Generate all cards + README snippet
@@ -16,6 +17,7 @@ const { renderCodeStatsCard } = require("./codeStatsCard");
 function generateAllCards(username, stats) {
     const start = Date.now();
     const theme = process.env.CARD_THEME || "dark";
+    const heatmapSvg = renderHeatmapCard(stats, { theme });
 
     console.log("\n🎨 Generating README cards...\n");
 
@@ -30,6 +32,7 @@ function generateAllCards(username, stats) {
     saveSVG(username, "insights", insightsSvg);
     saveSVG(username, "commits", commitsSvg);
     saveSVG(username, "codestats", codeSvg);
+    saveSVG(username, "heatmap", heatmapSvg);
 
     generateReadmeSnippet(username);
 

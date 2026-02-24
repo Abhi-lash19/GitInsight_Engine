@@ -274,3 +274,12 @@ Because GitHub analytics should be:
 * Developer-centric
 
 ---
+
+## 📊 Live GitHub Stats
+
+![Overview](./cards/Abhi-lash19-overview.svg)
+![Languages](./cards/Abhi-lash19-languages.svg)
+![Insights](./cards/Abhi-lash19-insights.svg)
+![Commits](./cards/Abhi-lash19-commits.svg)
+![Code Stats](./cards/Abhi-lash19-codestats.svg)
+![Heatmap](./cards/Abhi-lash19-heatmap.svg)
