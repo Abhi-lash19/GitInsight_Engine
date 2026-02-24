@@ -282,3 +282,4 @@ Because GitHub analytics should be:
 ![Insights](./cards/Abhi-lash19-insights.svg)
 ![Commits](./cards/Abhi-lash19-commits.svg)
 ![Code Stats](./cards/Abhi-lash19-codestats.svg)
+![Heatmap](./cards/Abhi-lash19-heatmap.svg)

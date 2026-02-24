@@ -21,6 +21,7 @@ function generateReadmeSnippet(username) {
 ![Insights](${card("insights")})
 ![Commits](${card("commits")})
 ![Code Stats](${card("codestats")})
+![Heatmap](${card("heatmap")})
 `;
 
     console.log("\n📋 Copy this into your root README.md:\n");
