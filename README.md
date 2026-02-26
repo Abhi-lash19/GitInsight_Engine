@@ -178,16 +178,6 @@ Environment variables are recommended for secrets.
 
 GitInsight Engine is designed to be extended via new services.
 
-## Add a New Metric
-
-1. Create a service module
-2. Register in stats pipeline
-3. Add cache strategy (optional)
-4. Extend output schema
-5. Write tests
-
----
-
 # Observability
 
 Built-in logging provides:
@@ -210,26 +200,6 @@ This makes it suitable for CI and scheduled analytics jobs.
 
 ---
 
-# Determinism & Reproducibility
-
-The engine ensures:
-
-* Stable ordering
-* Versioned outputs
-* Cache-aware repeatability
-* Consistent numeric rounding
-
----
-
-# Use Cases
-
-* GitHub profile analytics dashboards
-* Developer productivity insights
-* OSS health monitoring
-* Automated README badges
-* Internal engineering metrics pipelines
-
----
 
 # CLI Workflow (Conceptual)
 
@@ -249,29 +219,6 @@ gitinsight export --format svg
 4. **Fail soft, not loud**
 5. **Composable stat services**
 6. **Backward compatibility first**
-
----
-
-# Roadmap Ideas
-
-* GraphQL batching
-* Incremental updates
-* Plugin ecosystem
-* Real-time streaming stats
-* Web dashboard
-* Multi-user aggregation
-
----
-
-# ⭐ Why GitInsight Engine?
-
-Because GitHub analytics should be:
-
-* Fast
-* Deterministic
-* Extensible
-* CI-friendly
-* Developer-centric
 
 ---
 
