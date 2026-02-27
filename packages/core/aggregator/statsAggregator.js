@@ -4,7 +4,7 @@ const {
     calculateTopRepo,
     calculateAverageStars,
 } = require("../services/analyticsService");
-
+const { calculateRepoImpact } = require("../services/analyticsService");
 const { calculateInsights } = require("../analytics/insightsEngine");
 
 function buildStats(
@@ -34,8 +34,12 @@ function buildStats(
         averageStarsPerRepo: calculateAverageStars(repos),
         traffic: trafficStats,
         codeStats,
+        repoImpact: repos.map((r) => ({
+            name: r.name,
+            impactScore: calculateRepoImpact(r),
+        })),
         ...advancedStats,
-        insights, // NEW FIELD (non-breaking)
+        insights,
     };
 }
 

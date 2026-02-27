@@ -18,13 +18,13 @@
             Repos:
         </text>
         <text x="396" y="80" fill="#ffffff" font-size="15" text-anchor="end">
-            14
+            16
         </text>
         <text x="24" y="108" fill="#c9d1d9" font-size="15">
             Stars:
         </text>
         <text x="396" y="108" fill="#ffffff" font-size="15" text-anchor="end">
-            0
+            1
         </text>
         <text x="24" y="136" fill="#c9d1d9" font-size="15">
             Forks:
@@ -36,7 +36,7 @@
             Contributions:
         </text>
         <text x="396" y="164" fill="#ffffff" font-size="15" text-anchor="end">
-            252
+            278
         </text>
         <text x="24" y="192" fill="#c9d1d9" font-size="15">
             Productivity:

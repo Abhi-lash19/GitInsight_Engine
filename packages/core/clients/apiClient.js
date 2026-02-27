@@ -52,7 +52,7 @@ async function requestWithRetry(config, retries = 6) {
             return cached.data;
         }
 
-        // 🔄 GitHub stats still generating (code frequency endpoint)
+        // GitHub stats still generating (code frequency endpoint)
         if (status === 202 && retries > 0) {
             const delay = 5000;
             console.log(`⏳ GitHub stats generating... waiting ${delay / 1000}s`);
@@ -60,7 +60,7 @@ async function requestWithRetry(config, retries = 6) {
             return requestWithRetry(config, retries - 1);
         }
 
-        // 🚦 Rate limit handling
+        //  Rate limit handling
         if (status === 403 && resHeaders?.["x-ratelimit-remaining"] === "0") {
             const resetTime = parseInt(resHeaders["x-ratelimit-reset"], 10) * 1000;
             const waitTime = resetTime - Date.now();
@@ -70,6 +70,14 @@ async function requestWithRetry(config, retries = 6) {
                 await new Promise((res) => setTimeout(res, waitTime));
                 return requestWithRetry(config, retries - 1);
             }
+        }
+
+        //  Transient GitHub errors (502/503/504)
+        if ([502, 503, 504].includes(status) && retries > 0) {
+            const delay = 2 ** (6 - retries) * 500;
+            console.log(`🔁 Transient error ${status}. Retrying in ${delay}ms`);
+            await new Promise((res) => setTimeout(res, delay));
+            return requestWithRetry(config, retries - 1);
         }
 
         throw new Error(

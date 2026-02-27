@@ -13,6 +13,7 @@ const COMMIT_DETAIL_CONCURRENCY = 3;
 const detailLimit = pLimit(COMMIT_DETAIL_CONCURRENCY);
 
 const ONE_YEAR_MS = 1000 * 60 * 60 * 24 * 365;
+const ONE_YEAR_DAYS = 365;
 
 function formatDateKey(date) {
     return date.toISOString().slice(0, 10);
@@ -72,16 +73,24 @@ function getWeekIndex(date) {
     return diffInWeeks >= 0 && diffInWeeks < 52 ? 51 - diffInWeeks : null;
 }
 
+function getDateKey(date) {
+    return date.toISOString().split("T")[0];
+}
+
 async function calculateAdvancedCommitStats(repos, languageStats) {
     const commitsPerRepo = {};
     const weeklyCommitTrend = new Array(52).fill(0);
     const dailyCommitMap = {};
+
+    const dailyCommitMap = {};
+    const dailyCommitMatrix = [];
 
     let totalCommits = 0;
     let totalLinesAdded = 0;
     let totalLinesDeleted = 0;
 
     const detailMemo = new Map();
+    const now = new Date();
 
     const tasks = repos.map(repo =>
         limit(async () => {
@@ -113,6 +122,18 @@ async function calculateAdvancedCommitStats(repos, languageStats) {
                         const key = formatDateKey(commitDate);
                         dailyCommitMap[key] = (dailyCommitMap[key] || 0) + 1;
 
+                        /**
+                         * Daily map (NEW)
+                         */
+                        const diffDays = Math.floor((now - commitDate) / (1000 * 60 * 60 * 24));
+                        if (diffDays >= 0 && diffDays <= ONE_YEAR_DAYS) {
+                            const key = getDateKey(commitDate);
+                            dailyCommitMap[key] = (dailyCommitMap[key] || 0) + 1;
+                        }
+
+                        /**
+                         * Commit detail stats (existing logic)
+                         */
                         if (!detailMemo.has(commit.sha)) {
                             const details = await requestWithRetry({
                                 method: "GET",

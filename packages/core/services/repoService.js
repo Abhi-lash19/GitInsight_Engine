@@ -1,43 +1,41 @@
-const { requestWithRetry } = require("../clients/apiClient");
+const { graphqlRequest } = require("../clients/graphqlClient");
 const githubConfig = require("../config/githubConfig");
-const { readCache } = require("../cache/cacheManager");
 
+/**
+ * Fetch repositories using GraphQL batching
+ * Faster + fewer API calls
+ */
 async function fetchAllRepos() {
-    let page = 1;
-    const perPage = 100;
-    let allRepos = [];
-    let hasMore = true;
-
-    while (hasMore) {
-        console.log(`📦 Fetching repos page ${page}...`);
-
-        const repos = await requestWithRetry({
-            method: "GET",
-            url: `/users/${githubConfig.username}/repos`,
-            params: {
-                per_page: perPage,
-                page: page,
-            },
-        });
-
-        // If GitHub returns 304, use cached repos instead
-        if (!repos || !Array.isArray(repos)) {
-            console.log("⚡ Using cached repository data");
-            const cached = readCache(githubConfig.username);
-            return cached?.repos || [];
+    const query = `
+        query ($login: String!) {
+            user(login: $login) {
+                repositories(first: 100, ownerAffiliations: OWNER) {
+                    nodes {
+                        name
+                        stargazerCount
+                        forkCount
+                        diskUsage
+                    }
+                }
+            }
         }
+    `;
 
-        allRepos = allRepos.concat(repos);
+    const data = await graphqlRequest(query, {
+        login: githubConfig.username,
+    });
 
-        if (repos.length < perPage) {
-            hasMore = false;
-        } else {
-            page++;
-        }
-    }
+    const repos =
+        data?.user?.repositories?.nodes?.map((r) => ({
+            name: r.name,
+            stargazers_count: r.stargazerCount,
+            forks_count: r.forkCount,
+            size: r.diskUsage,
+        })) || [];
 
-    console.log(`✅ Total repositories fetched: ${allRepos.length}`);
-    return allRepos;
+    console.log(`⚡ GraphQL repos fetched: ${repos.length}`);
+
+    return repos;
 }
 
 module.exports = { fetchAllRepos };
