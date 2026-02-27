@@ -13,6 +13,7 @@ const COMMIT_DETAIL_CONCURRENCY = 3;
 const detailLimit = pLimit(COMMIT_DETAIL_CONCURRENCY);
 
 const ONE_YEAR_MS = 1000 * 60 * 60 * 24 * 365;
+const ONE_YEAR_DAYS = 365;
 
 async function fetchAllCommits(repoName) {
     if (isRepoCacheValid(githubConfig.username, repoName, "commits_full")) {
@@ -70,15 +71,23 @@ function getWeekIndex(date) {
     return null;
 }
 
+function getDateKey(date) {
+    return date.toISOString().split("T")[0];
+}
+
 async function calculateAdvancedCommitStats(repos, languageStats) {
     const commitsPerRepo = {};
     const weeklyCommitTrend = new Array(52).fill(0);
+
+    const dailyCommitMap = {};
+    const dailyCommitMatrix = [];
 
     let totalCommits = 0;
     let totalLinesAdded = 0;
     let totalLinesDeleted = 0;
 
     const detailMemo = new Map();
+    const now = new Date();
 
     const tasks = repos.map((repo) =>
         limit(async () => {
@@ -104,12 +113,27 @@ async function calculateAdvancedCommitStats(repos, languageStats) {
                         if (!commit || !commit.sha) return;
 
                         const commitDate = new Date(commit.commit.author.date);
-                        const weekIndex = getWeekIndex(commitDate);
 
+                        /**
+                         * Weekly trend (existing logic)
+                         */
+                        const weekIndex = getWeekIndex(commitDate);
                         if (weekIndex !== null) {
                             weeklyCommitTrend[weekIndex]++;
                         }
 
+                        /**
+                         * Daily map (NEW)
+                         */
+                        const diffDays = Math.floor((now - commitDate) / (1000 * 60 * 60 * 24));
+                        if (diffDays >= 0 && diffDays <= ONE_YEAR_DAYS) {
+                            const key = getDateKey(commitDate);
+                            dailyCommitMap[key] = (dailyCommitMap[key] || 0) + 1;
+                        }
+
+                        /**
+                         * Commit detail stats (existing logic)
+                         */
                         if (!detailMemo.has(commit.sha)) {
                             const details = await fetchCommitDetails(repo.name, commit.sha);
                             detailMemo.set(commit.sha, details);
@@ -129,6 +153,27 @@ async function calculateAdvancedCommitStats(repos, languageStats) {
 
     await Promise.all(tasks);
 
+    /**
+     * Build ordered 365-day array
+     */
+    const orderedDays = [];
+    for (let i = ONE_YEAR_DAYS - 1; i >= 0; i--) {
+        const d = new Date(now);
+        d.setDate(d.getDate() - i);
+        const key = getDateKey(d);
+        orderedDays.push(dailyCommitMap[key] || 0);
+    }
+
+    /**
+     * Convert to GitHub-style 7×52 matrix
+     */
+    for (let col = 0; col < 52; col++) {
+        for (let row = 0; row < 7; row++) {
+            const index = col * 7 + row;
+            dailyCommitMatrix.push(orderedDays[index] || 0);
+        }
+    }
+
     const commitsByLanguage = {};
     Object.entries(languageStats || {}).forEach(([lang, percent]) => {
         const numericPercent = parseFloat(percent);
@@ -143,6 +188,8 @@ async function calculateAdvancedCommitStats(repos, languageStats) {
         totalCommits,
         commitsPerRepo,
         weeklyCommitTrend,
+        dailyCommitMap,
+        dailyCommitMatrix,
         commitsByLanguage,
         codeStats: {
             totalLinesAdded,

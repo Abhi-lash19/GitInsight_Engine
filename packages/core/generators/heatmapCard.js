@@ -1,7 +1,7 @@
 const { getTheme } = require("../themes");
 
 /**
- * Professional GitHub-style 7x52 heatmap
+ * Professional GitHub-style 7x52 heatmap with month labels
  */
 function renderHeatmapCard(stats, options = {}) {
     const { theme = "dark" } = options;
@@ -28,7 +28,7 @@ function renderHeatmapCard(stats, options = {}) {
     const gap = 4;
 
     const paddingX = 30;
-    const paddingTop = 60;
+    const paddingTop = 70; // ⬅️ increased to fit month labels
 
     const gridWidth = cols * (cellSize + gap);
     const gridHeight = rows * (cellSize + gap);
@@ -47,6 +47,30 @@ function renderHeatmapCard(stats, options = {}) {
         if (ratio < 0.5) return "#006d32";
         if (ratio < 0.75) return "#26a641";
         return "#39d353";
+    }
+
+    /**
+     * ===== Month labels calculation =====
+     */
+    const monthLabels = [];
+    const now = new Date();
+
+    for (let i = 0; i < 365; i++) {
+        const d = new Date(now);
+        d.setDate(d.getDate() - (364 - i));
+
+        if (d.getDate() === 1) {
+            const col = Math.floor(i / 7);
+            const x = paddingX + col * (cellSize + gap);
+
+            const label = d.toLocaleString("default", { month: "short" });
+
+            monthLabels.push(`
+                <text x="${x}" y="${paddingTop - 15}" fill="${colors.text}" font-size="11">
+                    ${label}
+                </text>
+            `);
+        }
     }
 
     let cells = "";
@@ -80,6 +104,8 @@ function renderHeatmapCard(stats, options = {}) {
     <text x="${paddingX}" y="35" fill="${colors.title}" font-size="20" font-weight="600">
         52-Week Commit Heatmap
     </text>
+
+    ${monthLabels.join("")}
 
     ${cells}
 
