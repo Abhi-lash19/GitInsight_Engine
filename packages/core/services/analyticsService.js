@@ -22,7 +22,16 @@ function calculateAverageStars(repos) {
     return (totalStars / repos.length).toFixed(2);
 }
 
+function calculateRepoImpact(repo) {
+    return (
+        repo.stargazers_count * 2 +
+        repo.forks_count * 1.5 +
+        (repo.size || 0) * 0.01
+    );
+}
+
 module.exports = {
     calculateTopRepo,
     calculateAverageStars,
+    calculateRepoImpact,
 };

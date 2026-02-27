@@ -32,24 +32,90 @@
     "totalLinesDeleted": 19303,
     "netLines": 150139
   },
+  "repoImpact": [
+    {
+      "name": "favathlete",
+      "impactScore": 0.29
+    },
+    {
+      "name": "Python-FastApi-AWS",
+      "impactScore": 1.09
+    },
+    {
+      "name": "jenkins-eks-automation",
+      "impactScore": 0.22
+    },
+    {
+      "name": "x-o-game",
+      "impactScore": 0.18
+    },
+    {
+      "name": "infra-deploy-aws",
+      "impactScore": 7.1000000000000005
+    },
+    {
+      "name": "register-app-java",
+      "impactScore": 0.12
+    },
+    {
+      "name": "MonitorPro",
+      "impactScore": 6.36
+    },
+    {
+      "name": "edututor-core",
+      "impactScore": 1.94
+    },
+    {
+      "name": "ScribeAI",
+      "impactScore": 3.94
+    },
+    {
+      "name": "express-typescript-backend",
+      "impactScore": 1.67
+    },
+    {
+      "name": "3d-portfolio",
+      "impactScore": 342.55
+    },
+    {
+      "name": "Abhi-lash19",
+      "impactScore": 8.78
+    },
+    {
+      "name": "GitInsight_Engine",
+      "impactScore": 1.02
+    },
+    {
+      "name": "Kagaya",
+      "impactScore": 0.14
+    },
+    {
+      "name": "CoreGPT",
+      "impactScore": 2.5700000000000003
+    },
+    {
+      "name": "apollo-graphql-federation-demo",
+      "impactScore": 31.13
+    }
+  ],
   "totalCommits": 570,
   "commitsPerRepo": {
-    "3d-portfolio": 74,
-    "CoreGPT": 17,
-    "edututor-core": 21,
-    "Abhi-lash19": 47,
-    "apollo-graphql-federation-demo": 121,
-    "express-typescript-backend": 76,
     "favathlete": 3,
-    "GitInsight_Engine": 39,
-    "infra-deploy-aws": 41,
-    "jenkins-eks-automation": 22,
-    "Kagaya": 4,
     "Python-FastApi-AWS": 32,
-    "MonitorPro": 19,
-    "ScribeAI": 33,
+    "jenkins-eks-automation": 22,
+    "x-o-game": 17,
+    "infra-deploy-aws": 41,
     "register-app-java": 4,
-    "x-o-game": 17
+    "MonitorPro": 19,
+    "edututor-core": 21,
+    "ScribeAI": 33,
+    "express-typescript-backend": 76,
+    "3d-portfolio": 74,
+    "Abhi-lash19": 47,
+    "GitInsight_Engine": 39,
+    "Kagaya": 4,
+    "CoreGPT": 17,
+    "apollo-graphql-federation-demo": 121
   },
   "weeklyCommitTrend": [
     0,
@@ -95,8 +161,8 @@
     5,
     6,
     6,
-    11,
-    31,
+    12,
+    30,
     41,
     7,
     38,
@@ -106,8 +172,36 @@
     35
   ],
   "dailyCommitMap": {
-    "2026-02-13": 6,
+    "2026-02-18": 5,
+    "2026-02-20": 7,
+    "2025-09-14": 4,
+    "2025-09-07": 12,
+    "2025-09-03": 3,
+    "2025-09-02": 1,
     "2026-02-12": 38,
+    "2026-01-12": 11,
+    "2025-12-28": 3,
+    "2025-12-27": 1,
+    "2025-12-26": 6,
+    "2025-12-18": 4,
+    "2025-12-16": 2,
+    "2025-12-08": 1,
+    "2025-12-07": 4,
+    "2025-12-04": 1,
+    "2025-12-02": 1,
+    "2025-11-28": 1,
+    "2025-11-26": 4,
+    "2025-11-25": 1,
+    "2026-01-11": 23,
+    "2026-01-10": 7,
+    "2026-01-07": 4,
+    "2026-01-04": 5,
+    "2026-01-03": 10,
+    "2026-01-02": 13,
+    "2025-12-31": 2,
+    "2025-12-30": 2,
+    "2025-12-29": 2,
+    "2026-02-13": 6,
     "2026-02-11": 2,
     "2026-02-10": 9,
     "2026-02-09": 7,
@@ -121,46 +215,18 @@
     "2026-01-24": 5,
     "2026-01-22": 3,
     "2026-01-21": 4,
-    "2026-02-26": 3,
-    "2026-02-25": 8,
-    "2026-02-24": 11,
-    "2026-02-20": 7,
-    "2025-09-14": 4,
-    "2025-09-07": 12,
-    "2025-09-03": 3,
-    "2025-09-02": 1,
     "2026-02-21": 6,
     "2026-02-19": 7,
-    "2026-02-18": 5,
     "2026-02-17": 4,
     "2026-02-16": 2,
     "2026-02-15": 8,
     "2026-02-14": 9,
-    "2026-01-12": 11,
-    "2026-01-11": 23,
-    "2026-01-10": 7,
-    "2026-01-07": 4,
-    "2026-01-04": 5,
-    "2026-01-03": 10,
-    "2026-01-02": 13,
-    "2025-12-31": 2,
-    "2025-12-30": 2,
-    "2025-12-29": 2,
     "2026-02-27": 1,
+    "2026-02-26": 3,
+    "2026-02-24": 11,
     "2026-02-23": 4,
     "2026-02-22": 2,
-    "2025-12-28": 3,
-    "2025-12-27": 1,
-    "2025-12-26": 6,
-    "2025-12-18": 4,
-    "2025-12-16": 2,
-    "2025-12-08": 1,
-    "2025-12-07": 4,
-    "2025-12-04": 1,
-    "2025-12-02": 1,
-    "2025-11-28": 1,
-    "2025-11-26": 4,
-    "2025-11-25": 1
+    "2026-02-25": 8
   },
   "dailyCommitMatrix": [
     0,
