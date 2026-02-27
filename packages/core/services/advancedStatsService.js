@@ -15,6 +15,24 @@ const detailLimit = pLimit(COMMIT_DETAIL_CONCURRENCY);
 const ONE_YEAR_MS = 1000 * 60 * 60 * 24 * 365;
 const ONE_YEAR_DAYS = 365;
 
+function formatDateKey(date) {
+    return date.toISOString().slice(0, 10);
+}
+
+function buildDailyMatrix(map) {
+    const days = 365;
+    const result = new Array(days).fill(0);
+
+    for (let i = 0; i < days; i++) {
+        const d = new Date();
+        d.setDate(d.getDate() - (days - 1 - i));
+        const key = formatDateKey(d);
+        result[i] = map[key] || 0;
+    }
+
+    return result;
+}
+
 async function fetchAllCommits(repoName) {
     if (isRepoCacheValid(githubConfig.username, repoName, "commits_full")) {
         return readRepoCache(githubConfig.username, repoName, "commits_full");
@@ -49,26 +67,10 @@ async function fetchAllCommits(repoName) {
     return allCommits;
 }
 
-async function fetchCommitDetails(repoName, sha) {
-    return requestWithRetry(
-        {
-            method: "GET",
-            url: `/repos/${githubConfig.username}/${repoName}/commits/${sha}`,
-        },
-        5
-    );
-}
-
 function getWeekIndex(date) {
     const now = new Date();
-    const diffInMs = now - date;
-    const diffInWeeks = Math.floor(diffInMs / (1000 * 60 * 60 * 24 * 7));
-
-    if (diffInWeeks >= 0 && diffInWeeks < 52) {
-        return 51 - diffInWeeks;
-    }
-
-    return null;
+    const diffInWeeks = Math.floor((now - date) / (1000 * 60 * 60 * 24 * 7));
+    return diffInWeeks >= 0 && diffInWeeks < 52 ? 51 - diffInWeeks : null;
 }
 
 function getDateKey(date) {
@@ -78,6 +80,7 @@ function getDateKey(date) {
 async function calculateAdvancedCommitStats(repos, languageStats) {
     const commitsPerRepo = {};
     const weeklyCommitTrend = new Array(52).fill(0);
+    const dailyCommitMap = {};
 
     const dailyCommitMap = {};
     const dailyCommitMatrix = [];
@@ -89,7 +92,7 @@ async function calculateAdvancedCommitStats(repos, languageStats) {
     const detailMemo = new Map();
     const now = new Date();
 
-    const tasks = repos.map((repo) =>
+    const tasks = repos.map(repo =>
         limit(async () => {
             const commits = await fetchAllCommits(repo.name);
 
@@ -101,26 +104,23 @@ async function calculateAdvancedCommitStats(repos, languageStats) {
             commitsPerRepo[repo.name] = commits.length;
             totalCommits += commits.length;
 
-            const recentCommits = commits.filter(commit => {
-                if (!commit || !commit.commit?.author?.date) return false;
-                const d = new Date(commit.commit.author.date);
+            const recentCommits = commits.filter(c => {
+                const d = new Date(c.commit?.author?.date);
                 return Date.now() - d.getTime() < ONE_YEAR_MS;
             });
 
             await Promise.all(
                 recentCommits.map(commit =>
                     detailLimit(async () => {
-                        if (!commit || !commit.sha) return;
-
                         const commitDate = new Date(commit.commit.author.date);
 
-                        /**
-                         * Weekly trend (existing logic)
-                         */
+                        // weekly trend
                         const weekIndex = getWeekIndex(commitDate);
-                        if (weekIndex !== null) {
-                            weeklyCommitTrend[weekIndex]++;
-                        }
+                        if (weekIndex !== null) weeklyCommitTrend[weekIndex]++;
+
+                        // daily map
+                        const key = formatDateKey(commitDate);
+                        dailyCommitMap[key] = (dailyCommitMap[key] || 0) + 1;
 
                         /**
                          * Daily map (NEW)
@@ -135,13 +135,15 @@ async function calculateAdvancedCommitStats(repos, languageStats) {
                          * Commit detail stats (existing logic)
                          */
                         if (!detailMemo.has(commit.sha)) {
-                            const details = await fetchCommitDetails(repo.name, commit.sha);
+                            const details = await requestWithRetry({
+                                method: "GET",
+                                url: `/repos/${githubConfig.username}/${repo.name}/commits/${commit.sha}`,
+                            });
                             detailMemo.set(commit.sha, details);
                         }
 
                         const details = detailMemo.get(commit.sha);
-
-                        if (details && details.stats) {
+                        if (details?.stats) {
                             totalLinesAdded += details.stats.additions || 0;
                             totalLinesDeleted += details.stats.deletions || 0;
                         }
@@ -153,36 +155,7 @@ async function calculateAdvancedCommitStats(repos, languageStats) {
 
     await Promise.all(tasks);
 
-    /**
-     * Build ordered 365-day array
-     */
-    const orderedDays = [];
-    for (let i = ONE_YEAR_DAYS - 1; i >= 0; i--) {
-        const d = new Date(now);
-        d.setDate(d.getDate() - i);
-        const key = getDateKey(d);
-        orderedDays.push(dailyCommitMap[key] || 0);
-    }
-
-    /**
-     * Convert to GitHub-style 7×52 matrix
-     */
-    for (let col = 0; col < 52; col++) {
-        for (let row = 0; row < 7; row++) {
-            const index = col * 7 + row;
-            dailyCommitMatrix.push(orderedDays[index] || 0);
-        }
-    }
-
-    const commitsByLanguage = {};
-    Object.entries(languageStats || {}).forEach(([lang, percent]) => {
-        const numericPercent = parseFloat(percent);
-        if (!isNaN(numericPercent)) {
-            commitsByLanguage[lang] = Math.round(
-                (numericPercent / 100) * totalCommits
-            );
-        }
-    });
+    const dailyCommitMatrix = buildDailyMatrix(dailyCommitMap);
 
     return {
         totalCommits,
@@ -190,7 +163,6 @@ async function calculateAdvancedCommitStats(repos, languageStats) {
         weeklyCommitTrend,
         dailyCommitMap,
         dailyCommitMatrix,
-        commitsByLanguage,
         codeStats: {
             totalLinesAdded,
             totalLinesDeleted,

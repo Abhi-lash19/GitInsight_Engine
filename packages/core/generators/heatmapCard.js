@@ -5,49 +5,32 @@ const { getTheme } = require("../themes");
  */
 function renderHeatmapCard(stats, options = {}) {
     const { theme = "dark" } = options;
-    const themeObj = getTheme(theme);
-    const { colors } = themeObj;
+    const { colors } = getTheme(theme);
 
-    const dailyData =
-        stats.dailyCommitMatrix ||
-        (() => {
-            const fallback = [];
-            const weekly = stats.weeklyCommitTrend || new Array(52).fill(0);
-            for (let col = 0; col < 52; col++) {
-                for (let row = 0; row < 7; row++) {
-                    fallback.push(weekly[col] || 0);
-                }
-            }
-            return fallback;
-        })();
+    const data = stats.dailyCommitMatrix || new Array(365).fill(0);
 
-    const cols = 52;
+    const cols = 53;
     const rows = 7;
 
-    const cellSize = 11;
+    const cell = 11;
     const gap = 4;
 
     const paddingX = 30;
-    const paddingTop = 70; // ⬅️ increased to fit month labels
+    const paddingTop = 70;
 
-    const gridWidth = cols * (cellSize + gap);
-    const gridHeight = rows * (cellSize + gap);
+    const width = paddingX * 2 + cols * (cell + gap);
+    const height = paddingTop + rows * (cell + gap) + 40;
 
-    const width = paddingX * 2 + gridWidth;
-    const height = paddingTop + gridHeight + 50;
+    const max = Math.max(...data, 1);
 
-    const max = Math.max(...dailyData, 1);
-
-    function getGithubGreen(value) {
-        if (value === 0) return "#161b22";
-
-        const ratio = value / max;
-
-        if (ratio < 0.25) return "#0e4429";
-        if (ratio < 0.5) return "#006d32";
-        if (ratio < 0.75) return "#26a641";
+    const colorScale = v => {
+        if (v === 0) return "#161b22";
+        const r = v / max;
+        if (r < 0.25) return "#0e4429";
+        if (r < 0.5) return "#006d32";
+        if (r < 0.75) return "#26a641";
         return "#39d353";
-    }
+    };
 
     /**
      * ===== Month labels calculation =====
@@ -75,30 +58,27 @@ function renderHeatmapCard(stats, options = {}) {
 
     let cells = "";
 
-    for (let col = 0; col < cols; col++) {
-        for (let row = 0; row < rows; row++) {
-            const index = col * 7 + row;
-            const value = dailyData[index] || 0;
+    data.forEach((value, i) => {
+        const col = Math.floor(i / 7);
+        const row = i % 7;
 
-            const x = paddingX + col * (cellSize + gap);
-            const y = paddingTop + row * (cellSize + gap);
+        const x = paddingX + col * (cell + gap);
+        const y = paddingTop + row * (cell + gap);
 
-            cells += `
+        cells += `
                 <rect
                     x="${x}"
                     y="${y}"
-                    width="${cellSize}"
-                    height="${cellSize}"
+                    width="${cell}"
+                    height="${cell}"
                     rx="2"
-                    fill="${getGithubGreen(value)}"
+                    fill="${colorScale(value)}"
                 />
             `;
-        }
-    }
+    });
 
     return `
-<svg viewBox="0 0 ${width} ${height}" width="100%" xmlns="http://www.w3.org/2000/svg">
-
+<svg viewBox="0 0 ${width} ${height}" xmlns="http://www.w3.org/2000/svg">
     <rect width="100%" height="100%" rx="16" fill="${colors.bgStart}" stroke="${colors.border}" />
 
     <text x="${paddingX}" y="35" fill="${colors.title}" font-size="20" font-weight="600">
