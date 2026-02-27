@@ -2,7 +2,21 @@
 
 const { runCLI } = require("../../packages/core/index");
 
-// Run only when executed directly via node / bin
+if (process.argv.includes("--help")) {
+    console.log(`
+GitInsight CLI
+
+Usage:
+  gitinsight --user <username>       Generate stats
+  gitinsight --user <username> --refresh
+  gitinsight --help
+
+Description:
+  Generates GitHub analytics, SVG cards, and heatmaps.
+`);
+    process.exit(0);
+}
+
 if (require.main === module) {
     runCLI()
         .then(() => process.exit(0))
