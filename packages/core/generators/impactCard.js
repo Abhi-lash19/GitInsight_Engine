@@ -9,14 +9,26 @@ function renderImpactCard(stats, options = {}) {
 
     const data = (stats.repoImpact || [])
         .sort((a, b) => b.impactScore - a.impactScore)
-        .slice(0, 5);
+        .slice(0, 7);
 
     const width = 460;
     const barHeight = 22;
     const gap = 18;
     const startY = 70;
-    const leftPadding = 140;
-    const chartWidth = 260;
+
+    /**
+     * ===== Dynamic padding based on longest repo name =====
+     * Approx 7px per character (SVG font avg)
+     */
+    const longestNameLength = data.reduce(
+        (max, d) => Math.max(max, (d.name || "").length),
+        0
+    );
+
+    const labelWidth = longestNameLength * 7 + 40; // dynamic label area
+    const leftPadding = labelWidth;
+    const rightPadding = 40;
+    const chartWidth = width - leftPadding - rightPadding;
 
     const max = Math.max(...data.map(d => d.impactScore), 1);
 
@@ -29,8 +41,17 @@ function renderImpactCard(stats, options = {}) {
                 ${d.name}
             </text>
 
-            <rect x="${leftPadding}" y="${y}" width="${chartWidth}" height="${barHeight}" rx="8" fill="${colors.barBg1}" />
+            <!-- Background bar -->
+            <rect
+                x="${leftPadding}"
+                y="${y}"
+                width="${chartWidth}"
+                height="${barHeight}"
+                rx="8"
+                fill="${colors.barBg1}"
+            />
 
+            <!-- Progress bar -->
             ${animate
                 ? `<rect x="${leftPadding}" y="${y}" width="0" height="${barHeight}" rx="8" fill="${colors.title}">
                         <animate attributeName="width" from="0" to="${barWidth}" dur="0.8s" fill="freeze" />
@@ -38,13 +59,20 @@ function renderImpactCard(stats, options = {}) {
                 : `<rect x="${leftPadding}" y="${y}" width="${barWidth}" height="${barHeight}" rx="8" fill="${colors.title}" />`
             }
 
-            <text x="${leftPadding + barWidth + 8}" y="${y + 16}" fill="${colors.text}" font-size="12">
+            <!-- Score -->
+            <text
+                x="${leftPadding + chartWidth - 6}"
+                y="${y + 16}"
+                fill="${colors.text}"
+                font-size="12"
+                text-anchor="end"
+            >
                 ${d.impactScore.toFixed(1)}
             </text>
         `;
     }).join("");
 
-    const height = startY + data.length * (barHeight + gap) + 30;
+    const height = startY + data.length * (barHeight + gap) + 40;
 
     return `
 <svg width="100%" viewBox="0 0 ${width} ${height}" xmlns="http://www.w3.org/2000/svg">

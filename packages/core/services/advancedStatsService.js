@@ -82,8 +82,6 @@ async function calculateAdvancedCommitStats(repos, languageStats) {
     const weeklyCommitTrend = new Array(52).fill(0);
     const dailyCommitMap = {};
 
-    const dailyCommitMap = {};
-    const dailyCommitMatrix = [];
 
     let totalCommits = 0;
     let totalLinesAdded = 0;
