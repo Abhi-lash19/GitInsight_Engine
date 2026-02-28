@@ -4,8 +4,9 @@ const { getTheme } = require("../themes");
  * Professional GitHub-style 7x52 heatmap with month labels
  */
 function renderHeatmapCard(stats, options = {}) {
-    const { theme = "dark" } = options;
-    const { colors } = getTheme(theme);
+    const { theme = "dark", animate = true } = options;
+    const themeObj = getTheme(theme);
+    const { colors } = themeObj;
 
     const data = stats.dailyCommitMatrix || new Array(365).fill(0);
 
@@ -23,12 +24,15 @@ function renderHeatmapCard(stats, options = {}) {
 
     const max = Math.max(...data, 1);
 
-    const colorScale = v => {
-        if (v === 0) return "#161b22";
-        const r = v / max;
-        if (r < 0.25) return "#0e4429";
-        if (r < 0.5) return "#006d32";
-        if (r < 0.75) return "#26a641";
+
+    function getGithubGreen(value) {
+        if (value === 0) return colors.barBg1 || "#161b22";
+
+        const ratio = value / max;
+
+        if (ratio < 0.25) return "#0e4429";
+        if (ratio < 0.5) return "#006d32";
+        if (ratio < 0.75) return "#26a641";
         return "#39d353";
     };
 
@@ -44,7 +48,7 @@ function renderHeatmapCard(stats, options = {}) {
 
         if (d.getDate() === 1) {
             const col = Math.floor(i / 7);
-            const x = paddingX + col * (cellSize + gap);
+            const x = paddingX + col * (cell + gap);
 
             const label = d.toLocaleString("default", { month: "short" });
 
@@ -72,14 +76,28 @@ function renderHeatmapCard(stats, options = {}) {
                     width="${cell}"
                     height="${cell}"
                     rx="2"
-                    fill="${colorScale(value)}"
-                />
+                    fill="${getGithubGreen(value)}"
+                    opacity="${animate ? 0 : 1}"
+                >
+                    ${animate
+                ? `<animate attributeName="opacity" from="0" to="1" dur="0.6s" fill="freeze" />`
+                : ""
+            }
+                </rect>
             `;
     });
 
     return `
-<svg viewBox="0 0 ${width} ${height}" xmlns="http://www.w3.org/2000/svg">
-    <rect width="100%" height="100%" rx="16" fill="${colors.bgStart}" stroke="${colors.border}" />
+<svg viewBox="0 0 ${width} ${height}" width="100%" xmlns="http://www.w3.org/2000/svg">
+
+    <defs>
+        <linearGradient id="cardBg" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0%" stop-color="${colors.bgStart}"/>
+            <stop offset="100%" stop-color="${colors.bgEnd}"/>
+        </linearGradient>
+    </defs>
+
+    <rect width="100%" height="100%" rx="16" fill="url(#cardBg)" stroke="${colors.border}" />
 
     <text x="${paddingX}" y="35" fill="${colors.title}" font-size="20" font-weight="600">
         52-Week Commit Heatmap
