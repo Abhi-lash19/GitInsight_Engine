@@ -4,7 +4,7 @@ const { getTheme } = require("../themes");
  * Repo Impact Visualization (clean & readable)
  */
 function renderImpactCard(stats, options = {}) {
-    const { theme = "dark" } = options;
+    const { theme = "dark", animate = true } = options;
     const { colors } = getTheme(theme);
 
     const data = (stats.repoImpact || [])
@@ -29,21 +29,16 @@ function renderImpactCard(stats, options = {}) {
                 ${d.name}
             </text>
 
-            <rect
-                x="${leftPadding}"
-                y="${y}"
-                width="${barWidth}"
-                height="${barHeight}"
-                rx="8"
-                fill="${colors.title}"
-            />
+            <rect x="${leftPadding}" y="${y}" width="${chartWidth}" height="${barHeight}" rx="8" fill="${colors.barBg1}" />
 
-            <text
-                x="${leftPadding + barWidth + 8}"
-                y="${y + 16}"
-                fill="${colors.text}"
-                font-size="12"
-            >
+            ${animate
+                ? `<rect x="${leftPadding}" y="${y}" width="0" height="${barHeight}" rx="8" fill="${colors.title}">
+                        <animate attributeName="width" from="0" to="${barWidth}" dur="0.8s" fill="freeze" />
+                       </rect>`
+                : `<rect x="${leftPadding}" y="${y}" width="${barWidth}" height="${barHeight}" rx="8" fill="${colors.title}" />`
+            }
+
+            <text x="${leftPadding + barWidth + 8}" y="${y + 16}" fill="${colors.text}" font-size="12">
                 ${d.impactScore.toFixed(1)}
             </text>
         `;
@@ -52,14 +47,16 @@ function renderImpactCard(stats, options = {}) {
     const height = startY + data.length * (barHeight + gap) + 30;
 
     return `
-<svg 
-    width="100%" 
-    viewBox="0 0 ${width} ${height}" 
-    height="${height}" 
-    xmlns="http://www.w3.org/2000/svg"
->
+<svg width="100%" viewBox="0 0 ${width} ${height}" xmlns="http://www.w3.org/2000/svg">
 
-    <rect width="100%" height="100%" rx="16" fill="${colors.bgStart}" stroke="${colors.border}" />
+    <defs>
+        <linearGradient id="cardBg" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0%" stop-color="${colors.bgStart}"/>
+            <stop offset="100%" stop-color="${colors.bgEnd}"/>
+        </linearGradient>
+    </defs>
+
+    <rect width="100%" height="100%" rx="16" fill="url(#cardBg)" stroke="${colors.border}" />
 
     <text x="24" y="38" fill="${colors.title}" font-size="20" font-weight="600">
         Repo Impact Ranking
