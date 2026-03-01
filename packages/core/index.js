@@ -16,6 +16,7 @@ const { writeStatsToFile } = require("./output/writeJson");
 const { isCacheValid, readCache } = require('./cache/cacheManager');
 const { generateAllCards } = require("./generators/generateAllCards");
 const { PerfLogger } = require("./utils/logger");
+const { getStats } = require("./application/statsService");
 
 async function computeAnalytics(activeUsername, repos) {
     const analyticsSpinner = ora("Calculating analytics...").start();
@@ -47,18 +48,17 @@ async function runCLI() {
         .option("user", {
             alias: "u",
             type: "string",
-            description: "GitHub username to analyze",
-        })
-        .option("deep-refresh", {
-            alias: "dr",
-            type: "boolean",
-            description: "Force full rebuild (ignore incremental logic)",
-            default: false,
         })
         .option("refresh", {
             alias: "r",
             type: "boolean",
             description: "Force refresh (ignore cache)",
+            default: false,
+        })
+        .option("deep-refresh", {
+            alias: "dr",
+            type: "boolean",
+            description: "Force full rebuild (ignore incremental logic)",
             default: false,
         })
         .help()
@@ -67,15 +67,12 @@ async function runCLI() {
     const perf = new PerfLogger();
 
     try {
-        const activeUsername = argv.user || githubConfig.username;
-
-        if (!activeUsername) {
-            throw new Error("Username missing. Use --user <username>");
-        }
+        const username = argv.user || githubConfig.username;
+        if (!username) throw new Error("Username missing");
 
         console.log("\nGitInsight Engine");
         console.log("────────────────────────────");
-        console.log(`User: ${activeUsername}`);
+        console.log(`User: ${username}\n`);
         console.log(
             `Mode: ${argv["deep-refresh"]
                 ? "DEEP REFRESH"
@@ -85,111 +82,32 @@ async function runCLI() {
             }\n`
         );
 
-        /**
-         * =========================
-         * Cache Check
-         * =========================
-         */
-        const cacheStage = perf.startStage("Cache Validation");
+        const statsStage = perf.startStage("Get Stats");
 
-        if (!argv.refresh && !argv["deep-refresh"] && isCacheValid(activeUsername)) {
+        const result = await getStats(username, {
+            refresh: argv.refresh,
+            deepRefresh: argv["deep-refresh"],
+        });
+
+        const stats = result.stats;
+
+        if (result.cacheHit) {
             perf.markCacheHit();
-            perf.endStage(cacheStage);
-
-            const cachedPayload = readCache(activeUsername);
-            const cachedStats = cachedPayload?.data;
-
-            const cardStage = perf.startStage("Generate SVG Cards");
-            generateAllCards(activeUsername, cachedStats);
-            perf.endStage(cardStage);
-
-            perf.printSummary();
-            return;
+            perf.markCacheHit();
+        } else {
+            perf.markCacheMiss();
         }
 
-        perf.endStage(cacheStage);
+        perf.endStage(statsStage);
 
-        githubConfig.username = activeUsername;
-
-        /**
-         * =========================
-         * Fetch Repositories
-         * =========================
-         */
-        const repoStage = perf.startStage("Fetch Repositories");
-        const repos = await fetchAllRepos();
-        perf.endStage(repoStage);
-
-        /**
-         * =========================
-         * Compute Analytics
-         * =========================
-         */
-        const analyticsStage = perf.startStage("Compute Analytics");
-
-        const {
-            languageStats,
-            totalContributions,
-            trafficStats,
-            codeStats,
-        } = await computeAnalytics(activeUsername, repos);
-
-        let previousAdvancedStats = null;
-
-        if (argv.refresh && !argv["deep-refresh"] && isCacheValid(activeUsername)) {
-            const cached = readCache(activeUsername);
-            previousAdvancedStats = cached?.data;
-        }
-
-        const advancedStats = await calculateAdvancedCommitStats(
-            repos,
-            languageStats,
-            previousAdvancedStats
-        );
-
-        perf.endStage(analyticsStage);
-
-        /**
-         * =========================
-         * Build Stats
-         * =========================
-         */
-        const buildStage = perf.startStage("Build Stats Object");
-
-        const stats = buildStats(
-            activeUsername,
-            repos,
-            languageStats,
-            totalContributions,
-            trafficStats,
-            codeStats,
-            advancedStats
-        );
-
-        perf.endStage(buildStage);
-
-        /**
-         * =========================
-         * Save JSON
-         * =========================
-         */
-        const saveStage = perf.startStage("Write Stats JSON");
-        await writeStatsToFile(activeUsername, stats);
-        perf.endStage(saveStage);
-
-        /**
-         * =========================
-         * Generate Cards
-         * =========================
-         */
         const cardStage = perf.startStage("Generate SVG Cards");
-        generateAllCards(activeUsername, stats);
+        generateAllCards(username, stats);
         perf.endStage(cardStage);
 
         perf.printSummary();
 
     } catch (error) {
-        console.error("\nError:", error.message);
+        console.error("Error:", error.message);
         throw error;
     }
 }

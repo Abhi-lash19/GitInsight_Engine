@@ -36,7 +36,7 @@
             Avg Commits/Week:
         </text>
         <text x="396" y="164" fill="#ffffff" font-size="15" text-anchor="end">
-            6.17
+            6.25
         </text>
         <text x="24" y="192" fill="#c9d1d9" font-size="15">
             Most Active Week:
@@ -54,6 +54,6 @@
             Total Commits:
         </text>
         <text x="396" y="248" fill="#ffffff" font-size="15" text-anchor="end">
-            577
+            581
         </text>
 </svg>
