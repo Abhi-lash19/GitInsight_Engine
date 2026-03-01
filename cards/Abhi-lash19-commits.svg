@@ -33,16 +33,16 @@
             74
         </text>
         <text x="24" y="164" fill="#c9d1d9" font-size="15">
-            Abhi-lash19:
-        </text>
-        <text x="396" y="164" fill="#ffffff" font-size="15" text-anchor="end">
-            47
-        </text>
-        <text x="24" y="192" fill="#c9d1d9" font-size="15">
             GitInsight_Engine:
         </text>
+        <text x="396" y="164" fill="#ffffff" font-size="15" text-anchor="end">
+            50
+        </text>
+        <text x="24" y="192" fill="#c9d1d9" font-size="15">
+            Abhi-lash19:
+        </text>
         <text x="396" y="192" fill="#ffffff" font-size="15" text-anchor="end">
-            46
+            47
         </text>
         <text x="24" y="220" fill="#c9d1d9" font-size="15">
             infra-deploy-aws:

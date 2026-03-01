@@ -18,18 +18,18 @@
             Lines Added:
         </text>
         <text x="396" y="80" fill="#ffffff" font-size="15" text-anchor="end">
-            716400
+            726382
         </text>
         <text x="24" y="108" fill="#c9d1d9" font-size="15">
             Lines Deleted:
         </text>
         <text x="396" y="108" fill="#ffffff" font-size="15" text-anchor="end">
-            490916
+            500152
         </text>
         <text x="24" y="136" fill="#c9d1d9" font-size="15">
             Net Lines:
         </text>
         <text x="396" y="136" fill="#ffffff" font-size="15" text-anchor="end">
-            225484
+            226230
         </text>
 </svg>

@@ -10,7 +10,7 @@ const { renderCommitsCard } = require("../../packages/core/generators/commitsCar
 const { renderCodeStatsCard } = require("../../packages/core/generators/codeStatsCard");
 const { renderInsightsCard } = require("../../packages/core/generators/insightsCard");
 const { renderHeatmapCard } = require("../../packages/core/generators/heatmapCard");
-
+const { getStats } = require("../../packages/core/application/statsService");
 const { getApiCache, setApiCache } = require("../../packages/core/cache/cacheManager");
 
 const fastify = Fastify({ logger: true });
@@ -48,7 +48,7 @@ function setSvgHeaders(reply, svg) {
  * =========================
  */
 fastify.get("/api/v1/stats/:username", async (req, reply) => {
-    const stats = await computeStats(req.params.username);
+    const stats = await getStats(req.params.username);
 
     const payload = {
         version: "1.0.0",
@@ -75,7 +75,7 @@ fastify.get("/api/v1/cards/overview/:username", async (req, reply) => {
         return reply.send(cached);
     }
 
-    const stats = await computeStats(req.params.username);
+    const stats = await getStats(req.params.username);
     const svg = renderOverviewCard(stats, options);
 
     await setApiCache(cacheKey, svg);
@@ -98,7 +98,7 @@ fastify.get("/api/v1/cards/languages/:username", async (req, reply) => {
         return reply.send(cached);
     }
 
-    const stats = await computeStats(req.params.username);
+    const stats = await getStats(req.params.username);
     const svg = renderLanguageCard(stats.languages, options);
 
     await setApiCache(cacheKey, svg);
@@ -121,7 +121,7 @@ fastify.get("/api/v1/cards/commits/:username", async (req, reply) => {
         return reply.send(cached);
     }
 
-    const stats = await computeStats(req.params.username);
+    const stats = await getStats(req.params.username);
     const svg = renderCommitsCard(stats, options);
 
     await setApiCache(cacheKey, svg);
@@ -144,7 +144,7 @@ fastify.get("/api/v1/cards/codestats/:username", async (req, reply) => {
         return reply.send(cached);
     }
 
-    const stats = await computeStats(req.params.username);
+    const stats = await getStats(req.params.username);
     const svg = renderCodeStatsCard(stats, options);
 
     await setApiCache(cacheKey, svg);
@@ -167,7 +167,7 @@ fastify.get("/api/v1/cards/insights/:username", async (req, reply) => {
         return reply.send(cached);
     }
 
-    const stats = await computeStats(req.params.username);
+    const stats = await getStats(req.params.username);
     const svg = renderInsightsCard(stats, options);
 
     await setApiCache(cacheKey, svg);
@@ -190,7 +190,7 @@ fastify.get("/api/v1/cards/heatmap/:username", async (req, reply) => {
         return reply.send(cached);
     }
 
-    const stats = await computeStats(req.params.username);
+    const stats = await getStats(req.params.username);
     const svg = renderHeatmapCard(stats, options);
 
     await setApiCache(cacheKey, svg);
