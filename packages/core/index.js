@@ -49,6 +49,12 @@ async function runCLI() {
             type: "string",
             description: "GitHub username to analyze",
         })
+        .option("deep-refresh", {
+            alias: "dr",
+            type: "boolean",
+            description: "Force full rebuild (ignore incremental logic)",
+            default: false,
+        })
         .option("refresh", {
             alias: "r",
             type: "boolean",
@@ -70,7 +76,14 @@ async function runCLI() {
         console.log("\nGitInsight Engine");
         console.log("────────────────────────────");
         console.log(`User: ${activeUsername}`);
-        console.log(`Refresh: ${argv.refresh ? "YES" : "NO"}\n`);
+        console.log(
+            `Mode: ${argv["deep-refresh"]
+                ? "DEEP REFRESH"
+                : argv.refresh
+                    ? "INCREMENTAL REFRESH"
+                    : "CACHE"
+            }\n`
+        );
 
         /**
          * =========================
@@ -79,7 +92,7 @@ async function runCLI() {
          */
         const cacheStage = perf.startStage("Cache Validation");
 
-        if (!argv.refresh && isCacheValid(activeUsername)) {
+        if (!argv.refresh && !argv["deep-refresh"] && isCacheValid(activeUsername)) {
             perf.markCacheHit();
             perf.endStage(cacheStage);
 
@@ -121,9 +134,17 @@ async function runCLI() {
             codeStats,
         } = await computeAnalytics(activeUsername, repos);
 
+        let previousAdvancedStats = null;
+
+        if (argv.refresh && !argv["deep-refresh"] && isCacheValid(activeUsername)) {
+            const cached = readCache(activeUsername);
+            previousAdvancedStats = cached?.data;
+        }
+
         const advancedStats = await calculateAdvancedCommitStats(
             repos,
-            languageStats
+            languageStats,
+            previousAdvancedStats
         );
 
         perf.endStage(analyticsStage);
