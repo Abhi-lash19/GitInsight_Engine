@@ -4,33 +4,33 @@
   "totalStars": 1,
   "totalForks": 0,
   "languages": {
-    "TypeScript": "42.33",
-    "JavaScript": "31.76",
-    "Python": "12.25",
-    "HTML": "4.60",
-    "EJS": "3.17",
-    "CSS": "2.93",
+    "TypeScript": "42.22",
+    "JavaScript": "31.93",
+    "Python": "12.22",
+    "HTML": "4.59",
+    "EJS": "3.16",
+    "CSS": "2.92",
     "HCL": "1.58",
     "Shell": "0.45",
     "Java": "0.35",
-    "Dockerfile": "0.24",
+    "Dockerfile": "0.23",
     "Jupyter Notebook": "0.20",
     "Makefile": "0.14"
   },
-  "totalContributions": 283,
+  "totalContributions": 287,
   "topRepo": {
     "name": "CoreGPT",
     "stars": 1
   },
   "averageStarsPerRepo": "0.06",
   "traffic": {
-    "totalViews": 389,
-    "totalUniqueVisitors": 37
+    "totalViews": 379,
+    "totalUniqueVisitors": 36
   },
   "codeStats": {
-    "totalLinesAdded": 172527,
-    "totalLinesDeleted": 20571,
-    "netLines": 151956
+    "totalLinesAdded": 176992,
+    "totalLinesDeleted": 22554,
+    "netLines": 154438
   },
   "repoImpact": [
     {
@@ -79,11 +79,11 @@
     },
     {
       "name": "Abhi-lash19",
-      "impactScore": 9.8
+      "impactScore": 10.540000000000001
     },
     {
       "name": "GitInsight_Engine",
-      "impactScore": 1.26
+      "impactScore": 1.37
     },
     {
       "name": "Kagaya",
@@ -98,7 +98,7 @@
       "impactScore": 31.13
     }
   ],
-  "totalCommits": 574,
+  "totalCommits": 577,
   "commitsPerRepo": {
     "favathlete": 3,
     "Python-FastApi-AWS": 32,
@@ -112,7 +112,7 @@
     "express-typescript-backend": 76,
     "3d-portfolio": 74,
     "Abhi-lash19": 47,
-    "GitInsight_Engine": 43,
+    "GitInsight_Engine": 46,
     "Kagaya": 4,
     "CoreGPT": 17,
     "apollo-graphql-federation-demo": 121
@@ -145,8 +145,8 @@
     0,
     0,
     4,
-    12,
-    4,
+    13,
+    3,
     0,
     0,
     0,
@@ -162,14 +162,14 @@
     6,
     7,
     32,
-    11,
-    39,
+    16,
+    34,
     12,
     33,
     2,
-    67,
-    43,
-    33
+    72,
+    38,
+    36
   ],
   "dailyCommitMap": {
     "2026-02-18": 10,
@@ -221,6 +221,7 @@
     "2026-02-16": 4,
     "2026-02-15": 16,
     "2026-02-14": 18,
+    "2026-02-28": 6,
     "2026-02-27": 10,
     "2026-02-26": 6,
     "2026-02-24": 22,
@@ -229,7 +230,6 @@
     "2026-02-25": 16
   },
   "dailyCommitMatrix": [
-    0,
     0,
     0,
     0,
@@ -593,14 +593,15 @@
     16,
     6,
     10,
+    6,
     0
   ],
   "insights": {
     "productivityScore": 100,
     "activityLevel": "High",
     "churnRatio": 0,
-    "averageCommitsPerWeek": 6.12,
+    "averageCommitsPerWeek": 6.17,
     "mostActiveWeek": 49,
-    "repoImpactScore": 410.36
+    "repoImpactScore": 411.21
   }
 }

@@ -1,23 +1,22 @@
 const fs = require("fs");
 const path = require("path");
+const { getCacheFilePath } = require("../cache/cacheManager");
 
 function writeStatsToFile(username, stats) {
-    const outputDir = path.join(process.cwd(), "output");
+    const filePath = getCacheFilePath(username);
 
-    // Create output directory if it doesn't exist
-    if (!fs.existsSync(outputDir)) {
-        fs.mkdirSync(outputDir, { recursive: true });
-    }
-
-    const filePath = path.join(outputDir, `${username}-stats.json`);
+    const payload = {
+        generatedAt: Date.now(),
+        data: stats,
+    };
 
     fs.writeFileSync(
         filePath,
-        JSON.stringify(stats, null, 2),
+        JSON.stringify(payload, null, 2),
         "utf-8"
     );
 
-    console.log(`📁 Stats saved to ${filePath}`);
+    console.log(`Stats saved → ${filePath}`);
 }
 
 module.exports = { writeStatsToFile };

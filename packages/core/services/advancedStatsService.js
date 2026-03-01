@@ -73,80 +73,128 @@ function getWeekIndex(date) {
     return diffInWeeks >= 0 && diffInWeeks < 52 ? 51 - diffInWeeks : null;
 }
 
-function getDateKey(date) {
-    return date.toISOString().split("T")[0];
-}
+async function calculateAdvancedCommitStats(
+    repos,
+    languageStats,
+    previousAdvancedStats = null
+) {
+    const commitsPerRepo = previousAdvancedStats?.commitsPerRepo || {};
+    const weeklyCommitTrend = previousAdvancedStats?.weeklyCommitTrend
+        ? [...previousAdvancedStats.weeklyCommitTrend]
+        : new Array(52).fill(0);
 
-async function calculateAdvancedCommitStats(repos, languageStats) {
-    const commitsPerRepo = {};
-    const weeklyCommitTrend = new Array(52).fill(0);
-    const dailyCommitMap = {};
+    const dailyCommitMap = previousAdvancedStats?.dailyCommitMap
+        ? { ...previousAdvancedStats.dailyCommitMap }
+        : {};
 
+    let totalCommits = previousAdvancedStats?.totalCommits || 0;
+    let totalLinesAdded = previousAdvancedStats?.codeStats?.totalLinesAdded || 0;
+    let totalLinesDeleted = previousAdvancedStats?.codeStats?.totalLinesDeleted || 0;
 
-    let totalCommits = 0;
-    let totalLinesAdded = 0;
-    let totalLinesDeleted = 0;
+    const repoMeta = previousAdvancedStats?.repoMeta || {};
 
-    const detailMemo = new Map();
     const now = new Date();
 
     const tasks = repos.map(repo =>
         limit(async () => {
-            const commits = await fetchAllCommits(repo.name);
 
-            if (!Array.isArray(commits)) {
-                commitsPerRepo[repo.name] = 0;
+            let page = 1;
+            let newCommits = [];
+            let stop = false;
+
+            const previousSha = repoMeta?.[repo.name]?.latestProcessedSha;
+
+            while (!stop && page <= MAX_PAGES) {
+                const commits = await requestWithRetry({
+                    method: "GET",
+                    url: `/repos/${githubConfig.username}/${repo.name}/commits`,
+                    params: { per_page: 100, page },
+                });
+
+                if (!Array.isArray(commits) || commits.length === 0) break;
+
+                for (const commit of commits) {
+                    if (previousSha && commit.sha === previousSha) {
+                        stop = true;
+                        break;
+                    }
+                    newCommits.push(commit);
+                }
+
+                if (commits.length < 100) break;
+                page++;
+            }
+
+            /**
+             * No new commits → skip
+             */
+            if (previousAdvancedStats && newCommits.length === 0) {
                 return;
             }
 
-            commitsPerRepo[repo.name] = commits.length;
-            totalCommits += commits.length;
+            if (!repoMeta[repo.name]) repoMeta[repo.name] = {};
 
-            const recentCommits = commits.filter(c => {
-                const d = new Date(c.commit?.author?.date);
-                return Date.now() - d.getTime() < ONE_YEAR_MS;
-            });
+            if (!previousAdvancedStats) {
+                commitsPerRepo[repo.name] = 0;
+            }
 
-            await Promise.all(
-                recentCommits.map(commit =>
-                    detailLimit(async () => {
-                        const commitDate = new Date(commit.commit.author.date);
+            commitsPerRepo[repo.name] =
+                (commitsPerRepo[repo.name] || 0) + newCommits.length;
 
-                        // weekly trend
-                        const weekIndex = getWeekIndex(commitDate);
-                        if (weekIndex !== null) weeklyCommitTrend[weekIndex]++;
+            totalCommits += newCommits.length;
 
-                        // daily map
-                        const key = formatDateKey(commitDate);
-                        dailyCommitMap[key] = (dailyCommitMap[key] || 0) + 1;
+            let commitDetailCache = {};
+            if (isRepoCacheValid(githubConfig.username, repo.name, "commit_details")) {
+                commitDetailCache =
+                    readRepoCache(
+                        githubConfig.username,
+                        repo.name,
+                        "commit_details"
+                    ) || {};
+            }
 
-                        /**
-                         * Daily map (NEW)
-                         */
-                        const diffDays = Math.floor((now - commitDate) / (1000 * 60 * 60 * 24));
-                        if (diffDays >= 0 && diffDays <= ONE_YEAR_DAYS) {
-                            const key = getDateKey(commitDate);
-                            dailyCommitMap[key] = (dailyCommitMap[key] || 0) + 1;
-                        }
+            for (const commit of newCommits) {
 
-                        /**
-                         * Commit detail stats (existing logic)
-                         */
-                        if (!detailMemo.has(commit.sha)) {
-                            const details = await requestWithRetry({
-                                method: "GET",
-                                url: `/repos/${githubConfig.username}/${repo.name}/commits/${commit.sha}`,
-                            });
-                            detailMemo.set(commit.sha, details);
-                        }
+                const commitDate = new Date(commit.commit.author.date);
 
-                        const details = detailMemo.get(commit.sha);
-                        if (details?.stats) {
-                            totalLinesAdded += details.stats.additions || 0;
-                            totalLinesDeleted += details.stats.deletions || 0;
-                        }
-                    })
-                )
+                const weekIndex = getWeekIndex(commitDate);
+                if (weekIndex !== null) weeklyCommitTrend[weekIndex]++;
+
+                const diffDays = Math.floor(
+                    (now - commitDate) / (1000 * 60 * 60 * 24)
+                );
+
+                if (diffDays >= 0 && diffDays <= ONE_YEAR_DAYS) {
+                    const key = formatDateKey(commitDate);
+                    dailyCommitMap[key] =
+                        (dailyCommitMap[key] || 0) + 1;
+                }
+
+                let details = commitDetailCache[commit.sha];
+
+                if (!details) {
+                    details = await requestWithRetry({
+                        method: "GET",
+                        url: `/repos/${githubConfig.username}/${repo.name}/commits/${commit.sha}`,
+                    });
+                    commitDetailCache[commit.sha] = details;
+                }
+
+                if (details?.stats) {
+                    totalLinesAdded += details.stats.additions || 0;
+                    totalLinesDeleted += details.stats.deletions || 0;
+                }
+            }
+
+            if (newCommits.length > 0) {
+                repoMeta[repo.name].latestProcessedSha = newCommits[0].sha;
+            }
+
+            writeRepoCache(
+                githubConfig.username,
+                repo.name,
+                "commit_details",
+                commitDetailCache
             );
         })
     );
@@ -166,6 +214,7 @@ async function calculateAdvancedCommitStats(repos, languageStats) {
             totalLinesDeleted,
             netLines: totalLinesAdded - totalLinesDeleted,
         },
+        repoMeta,
     };
 }
 

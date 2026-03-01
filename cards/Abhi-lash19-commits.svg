@@ -42,7 +42,7 @@
             GitInsight_Engine:
         </text>
         <text x="396" y="192" fill="#ffffff" font-size="15" text-anchor="end">
-            43
+            46
         </text>
         <text x="24" y="220" fill="#c9d1d9" font-size="15">
             infra-deploy-aws:
