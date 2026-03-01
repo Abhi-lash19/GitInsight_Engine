@@ -91,7 +91,7 @@
 
             <!-- Progress bar -->
             <rect x="250" y="150" width="0" height="22" rx="8" fill="#58a6ff">
-                        <animate attributeName="width" from="0" to="4.863523573200993" dur="0.8s" fill="freeze" />
+                        <animate attributeName="width" from="0" to="5.230769230769231" dur="0.8s" fill="freeze" />
                        </rect>
 
             <!-- Score -->
@@ -102,7 +102,7 @@
                 font-size="12"
                 text-anchor="end"
             >
-                9.8
+                10.5
             </text>
         
             <text x="24" y="206" fill="#c9d1d9" font-size="13">
