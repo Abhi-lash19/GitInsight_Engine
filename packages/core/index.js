@@ -15,6 +15,7 @@ const { buildStats } = require("./aggregator/statsAggregator");
 const { writeStatsToFile } = require("./output/writeJson");
 const { isCacheValid, readCache } = require('./cache/cacheManager');
 const { generateAllCards } = require("./generators/generateAllCards");
+const { PerfLogger } = require("./utils/logger");
 
 async function computeAnalytics(activeUsername, repos) {
     const analyticsSpinner = ora("Calculating analytics...").start();
@@ -57,37 +58,61 @@ async function runCLI() {
         .help()
         .alias("help", "h").argv;
 
+    const perf = new PerfLogger();
+
     try {
         const activeUsername = argv.user || githubConfig.username;
 
         if (!activeUsername) {
-            console.log(
-                chalk.red(
-                    "❌ No username provided. Use --user <username> or set GITHUB_USERNAME in .env"
-                )
-            );
-            throw new Error("Username missing");
+            throw new Error("Username missing. Use --user <username>");
         }
 
-        console.log(chalk.cyan.bold("\n🚀 GitInsight Engine\n"));
-        console.log(chalk.white(`👤 Target User: ${activeUsername}`));
-        console.log(chalk.white(`🔄 Force Refresh: ${argv.refresh ? "YES" : "NO"}\n`));
+        console.log("\nGitInsight Engine");
+        console.log("────────────────────────────");
+        console.log(`User: ${activeUsername}`);
+        console.log(`Refresh: ${argv.refresh ? "YES" : "NO"}\n`);
+
+        /**
+         * =========================
+         * Cache Check
+         * =========================
+         */
+        const cacheStage = perf.startStage("Cache Validation");
 
         if (!argv.refresh && isCacheValid(activeUsername)) {
-            console.log(chalk.yellow("⚡ Using cached stats (within TTL)\n"));
-            const cachedStats = readCache(activeUsername);
-            console.log(JSON.stringify(cachedStats, null, 2));
-            console.log(chalk.green("\n✅ Done\n"));
+            perf.markCacheHit();
+            perf.endStage(cacheStage);
+
+            const cachedPayload = readCache(activeUsername);
+            const cachedStats = cachedPayload?.data;
+
+            const cardStage = perf.startStage("Generate SVG Cards");
+            generateAllCards(activeUsername, cachedStats);
+            perf.endStage(cardStage);
+
+            perf.printSummary();
             return;
         }
 
-        console.log(chalk.gray("♻️ Computing fresh stats...\n"));
+        perf.endStage(cacheStage);
 
         githubConfig.username = activeUsername;
 
-        const repoSpinner = ora("Fetching repositories...").start();
+        /**
+         * =========================
+         * Fetch Repositories
+         * =========================
+         */
+        const repoStage = perf.startStage("Fetch Repositories");
         const repos = await fetchAllRepos();
-        repoSpinner.succeed("Repositories fetched");
+        perf.endStage(repoStage);
+
+        /**
+         * =========================
+         * Compute Analytics
+         * =========================
+         */
+        const analyticsStage = perf.startStage("Compute Analytics");
 
         const {
             languageStats,
@@ -101,6 +126,15 @@ async function runCLI() {
             languageStats
         );
 
+        perf.endStage(analyticsStage);
+
+        /**
+         * =========================
+         * Build Stats
+         * =========================
+         */
+        const buildStage = perf.startStage("Build Stats Object");
+
         const stats = buildStats(
             activeUsername,
             repos,
@@ -111,16 +145,31 @@ async function runCLI() {
             advancedStats
         );
 
-        console.log(chalk.green("\n📊 GitHub Stats:\n"));
-        console.log(JSON.stringify(stats, null, 2));
+        perf.endStage(buildStage);
 
+        /**
+         * =========================
+         * Save JSON
+         * =========================
+         */
+        const saveStage = perf.startStage("Write Stats JSON");
         await writeStatsToFile(activeUsername, stats);
-        generateAllCards(activeUsername, stats);
+        perf.endStage(saveStage);
 
-        console.log(chalk.green("\n✅ Done\n"));
+        /**
+         * =========================
+         * Generate Cards
+         * =========================
+         */
+        const cardStage = perf.startStage("Generate SVG Cards");
+        generateAllCards(activeUsername, stats);
+        perf.endStage(cardStage);
+
+        perf.printSummary();
+
     } catch (error) {
-        console.log(chalk.red("\n❌ Error:"), error.message);
-        throw error; // lets bin exit with code 1
+        console.error("\nError:", error.message);
+        throw error;
     }
 }
 

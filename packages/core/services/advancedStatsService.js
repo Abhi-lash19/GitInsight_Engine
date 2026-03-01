@@ -73,15 +73,10 @@ function getWeekIndex(date) {
     return diffInWeeks >= 0 && diffInWeeks < 52 ? 51 - diffInWeeks : null;
 }
 
-function getDateKey(date) {
-    return date.toISOString().split("T")[0];
-}
-
 async function calculateAdvancedCommitStats(repos, languageStats) {
     const commitsPerRepo = {};
     const weeklyCommitTrend = new Array(52).fill(0);
     const dailyCommitMap = {};
-
 
     let totalCommits = 0;
     let totalLinesAdded = 0;
@@ -92,6 +87,22 @@ async function calculateAdvancedCommitStats(repos, languageStats) {
 
     const tasks = repos.map(repo =>
         limit(async () => {
+
+            /**
+             * =========================
+             * Load commit detail cache (per repo)
+             * =========================
+             */
+            let commitDetailCache = {};
+            if (isRepoCacheValid(githubConfig.username, repo.name, "commit_details")) {
+                commitDetailCache =
+                    readRepoCache(
+                        githubConfig.username,
+                        repo.name,
+                        "commit_details"
+                    ) || {};
+            }
+
             const commits = await fetchAllCommits(repo.name);
 
             if (!Array.isArray(commits)) {
@@ -116,27 +127,33 @@ async function calculateAdvancedCommitStats(repos, languageStats) {
                         const weekIndex = getWeekIndex(commitDate);
                         if (weekIndex !== null) weeklyCommitTrend[weekIndex]++;
 
-                        // daily map
-                        const key = formatDateKey(commitDate);
-                        dailyCommitMap[key] = (dailyCommitMap[key] || 0) + 1;
+                        // daily map (last 1 year only)
+                        const diffDays = Math.floor(
+                            (now - commitDate) / (1000 * 60 * 60 * 24)
+                        );
 
-                        /**
-                         * Daily map (NEW)
-                         */
-                        const diffDays = Math.floor((now - commitDate) / (1000 * 60 * 60 * 24));
                         if (diffDays >= 0 && diffDays <= ONE_YEAR_DAYS) {
-                            const key = getDateKey(commitDate);
-                            dailyCommitMap[key] = (dailyCommitMap[key] || 0) + 1;
+                            const key = formatDateKey(commitDate);
+                            dailyCommitMap[key] =
+                                (dailyCommitMap[key] || 0) + 1;
                         }
 
                         /**
-                         * Commit detail stats (existing logic)
+                         * Commit detail stats
                          */
                         if (!detailMemo.has(commit.sha)) {
-                            const details = await requestWithRetry({
-                                method: "GET",
-                                url: `/repos/${githubConfig.username}/${repo.name}/commits/${commit.sha}`,
-                            });
+                            let details = commitDetailCache[commit.sha];
+
+                            if (!details) {
+                                details = await requestWithRetry({
+                                    method: "GET",
+                                    url: `/repos/${githubConfig.username}/${repo.name}/commits/${commit.sha}`,
+                                });
+
+                                // store in repo-level cache
+                                commitDetailCache[commit.sha] = details;
+                            }
+
                             detailMemo.set(commit.sha, details);
                         }
 
@@ -147,6 +164,18 @@ async function calculateAdvancedCommitStats(repos, languageStats) {
                         }
                     })
                 )
+            );
+
+            /**
+             * =========================
+             * Save updated commit detail cache
+             * =========================
+             */
+            writeRepoCache(
+                githubConfig.username,
+                repo.name,
+                "commit_details",
+                commitDetailCache
             );
         })
     );

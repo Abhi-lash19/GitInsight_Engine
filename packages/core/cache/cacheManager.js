@@ -42,12 +42,21 @@ function getRepoCacheFile(username, repoName, type) {
 function isCacheValid(username) {
     const filePath = getCacheFilePath(username);
 
-    if (!fs.existsSync(filePath)) return false;
+    if (!fs.existsSync(filePath)) {
+        console.log("[Cache] File not found");
+        return false;
+    }
 
     const stats = fs.statSync(filePath);
     const fileAge = Date.now() - stats.mtimeMs;
 
-    return fileAge < CACHE_TTL_MS;
+    if (fileAge >= CACHE_TTL_MS) {
+        console.log("[Cache] TTL expired");
+        return false;
+    }
+
+    console.log("[Cache] Valid");
+    return true;
 }
 
 function isRepoCacheValid(username, repoName, type) {
@@ -64,7 +73,16 @@ function isRepoCacheValid(username, repoName, type) {
 function readCache(username) {
     const filePath = getCacheFilePath(username);
     if (!fs.existsSync(filePath)) return null;
-    return JSON.parse(fs.readFileSync(filePath, "utf-8"));
+
+    const raw = JSON.parse(fs.readFileSync(filePath, "utf-8"));
+
+    // Backward compatibility
+    if (raw.data) return raw;
+
+    return {
+        generatedAt: null,
+        data: raw,
+    };
 }
 
 function readRepoCache(username, repoName, type) {
