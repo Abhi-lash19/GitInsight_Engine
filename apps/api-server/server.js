@@ -198,6 +198,41 @@ fastify.get("/api/v1/cards/heatmap/:username", async (req, reply) => {
     return reply.send(svg);
 });
 
+/**
+ * =========================
+ * PUBLIC README WIDGET ROUTES
+ * =========================
+ * These endpoints are designed for GitHub README embedding
+ */
+
+fastify.get("/overview/:username.svg", async (req, reply) => {
+    const stats = await getStats(req.params.username);
+    const svg = renderOverviewCard(stats, parseOptions(req.query));
+    setSvgHeaders(reply, svg);
+    return reply.send(svg);
+});
+
+fastify.get("/languages/:username.svg", async (req, reply) => {
+    const stats = await getStats(req.params.username);
+    const svg = renderLanguageCard(stats.languages, parseOptions(req.query));
+    setSvgHeaders(reply, svg);
+    return reply.send(svg);
+});
+
+fastify.get("/commits/:username.svg", async (req, reply) => {
+    const stats = await getStats(req.params.username);
+    const svg = renderCommitsCard(stats, parseOptions(req.query));
+    setSvgHeaders(reply, svg);
+    return reply.send(svg);
+});
+
+fastify.get("/heatmap/:username.svg", async (req, reply) => {
+    const stats = await getStats(req.params.username);
+    const svg = renderHeatmapCard(stats, parseOptions(req.query));
+    setSvgHeaders(reply, svg);
+    return reply.send(svg);
+});
+
 fastify.listen({ port: 3000, host: "0.0.0.0" })
     .then(() => console.log("🚀 API running at http://localhost:3000"))
     .catch(console.error);
