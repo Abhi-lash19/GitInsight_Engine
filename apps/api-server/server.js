@@ -99,7 +99,7 @@ fastify.get("/api/v1/cards/languages/:username", async (req, reply) => {
     }
 
     const stats = await getStats(req.params.username);
-    const svg = renderLanguageCard(stats.languages, options);
+    const svg = renderLanguageCard(stats.languages || {}, options);
 
     await setApiCache(cacheKey, svg);
     setSvgHeaders(reply, svg);
@@ -202,33 +202,132 @@ fastify.get("/api/v1/cards/heatmap/:username", async (req, reply) => {
  * =========================
  * PUBLIC README WIDGET ROUTES
  * =========================
- * These endpoints are designed for GitHub README embedding
+ * Optimized for GitHub README embedding
+ * Uses same SVG cache as API routes
  */
 
+/**
+ * Overview Card
+ */
 fastify.get("/overview/:username.svg", async (req, reply) => {
-    const stats = await getStats(req.params.username);
-    const svg = renderOverviewCard(stats, parseOptions(req.query));
+    const options = parseOptions(req.query);
+    const cacheKey = `public:overview:${req.params.username}:${JSON.stringify(options)}`;
+
+    const cached = await getApiCache(cacheKey);
+    if (cached) {
+        setSvgHeaders(reply, cached);
+        return reply.send(cached);
+    }
+
+    const { stats } = await getStats(req.params.username);
+    const svg = renderOverviewCard(stats, options);
+
+    await setApiCache(cacheKey, svg);
     setSvgHeaders(reply, svg);
     return reply.send(svg);
 });
 
+/**
+ * Languages Card
+ */
 fastify.get("/languages/:username.svg", async (req, reply) => {
-    const stats = await getStats(req.params.username);
-    const svg = renderLanguageCard(stats.languages, parseOptions(req.query));
+    const options = parseOptions(req.query);
+    const cacheKey = `public:languages:${req.params.username}:${JSON.stringify(options)}`;
+
+    const cached = await getApiCache(cacheKey);
+    if (cached) {
+        setSvgHeaders(reply, cached);
+        return reply.send(cached);
+    }
+
+    const { stats } = await getStats(req.params.username);
+    const svg = renderLanguageCard(stats.languages || {}, options);
+
+    await setApiCache(cacheKey, svg);
     setSvgHeaders(reply, svg);
     return reply.send(svg);
 });
 
+/**
+ * Commits Card
+ */
 fastify.get("/commits/:username.svg", async (req, reply) => {
-    const stats = await getStats(req.params.username);
-    const svg = renderCommitsCard(stats, parseOptions(req.query));
+    const options = parseOptions(req.query);
+    const cacheKey = `public:commits:${req.params.username}:${JSON.stringify(options)}`;
+
+    const cached = await getApiCache(cacheKey);
+    if (cached) {
+        setSvgHeaders(reply, cached);
+        return reply.send(cached);
+    }
+
+    const { stats } = await getStats(req.params.username);
+    const svg = renderCommitsCard(stats, options);
+
+    await setApiCache(cacheKey, svg);
     setSvgHeaders(reply, svg);
     return reply.send(svg);
 });
 
+/**
+ * Code Stats Card
+ */
+fastify.get("/codestats/:username.svg", async (req, reply) => {
+    const options = parseOptions(req.query);
+    const cacheKey = `public:codestats:${req.params.username}:${JSON.stringify(options)}`;
+
+    const cached = await getApiCache(cacheKey);
+    if (cached) {
+        setSvgHeaders(reply, cached);
+        return reply.send(cached);
+    }
+
+    const { stats } = await getStats(req.params.username);
+    const svg = renderCodeStatsCard(stats, options);
+
+    await setApiCache(cacheKey, svg);
+    setSvgHeaders(reply, svg);
+    return reply.send(svg);
+});
+
+/**
+ * Insights Card
+ */
+fastify.get("/insights/:username.svg", async (req, reply) => {
+    const options = parseOptions(req.query);
+    const cacheKey = `public:insights:${req.params.username}:${JSON.stringify(options)}`;
+
+    const cached = await getApiCache(cacheKey);
+    if (cached) {
+        setSvgHeaders(reply, cached);
+        return reply.send(cached);
+    }
+
+    const { stats } = await getStats(req.params.username);
+    const svg = renderInsightsCard(stats, options);
+
+    await setApiCache(cacheKey, svg);
+    setSvgHeaders(reply, svg);
+    return reply.send(svg);
+});
+
+/**
+ * Heatmap Card
+ */
 fastify.get("/heatmap/:username.svg", async (req, reply) => {
-    const stats = await getStats(req.params.username);
-    const svg = renderHeatmapCard(stats, parseOptions(req.query));
+    const options = parseOptions(req.query);
+    const cacheKey = `public:heatmap:${req.params.username}:${JSON.stringify(options)}`;
+
+    const cached = await getApiCache(cacheKey);
+    if (cached) {
+        setSvgHeaders(reply, cached);
+        return reply.send(cached);
+    }
+
+    const { stats } = await getStats(req.params.username);
+    const svg = renderHeatmapCard(stats, options);
+
+    await setApiCache(cacheKey, svg);
     setSvgHeaders(reply, svg);
     return reply.send(svg);
 });
