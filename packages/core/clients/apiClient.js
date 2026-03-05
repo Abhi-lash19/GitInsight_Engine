@@ -80,6 +80,13 @@ async function requestWithRetry(config, retries = 6) {
             return requestWithRetry(config, retries - 1);
         }
 
+        // Some commit endpoints randomly fail (404/409/502 etc)
+        // Do not crash the entire stats pipeline for a single commit
+        if (config.url && config.url.includes("/commits/")) {
+            console.warn(` Skipping failed commit request: ${config.url} (${status})`);
+            return null;
+        }
+
         throw new Error(
             `GitHub API Error: ${status || "UNKNOWN"} → ${config.url}`
         );

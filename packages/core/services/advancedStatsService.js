@@ -33,40 +33,6 @@ function buildDailyMatrix(map) {
     return result;
 }
 
-async function fetchAllCommits(repoName) {
-    if (isRepoCacheValid(githubConfig.username, repoName, "commits_full")) {
-        return readRepoCache(githubConfig.username, repoName, "commits_full");
-    }
-
-    let page = 1;
-    let allCommits = [];
-
-    while (page <= MAX_PAGES) {
-        const commits = await requestWithRetry(
-            {
-                method: "GET",
-                url: `/repos/${githubConfig.username}/${repoName}/commits`,
-                params: {
-                    per_page: 100,
-                    page,
-                },
-            },
-            5
-        );
-
-        if (!Array.isArray(commits) || commits.length === 0) break;
-
-        allCommits = allCommits.concat(commits);
-
-        if (commits.length < 100) break;
-
-        page++;
-    }
-
-    writeRepoCache(githubConfig.username, repoName, "commits_full", allCommits);
-    return allCommits;
-}
-
 function getWeekIndex(date) {
     const now = new Date();
     const diffInWeeks = Math.floor((now - date) / (1000 * 60 * 60 * 24 * 7));
@@ -88,8 +54,6 @@ async function calculateAdvancedCommitStats(
         : {};
 
     let totalCommits = previousAdvancedStats?.totalCommits || 0;
-    let totalLinesAdded = previousAdvancedStats?.codeStats?.totalLinesAdded || 0;
-    let totalLinesDeleted = previousAdvancedStats?.codeStats?.totalLinesDeleted || 0;
 
     const repoMeta = previousAdvancedStats?.repoMeta || {};
 
@@ -143,16 +107,6 @@ async function calculateAdvancedCommitStats(
 
             totalCommits += newCommits.length;
 
-            let commitDetailCache = {};
-            if (isRepoCacheValid(githubConfig.username, repo.name, "commit_details")) {
-                commitDetailCache =
-                    readRepoCache(
-                        githubConfig.username,
-                        repo.name,
-                        "commit_details"
-                    ) || {};
-            }
-
             for (const commit of newCommits) {
 
                 const commitDate = new Date(commit.commit.author.date);
@@ -169,33 +123,11 @@ async function calculateAdvancedCommitStats(
                     dailyCommitMap[key] =
                         (dailyCommitMap[key] || 0) + 1;
                 }
-
-                let details = commitDetailCache[commit.sha];
-
-                if (!details) {
-                    details = await requestWithRetry({
-                        method: "GET",
-                        url: `/repos/${githubConfig.username}/${repo.name}/commits/${commit.sha}`,
-                    });
-                    commitDetailCache[commit.sha] = details;
-                }
-
-                if (details?.stats) {
-                    totalLinesAdded += details.stats.additions || 0;
-                    totalLinesDeleted += details.stats.deletions || 0;
-                }
             }
 
             if (newCommits.length > 0) {
                 repoMeta[repo.name].latestProcessedSha = newCommits[0].sha;
             }
-
-            writeRepoCache(
-                githubConfig.username,
-                repo.name,
-                "commit_details",
-                commitDetailCache
-            );
         })
     );
 
@@ -209,11 +141,6 @@ async function calculateAdvancedCommitStats(
         weeklyCommitTrend,
         dailyCommitMap,
         dailyCommitMatrix,
-        codeStats: {
-            totalLinesAdded,
-            totalLinesDeleted,
-            netLines: totalLinesAdded - totalLinesDeleted,
-        },
         repoMeta,
     };
 }
