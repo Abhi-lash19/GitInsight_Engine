@@ -28,7 +28,7 @@ function renderLanguageCard(languages, options = {}) {
     const gap = 14;
     const startY = 80;
 
-    const sorted = Object.entries(languages)
+    const sorted = Object.entries(languages || {})
         .sort((a, b) => parseFloat(b[1]) - parseFloat(a[1]))
         .slice(0, 8);
 
