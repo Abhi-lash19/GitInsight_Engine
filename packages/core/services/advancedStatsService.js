@@ -177,9 +177,12 @@ async function calculateAdvancedCommitStats(
                         method: "GET",
                         url: `/repos/${githubConfig.username}/${repo.name}/commits/${commit.sha}`,
                     });
+
+                    // Skip commit if GitHub API failed
+                    if (!details) continue;
+
                     commitDetailCache[commit.sha] = details;
                 }
-
                 if (details?.stats) {
                     totalLinesAdded += details.stats.additions || 0;
                     totalLinesDeleted += details.stats.deletions || 0;
