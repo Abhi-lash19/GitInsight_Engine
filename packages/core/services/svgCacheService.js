@@ -18,15 +18,15 @@ function readSvg(username, card) {
 }
 
 async function ensureCardsGenerated(username, stats) {
-    const overviewPath = getSvgPath(username, "overview");
+    const cardPath = getSvgPath(username, card);
 
-    if (!fs.existsSync(overviewPath)) {
+    if (!fs.existsSync(cardPath)) {
         generateAllCards(username, stats);
     }
 }
 
 async function getSvgCard(username, card, stats) {
-    await ensureCardsGenerated(username, stats);
+    await ensureCardsGenerated(username, stats, card);
 
     return readSvg(username, card);
 }
