@@ -20,8 +20,15 @@ async function getStats(username, options = {}) {
      * =========================
      */
     if (!refresh && !deepRefresh && memoryStatsCache.has(username)) {
+        const cachedStats = memoryStatsCache.get(username);
+
+        // background refresh (stale-while-revalidate)
+        if (!activeRuns.has(username)) {
+            refreshStatsInBackground(username);
+        }
+
         return {
-            stats: memoryStatsCache.get(username),
+            stats: cachedStats,
             cacheHit: true,
         };
     }
@@ -36,6 +43,11 @@ async function getStats(username, options = {}) {
         const stats = cachedPayload?.data || cachedPayload;
 
         memoryStatsCache.set(username, stats);
+
+        // background refresh
+        if (!activeRuns.has(username)) {
+            refreshStatsInBackground(username);
+        }
 
         return {
             stats,
@@ -56,16 +68,7 @@ async function getStats(username, options = {}) {
         };
     }
 
-    const promise = (async () => {
-        const stats = await computeStats(username);
-
-        await writeStatsToFile(username, stats);
-
-        memoryStatsCache.set(username, stats);
-        activeRuns.delete(username);
-
-        return stats;
-    })();
+    const promise = computeAndStoreStats(username);
 
     activeRuns.set(username, promise);
 
@@ -75,6 +78,37 @@ async function getStats(username, options = {}) {
         stats,
         cacheHit: false,
     };
+}
+
+/**
+ * =========================
+ * Compute + Store Stats
+ * =========================
+ */
+async function computeAndStoreStats(username) {
+    const stats = await computeStats(username);
+
+    await writeStatsToFile(username, stats);
+
+    memoryStatsCache.set(username, stats);
+
+    activeRuns.delete(username);
+
+    return stats;
+}
+
+/**
+ * =========================
+ * Background Refresh
+ * =========================
+ */
+function refreshStatsInBackground(username) {
+    const promise = computeAndStoreStats(username).catch((err) => {
+        console.error("Background stats refresh failed:", err);
+        activeRuns.delete(username);
+    });
+
+    activeRuns.set(username, promise);
 }
 
 module.exports = { getStats };
