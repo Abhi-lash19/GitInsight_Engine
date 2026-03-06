@@ -17,7 +17,10 @@ function readSvg(username, card) {
     return fs.readFileSync(getSvgPath(username, card), "utf8");
 }
 
-async function ensureCardsGenerated(username, stats) {
+/**
+ * Ensure cards exist before serving
+ */
+async function ensureCardsGenerated(username, stats, card) {
     const cardPath = getSvgPath(username, card);
 
     if (!fs.existsSync(cardPath)) {
