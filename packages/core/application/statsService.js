@@ -1,6 +1,7 @@
 const { computeStats } = require("./computeStats");
 const { isCacheValid, readCache } = require("../cache/cacheManager");
 const { writeStatsToFile } = require("../output/writeJson");
+const { generateAllCards } = require("../generators/generateAllCards");
 
 const activeRuns = new Map();
 const memoryStatsCache = new Map();
@@ -89,6 +90,9 @@ async function computeAndStoreStats(username) {
     const stats = await computeStats(username);
 
     await writeStatsToFile(username, stats);
+
+    // regenerate SVG cards when stats change
+    generateAllCards(username, stats);
 
     memoryStatsCache.set(username, stats);
 
