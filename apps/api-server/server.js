@@ -35,12 +35,24 @@ function parseOptions(query) {
     };
 }
 
-function setSvgHeaders(reply, svg) {
+function setSvgHeaders(req, reply, svg) {
     const etag = `"${Buffer.from(svg).toString("base64").slice(0, 32)}"`;
 
-    reply.header("Cache-Control", "public, max-age=300, s-maxage=600, stale-while-revalidate=30");
+    // 304 support
+    if (req.headers["if-none-match"] === etag) {
+        reply.code(304);
+        return true;
+    }
+
+    reply.header(
+        "Cache-Control",
+        "public, max-age=0, s-maxage=86400, stale-while-revalidate=43200"
+    );
+
     reply.header("ETag", etag);
     reply.header("Content-Type", "image/svg+xml");
+
+    return false;
 }
 
 /**
@@ -72,7 +84,7 @@ fastify.get("/api/v1/cards/overview/:username", async (req, reply) => {
 
     const cached = await getApiCache(cacheKey);
     if (cached) {
-        setSvgHeaders(reply, cached);
+        if (setSvgHeaders(req, reply, cached)) return reply.send();
         return reply.send(cached);
     }
 
@@ -80,7 +92,7 @@ fastify.get("/api/v1/cards/overview/:username", async (req, reply) => {
     const svg = renderOverviewCard(stats, options);
 
     await setApiCache(cacheKey, svg);
-    setSvgHeaders(reply, svg);
+    if (setSvgHeaders(req, reply, svg)) return reply.send();
     return reply.send(svg);
 });
 
@@ -95,7 +107,7 @@ fastify.get("/api/v1/cards/languages/:username", async (req, reply) => {
 
     const cached = await getApiCache(cacheKey);
     if (cached) {
-        setSvgHeaders(reply, cached);
+        if (setSvgHeaders(req, reply, cached)) return reply.send();
         return reply.send(cached);
     }
 
@@ -103,7 +115,7 @@ fastify.get("/api/v1/cards/languages/:username", async (req, reply) => {
     const svg = renderLanguageCard(stats.languages || {}, options);
 
     await setApiCache(cacheKey, svg);
-    setSvgHeaders(reply, svg);
+    if (setSvgHeaders(req, reply, svg)) return reply.send();
     return reply.send(svg);
 });
 
@@ -118,7 +130,7 @@ fastify.get("/api/v1/cards/commits/:username", async (req, reply) => {
 
     const cached = await getApiCache(cacheKey);
     if (cached) {
-        setSvgHeaders(reply, cached);
+        if (setSvgHeaders(req, reply, cached)) return reply.send();
         return reply.send(cached);
     }
 
@@ -126,7 +138,7 @@ fastify.get("/api/v1/cards/commits/:username", async (req, reply) => {
     const svg = renderCommitsCard(stats, options);
 
     await setApiCache(cacheKey, svg);
-    setSvgHeaders(reply, svg);
+    if (setSvgHeaders(req, reply, svg)) return reply.send();
     return reply.send(svg);
 });
 
@@ -141,7 +153,7 @@ fastify.get("/api/v1/cards/codestats/:username", async (req, reply) => {
 
     const cached = await getApiCache(cacheKey);
     if (cached) {
-        setSvgHeaders(reply, cached);
+        if (setSvgHeaders(req, reply, cached)) return reply.send();
         return reply.send(cached);
     }
 
@@ -149,7 +161,7 @@ fastify.get("/api/v1/cards/codestats/:username", async (req, reply) => {
     const svg = renderCodeStatsCard(stats, options);
 
     await setApiCache(cacheKey, svg);
-    setSvgHeaders(reply, svg);
+    if (setSvgHeaders(req, reply, svg)) return reply.send();
     return reply.send(svg);
 });
 
@@ -164,7 +176,7 @@ fastify.get("/api/v1/cards/insights/:username", async (req, reply) => {
 
     const cached = await getApiCache(cacheKey);
     if (cached) {
-        setSvgHeaders(reply, cached);
+        if (setSvgHeaders(req, reply, cached)) return reply.send();
         return reply.send(cached);
     }
 
@@ -172,7 +184,7 @@ fastify.get("/api/v1/cards/insights/:username", async (req, reply) => {
     const svg = renderInsightsCard(stats, options);
 
     await setApiCache(cacheKey, svg);
-    setSvgHeaders(reply, svg);
+    if (setSvgHeaders(req, reply, svg)) return reply.send();
     return reply.send(svg);
 });
 
@@ -187,7 +199,7 @@ fastify.get("/api/v1/cards/heatmap/:username", async (req, reply) => {
 
     const cached = await getApiCache(cacheKey);
     if (cached) {
-        setSvgHeaders(reply, cached);
+        if (setSvgHeaders(req, reply, cached)) return reply.send();
         return reply.send(cached);
     }
 
@@ -195,7 +207,7 @@ fastify.get("/api/v1/cards/heatmap/:username", async (req, reply) => {
     const svg = renderHeatmapCard(stats, options);
 
     await setApiCache(cacheKey, svg);
-    setSvgHeaders(reply, svg);
+    if (setSvgHeaders(req, reply, svg)) return reply.send();
     return reply.send(svg);
 });
 
@@ -215,7 +227,7 @@ fastify.get("/overview/:username.svg", async (req, reply) => {
 
     const svg = await getSvgCard(req.params.username, "overview", stats);
 
-    setSvgHeaders(reply, svg);
+    if (setSvgHeaders(req, reply, svg)) return reply.send();
     return reply.send(svg);
 });
 
@@ -227,7 +239,7 @@ fastify.get("/languages/:username.svg", async (req, reply) => {
 
     const svg = await getSvgCard(req.params.username, "languages", stats);
 
-    setSvgHeaders(reply, svg);
+    if (setSvgHeaders(req, reply, svg)) return reply.send();
     return reply.send(svg);
 });
 
@@ -239,7 +251,7 @@ fastify.get("/commits/:username.svg", async (req, reply) => {
 
     const svg = await getSvgCard(req.params.username, "commits", stats);
 
-    setSvgHeaders(reply, svg);
+    if (setSvgHeaders(req, reply, svg)) return reply.send();
     return reply.send(svg);
 });
 
@@ -251,7 +263,7 @@ fastify.get("/codestats/:username.svg", async (req, reply) => {
 
     const svg = await getSvgCard(req.params.username, "codestats", stats);
 
-    setSvgHeaders(reply, svg);
+    if (setSvgHeaders(req, reply, svg)) return reply.send();
     return reply.send(svg);
 });
 
@@ -263,7 +275,7 @@ fastify.get("/insights/:username.svg", async (req, reply) => {
 
     const svg = await getSvgCard(req.params.username, "insights", stats);
 
-    setSvgHeaders(reply, svg);
+    if (setSvgHeaders(req, reply, svg)) return reply.send();
     return reply.send(svg);
 });
 
@@ -275,7 +287,7 @@ fastify.get("/heatmap/:username.svg", async (req, reply) => {
 
     const svg = await getSvgCard(req.params.username, "heatmap", stats);
 
-    setSvgHeaders(reply, svg);
+    if (setSvgHeaders(req, reply, svg)) return reply.send();
     return reply.send(svg);
 });
 

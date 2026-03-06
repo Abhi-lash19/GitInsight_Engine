@@ -9,11 +9,18 @@ function getSvgPath(username, card) {
     return path.join(CARDS_DIR, `${username}-${card}.svg`);
 }
 
+function svgExists(username, card) {
+    return fs.existsSync(getSvgPath(username, card));
+}
+
 function readSvg(username, card) {
     return fs.readFileSync(getSvgPath(username, card), "utf8");
 }
 
-function ensureCardsGenerated(username, stats, card) {
+/**
+ * Ensure cards exist before serving
+ */
+async function ensureCardsGenerated(username, stats, card) {
     const cardPath = getSvgPath(username, card);
 
     if (!fs.existsSync(cardPath)) {
@@ -22,10 +29,11 @@ function ensureCardsGenerated(username, stats, card) {
 }
 
 async function getSvgCard(username, card, stats) {
-    ensureCardsGenerated(username, stats, card);
+    await ensureCardsGenerated(username, stats, card);
+
     return readSvg(username, card);
 }
 
 module.exports = {
-    getSvgCard,
+    getSvgCard
 };
