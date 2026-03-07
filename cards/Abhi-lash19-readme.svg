@@ -1,0 +1,180 @@
+
+<svg width="760" height="380" viewBox="0 0 760 380"
+    xmlns="http://www.w3.org/2000/svg">
+
+    <defs>
+        <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0%" stop-color="#0d1117" />
+            <stop offset="100%" stop-color="#161b22" />
+        </linearGradient>
+    </defs>
+
+    <rect width="100%" height="100%" rx="20"
+        fill="url(#bg)"
+        stroke="#30363d" />
+
+    <text x="40" y="50"
+        fill="#58a6ff"
+        font-size="26"
+        font-weight="700">
+        GitInsight Dashboard
+    </text>
+
+    <!-- Overview -->
+    <text x="40" y="100" fill="#c9d1d9" font-size="15">
+        📦 Repositories: 16
+    </text>
+
+    <text x="40" y="125" fill="#c9d1d9" font-size="15">
+        ⭐ Stars: 1
+    </text>
+
+    <text x="40" y="150" fill="#c9d1d9" font-size="15">
+        🔥 Contributions: 328
+    </text>
+
+    <text x="40" y="175" fill="#c9d1d9" font-size="15">
+        📝 Commits: 608
+    </text>
+
+    <!-- Languages -->
+    <text x="40" y="190"
+        fill="#58a6ff"
+        font-size="18"
+        font-weight="600">
+        Top Languages
+    </text>
+
+    
+        <text x="40" y="210" fill="#c9d1d9" font-size="14">
+            TypeScript
+        </text>
+
+        <rect x="170" y="198" width="180" height="10"
+            rx="5"
+            fill="#21262d" />
+
+        <rect x="170" y="198" width="73.314" height="10"
+            rx="5"
+            fill="#58a6ff" />
+
+        <text x="360" y="210"
+            fill="#c9d1d9"
+            font-size="13"
+            text-anchor="end">
+            40.7%
+        </text>
+        
+        <text x="40" y="236" fill="#c9d1d9" font-size="14">
+            JavaScript
+        </text>
+
+        <rect x="170" y="224" width="180" height="10"
+            rx="5"
+            fill="#21262d" />
+
+        <rect x="170" y="224" width="63.72" height="10"
+            rx="5"
+            fill="#58a6ff" />
+
+        <text x="360" y="236"
+            fill="#c9d1d9"
+            font-size="13"
+            text-anchor="end">
+            35.4%
+        </text>
+        
+        <text x="40" y="262" fill="#c9d1d9" font-size="14">
+            Python
+        </text>
+
+        <rect x="170" y="250" width="180" height="10"
+            rx="5"
+            fill="#21262d" />
+
+        <rect x="170" y="250" width="20.322" height="10"
+            rx="5"
+            fill="#58a6ff" />
+
+        <text x="360" y="262"
+            fill="#c9d1d9"
+            font-size="13"
+            text-anchor="end">
+            11.3%
+        </text>
+        
+        <text x="40" y="288" fill="#c9d1d9" font-size="14">
+            HTML
+        </text>
+
+        <rect x="170" y="276" width="180" height="10"
+            rx="5"
+            fill="#21262d" />
+
+        <rect x="170" y="276" width="7.632" height="10"
+            rx="5"
+            fill="#58a6ff" />
+
+        <text x="360" y="288"
+            fill="#c9d1d9"
+            font-size="13"
+            text-anchor="end">
+            4.2%
+        </text>
+        
+        <text x="40" y="314" fill="#c9d1d9" font-size="14">
+            EJS
+        </text>
+
+        <rect x="170" y="302" width="180" height="10"
+            rx="5"
+            fill="#21262d" />
+
+        <rect x="170" y="302" width="5.256" height="10"
+            rx="5"
+            fill="#58a6ff" />
+
+        <text x="360" y="314"
+            fill="#c9d1d9"
+            font-size="13"
+            text-anchor="end">
+            2.9%
+        </text>
+        
+
+    <!-- Code Stats -->
+    <text x="430" y="100"
+        fill="#58a6ff"
+        font-size="18"
+        font-weight="600">
+        Code Activity
+    </text>
+
+    <text x="430" y="130" fill="#c9d1d9" font-size="14">
+        Lines Added: 71876
+    </text>
+
+    <text x="430" y="155" fill="#c9d1d9" font-size="14">
+        Lines Deleted: 1191
+    </text>
+
+    <text x="430" y="180" fill="#c9d1d9" font-size="14">
+        Net Lines: 70685
+    </text>
+
+    <text x="430" y="220"
+        fill="#58a6ff"
+        font-size="18"
+        font-weight="600">
+        Productivity
+    </text>
+
+    <text x="430" y="250" fill="#c9d1d9" font-size="14">
+        Score: 100
+    </text>
+
+    <text x="430" y="275" fill="#c9d1d9" font-size="14">
+        Activity: High
+    </text>
+
+</svg>

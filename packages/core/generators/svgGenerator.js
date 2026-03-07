@@ -13,7 +13,9 @@ function createCard({ title, lines, themeName = "dark" }) {
 
     // Split "Label: Value"
     const rows = lines.map((line, i) => {
-        const [label, value] = line.split(":");
+        const parts = line.split(":");
+        const label = parts.shift();
+        const value = parts.join(":");
 
         return `
         <text x="${paddingX}" y="${startY + i * rowHeight}" fill="${colors.text}" font-size="15">

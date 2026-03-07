@@ -45,13 +45,13 @@
         <!-- Animated progress bar -->
         
         <rect x="130" y="80" width="0" height="16" rx="8" fill="url(#barGrad)">
-            <animate attributeName="width" from="0" to="97.91999999999999" dur="0.9s" fill="freeze" />
+            <animate attributeName="width" from="0" to="97.752" dur="0.9s" fill="freeze" />
         </rect>
         
 
         <!-- Percentage -->
         <text x="378" y="93" fill="#8b949e" font-size="12" font-weight="600">
-            40.8%
+            40.7%
         </text>
         
         <!-- Language dot -->
@@ -68,13 +68,13 @@
         <!-- Animated progress bar -->
         
         <rect x="130" y="110" width="0" height="16" rx="8" fill="url(#barGrad)">
-            <animate attributeName="width" from="0" to="84.696" dur="0.9s" fill="freeze" />
+            <animate attributeName="width" from="0" to="84.96" dur="0.9s" fill="freeze" />
         </rect>
         
 
         <!-- Percentage -->
         <text x="378" y="123" fill="#8b949e" font-size="12" font-weight="600">
-            35.3%
+            35.4%
         </text>
         
         <!-- Language dot -->
@@ -91,7 +91,7 @@
         <!-- Animated progress bar -->
         
         <rect x="130" y="140" width="0" height="16" rx="8" fill="url(#barGrad)">
-            <animate attributeName="width" from="0" to="27.144000000000002" dur="0.9s" fill="freeze" />
+            <animate attributeName="width" from="0" to="27.095999999999997" dur="0.9s" fill="freeze" />
         </rect>
         
 
@@ -137,7 +137,7 @@
         <!-- Animated progress bar -->
         
         <rect x="130" y="200" width="0" height="16" rx="8" fill="url(#barGrad)">
-            <animate attributeName="width" from="0" to="7.032000000000001" dur="0.9s" fill="freeze" />
+            <animate attributeName="width" from="0" to="7.008" dur="0.9s" fill="freeze" />
         </rect>
         
 
@@ -160,7 +160,7 @@
         <!-- Animated progress bar -->
         
         <rect x="130" y="230" width="0" height="16" rx="8" fill="url(#barGrad)">
-            <animate attributeName="width" from="0" to="6.48" dur="0.9s" fill="freeze" />
+            <animate attributeName="width" from="0" to="6.456" dur="0.9s" fill="freeze" />
         </rect>
         
 
