@@ -6,6 +6,9 @@ const { generateAllCards } = require("../generators/generateAllCards");
 const activeRuns = new Map();
 const memoryStatsCache = new Map();
 
+const REFRESH_COOLDOWN = 10 * 60 * 1000; // 10 minutes
+const lastRefreshTime = new Map();
+
 /**
  * Centralized Stats Service
  * - Prevent duplicate computation
@@ -107,6 +110,16 @@ async function computeAndStoreStats(username) {
  * =========================
  */
 function refreshStatsInBackground(username) {
+
+    const last = lastRefreshTime.get(username) || 0;
+
+    // prevent refresh if cooldown not passed
+    if (Date.now() - last < REFRESH_COOLDOWN) {
+        return;
+    }
+
+    lastRefreshTime.set(username, Date.now());
+
     const promise = computeAndStoreStats(username).catch((err) => {
         console.error("Background stats refresh failed:", err);
         activeRuns.delete(username);
