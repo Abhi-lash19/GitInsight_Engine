@@ -11,6 +11,7 @@ const { renderCommitsCard } = require("./commitsCard");
 const { renderCodeStatsCard } = require("./codeStatsCard");
 const { renderHeatmapCard } = require("./heatmapCard");
 const { renderImpactCard } = require("./impactCard");
+const { renderReadmeDashboard } = require("./readmeDashboardCard");
 
 /**
  * Generate all cards + README snippet
@@ -28,6 +29,7 @@ function generateAllCards(username, stats) {
     const commitsSvg = renderCommitsCard(stats, { theme });
     const codeSvg = renderCodeStatsCard(stats, { theme });
     const impactSvg = renderImpactCard(stats, { theme });
+    const dashboardSvg = renderReadmeDashboard(stats, { theme });
 
     saveSVG(username, "overview", overviewSvg);
     saveSVG(username, "languages", languageSvg);
@@ -36,6 +38,7 @@ function generateAllCards(username, stats) {
     saveSVG(username, "codestats", codeSvg);
     saveSVG(username, "heatmap", heatmapSvg);
     saveSVG(username, "impact", impactSvg);
+    saveSVG(username, "readme", dashboardSvg);
 
     generateReadmeSnippet(username);
 

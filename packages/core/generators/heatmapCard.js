@@ -10,7 +10,7 @@ function renderHeatmapCard(stats, options = {}) {
     const { colors } = getTheme(theme);
 
     // fallback to full year
-    const rawData = stats.dailyCommitMatrix || new Array(365).fill(0);
+    const rawData = stats.dailyCommitMatrix || stats.dailyCommitMap || new Array(365).fill(0);
 
     /**
      * ===== Align to GitHub calendar (weeks start Sunday) =====
@@ -52,7 +52,7 @@ function renderHeatmapCard(stats, options = {}) {
     const max = sorted[sorted.length - 1];
 
     function getColor(v) {
-        if (v === 0) return colors.barBg1 || "#161b22";
+        if (v === 0) return "#161b22";
         if (v <= p25) return "#0e4429";
         if (v <= p50) return "#006d32";
         if (v <= p75) return "#26a641";
