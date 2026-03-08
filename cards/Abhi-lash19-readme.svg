@@ -1,180 +1,347 @@
 
-<svg width="760" height="380" viewBox="0 0 760 380"
-    xmlns="http://www.w3.org/2000/svg">
 
-    <defs>
-        <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
-            <stop offset="0%" stop-color="#0d1117" />
-            <stop offset="100%" stop-color="#161b22" />
-        </linearGradient>
-    </defs>
+<svg width="820" height="440" viewBox="0 0 820 440" xmlns="http://www.w3.org/2000/svg">
 
-    <rect width="100%" height="100%" rx="20"
-        fill="url(#bg)"
-        stroke="#30363d" />
+<defs>
 
-    <text x="40" y="50"
-        fill="#58a6ff"
-        font-size="26"
-        font-weight="700">
-        GitInsight Dashboard
-    </text>
+<linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+<stop offset="0%" stop-color="#0d1117" />
+<stop offset="100%" stop-color="#161b22" />
+</linearGradient>
 
-    <!-- Overview -->
-    <text x="40" y="100" fill="#c9d1d9" font-size="15">
-        📦 Repositories: 16
-    </text>
+<filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+<feDropShadow dx="0" dy="3" stdDeviation="4" flood-opacity="0.25"/>
+</filter>
 
-    <text x="40" y="125" fill="#c9d1d9" font-size="15">
-        ⭐ Stars: 1
-    </text>
+</defs>
 
-    <text x="40" y="150" fill="#c9d1d9" font-size="15">
-        🔥 Contributions: 328
-    </text>
+<rect
+width="100%"
+height="100%"
+rx="20"
+fill="url(#bg)"
+stroke="#30363d"
+filter="url(#shadow)"
+/>
 
-    <text x="40" y="175" fill="#c9d1d9" font-size="15">
-        📝 Commits: 608
-    </text>
+<text
+x="32"
+y="48"
+fill="#58a6ff"
+font-size="24"
+font-weight="700"
+>
+GitInsight Profile
+</text>
 
-    <!-- Languages -->
-    <text x="40" y="190"
-        fill="#58a6ff"
-        font-size="18"
-        font-weight="600">
-        Top Languages
-    </text>
 
-    
-        <text x="40" y="210" fill="#c9d1d9" font-size="14">
-            TypeScript
-        </text>
+<!-- OVERVIEW -->
 
-        <rect x="170" y="198" width="180" height="10"
-            rx="5"
-            fill="#21262d" />
+<rect
+x="32"
+y="70"
+width="360"
+height="150"
+rx="14"
+fill="#0d1117"
+stroke="#30363d"
+/>
 
-        <rect x="170" y="198" width="73.314" height="10"
-            rx="5"
-            fill="#58a6ff" />
+<text x="52" y="100" fill="#58a6ff" font-size="17" font-weight="600">
+Overview
+</text>
 
-        <text x="360" y="210"
-            fill="#c9d1d9"
-            font-size="13"
-            text-anchor="end">
-            40.7%
-        </text>
-        
-        <text x="40" y="236" fill="#c9d1d9" font-size="14">
-            JavaScript
-        </text>
+<text x="52" y="130" fill="#c9d1d9" font-size="14">
+📦 Repositories: 16
+</text>
 
-        <rect x="170" y="224" width="180" height="10"
-            rx="5"
-            fill="#21262d" />
+<text x="52" y="152" fill="#c9d1d9" font-size="14">
+⭐ Stars: 1
+</text>
 
-        <rect x="170" y="224" width="63.72" height="10"
-            rx="5"
-            fill="#58a6ff" />
+<text x="52" y="174" fill="#c9d1d9" font-size="14">
+🍴 Forks: 0
+</text>
 
-        <text x="360" y="236"
-            fill="#c9d1d9"
-            font-size="13"
-            text-anchor="end">
-            35.4%
-        </text>
-        
-        <text x="40" y="262" fill="#c9d1d9" font-size="14">
-            Python
-        </text>
+<text x="52" y="196" fill="#c9d1d9" font-size="14">
+🔥 Contributions: 332
+</text>
 
-        <rect x="170" y="250" width="180" height="10"
-            rx="5"
-            fill="#21262d" />
 
-        <rect x="170" y="250" width="20.322" height="10"
-            rx="5"
-            fill="#58a6ff" />
+<!-- INSIGHTS -->
 
-        <text x="360" y="262"
-            fill="#c9d1d9"
-            font-size="13"
-            text-anchor="end">
-            11.3%
-        </text>
-        
-        <text x="40" y="288" fill="#c9d1d9" font-size="14">
-            HTML
-        </text>
+<rect
+x="32"
+y="240"
+width="360"
+height="150"
+rx="14"
+fill="#0d1117"
+stroke="#30363d"
+/>
 
-        <rect x="170" y="276" width="180" height="10"
-            rx="5"
-            fill="#21262d" />
+<text x="52" y="270" fill="#58a6ff" font-size="17" font-weight="600">
+Developer Insights
+</text>
 
-        <rect x="170" y="276" width="7.632" height="10"
-            rx="5"
-            fill="#58a6ff" />
+<text x="52" y="300" fill="#c9d1d9" font-size="14">
+⚡ Productivity Score: 100
+</text>
 
-        <text x="360" y="288"
-            fill="#c9d1d9"
-            font-size="13"
-            text-anchor="end">
-            4.2%
-        </text>
-        
-        <text x="40" y="314" fill="#c9d1d9" font-size="14">
-            EJS
-        </text>
+<text x="52" y="322" fill="#c9d1d9" font-size="14">
+📈 Activity Level: High
+</text>
 
-        <rect x="170" y="302" width="180" height="10"
-            rx="5"
-            fill="#21262d" />
+<text x="52" y="344" fill="#c9d1d9" font-size="14">
+📝 Commits: 611
+</text>
 
-        <rect x="170" y="302" width="5.256" height="10"
-            rx="5"
-            fill="#58a6ff" />
+<text x="52" y="366" fill="#c9d1d9" font-size="14">
+🚀 Top Repo: CoreGPT
+</text>
 
-        <text x="360" y="314"
-            fill="#c9d1d9"
-            font-size="13"
-            text-anchor="end">
-            2.9%
-        </text>
-        
 
-    <!-- Code Stats -->
-    <text x="430" y="100"
-        fill="#58a6ff"
-        font-size="18"
-        font-weight="600">
-        Code Activity
-    </text>
+<!-- CODE -->
 
-    <text x="430" y="130" fill="#c9d1d9" font-size="14">
-        Lines Added: 71876
-    </text>
+<rect
+x="428"
+y="70"
+width="360"
+height="120"
+rx="14"
+fill="#0d1117"
+stroke="#30363d"
+/>
 
-    <text x="430" y="155" fill="#c9d1d9" font-size="14">
-        Lines Deleted: 1191
-    </text>
+<text x="448" y="100" fill="#58a6ff" font-size="17" font-weight="600">
+Code Activity
+</text>
 
-    <text x="430" y="180" fill="#c9d1d9" font-size="14">
-        Net Lines: 70685
-    </text>
+<text x="448" y="130" fill="#c9d1d9" font-size="14">
+➕ Lines Added: 0
+</text>
 
-    <text x="430" y="220"
-        fill="#58a6ff"
-        font-size="18"
-        font-weight="600">
-        Productivity
-    </text>
+<text x="448" y="152" fill="#c9d1d9" font-size="14">
+➖ Lines Deleted: 0
+</text>
 
-    <text x="430" y="250" fill="#c9d1d9" font-size="14">
-        Score: 100
-    </text>
+<text x="448" y="174" fill="#c9d1d9" font-size="14">
+📊 Net Lines: 0
+</text>
 
-    <text x="430" y="275" fill="#c9d1d9" font-size="14">
-        Activity: High
-    </text>
+
+<!-- LANGUAGES -->
+
+<rect
+x="428"
+y="210"
+width="360"
+height="180"
+rx="14"
+fill="#0d1117"
+stroke="#30363d"
+/>
+
+<text
+x="448"
+y="235"
+fill="#58a6ff"
+font-size="17"
+font-weight="600"
+>
+Top Languages
+</text>
+
+
+
+<text
+x="448"
+y="260"
+fill="#c9d1d9"
+font-size="13"
+>
+TypeScript
+</text>
+
+<rect
+x="538"
+y="250"
+width="160"
+height="10"
+rx="5"
+fill="#21262d"
+/>
+
+<rect
+x="538"
+y="250"
+width="64.672"
+height="10"
+rx="5"
+fill="#58a6ff"
+/>
+
+<text
+x="704"
+y="260"
+fill="#c9d1d9"
+font-size="12"
+>
+40.4%
+</text>
+
+
+
+<text
+x="448"
+y="282"
+fill="#c9d1d9"
+font-size="13"
+>
+JavaScript
+</text>
+
+<rect
+x="538"
+y="272"
+width="160"
+height="10"
+rx="5"
+fill="#21262d"
+/>
+
+<rect
+x="538"
+y="272"
+width="57.424"
+height="10"
+rx="5"
+fill="#58a6ff"
+/>
+
+<text
+x="704"
+y="282"
+fill="#c9d1d9"
+font-size="12"
+>
+35.9%
+</text>
+
+
+
+<text
+x="448"
+y="304"
+fill="#c9d1d9"
+font-size="13"
+>
+Python
+</text>
+
+<rect
+x="538"
+y="294"
+width="160"
+height="10"
+rx="5"
+fill="#21262d"
+/>
+
+<rect
+x="538"
+y="294"
+width="17.919999999999998"
+height="10"
+rx="5"
+fill="#58a6ff"
+/>
+
+<text
+x="704"
+y="304"
+fill="#c9d1d9"
+font-size="12"
+>
+11.2%
+</text>
+
+
+
+<text
+x="448"
+y="326"
+fill="#c9d1d9"
+font-size="13"
+>
+HTML
+</text>
+
+<rect
+x="538"
+y="316"
+width="160"
+height="10"
+rx="5"
+fill="#21262d"
+/>
+
+<rect
+x="538"
+y="316"
+width="6.720000000000001"
+height="10"
+rx="5"
+fill="#58a6ff"
+/>
+
+<text
+x="704"
+y="326"
+fill="#c9d1d9"
+font-size="12"
+>
+4.2%
+</text>
+
+
+
+<text
+x="448"
+y="348"
+fill="#c9d1d9"
+font-size="13"
+>
+EJS
+</text>
+
+<rect
+x="538"
+y="338"
+width="160"
+height="10"
+rx="5"
+fill="#21262d"
+/>
+
+<rect
+x="538"
+y="338"
+width="4.64"
+height="10"
+rx="5"
+fill="#58a6ff"
+/>
+
+<text
+x="704"
+y="348"
+fill="#c9d1d9"
+font-size="12"
+>
+2.9%
+</text>
+
+
 
 </svg>

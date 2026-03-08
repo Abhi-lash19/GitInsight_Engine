@@ -45,13 +45,13 @@
         <!-- Animated progress bar -->
         
         <rect x="130" y="80" width="0" height="16" rx="8" fill="url(#barGrad)">
-            <animate attributeName="width" from="0" to="97.752" dur="0.9s" fill="freeze" />
+            <animate attributeName="width" from="0" to="97.008" dur="0.9s" fill="freeze" />
         </rect>
         
 
         <!-- Percentage -->
         <text x="378" y="93" fill="#8b949e" font-size="12" font-weight="600">
-            40.7%
+            40.4%
         </text>
         
         <!-- Language dot -->
@@ -68,13 +68,13 @@
         <!-- Animated progress bar -->
         
         <rect x="130" y="110" width="0" height="16" rx="8" fill="url(#barGrad)">
-            <animate attributeName="width" from="0" to="84.96" dur="0.9s" fill="freeze" />
+            <animate attributeName="width" from="0" to="86.136" dur="0.9s" fill="freeze" />
         </rect>
         
 
         <!-- Percentage -->
         <text x="378" y="123" fill="#8b949e" font-size="12" font-weight="600">
-            35.4%
+            35.9%
         </text>
         
         <!-- Language dot -->
@@ -91,13 +91,13 @@
         <!-- Animated progress bar -->
         
         <rect x="130" y="140" width="0" height="16" rx="8" fill="url(#barGrad)">
-            <animate attributeName="width" from="0" to="27.095999999999997" dur="0.9s" fill="freeze" />
+            <animate attributeName="width" from="0" to="26.879999999999995" dur="0.9s" fill="freeze" />
         </rect>
         
 
         <!-- Percentage -->
         <text x="378" y="153" fill="#8b949e" font-size="12" font-weight="600">
-            11.3%
+            11.2%
         </text>
         
         <!-- Language dot -->
@@ -114,7 +114,7 @@
         <!-- Animated progress bar -->
         
         <rect x="130" y="170" width="0" height="16" rx="8" fill="url(#barGrad)">
-            <animate attributeName="width" from="0" to="10.176" dur="0.9s" fill="freeze" />
+            <animate attributeName="width" from="0" to="10.08" dur="0.9s" fill="freeze" />
         </rect>
         
 
@@ -137,7 +137,7 @@
         <!-- Animated progress bar -->
         
         <rect x="130" y="200" width="0" height="16" rx="8" fill="url(#barGrad)">
-            <animate attributeName="width" from="0" to="7.008" dur="0.9s" fill="freeze" />
+            <animate attributeName="width" from="0" to="6.959999999999999" dur="0.9s" fill="freeze" />
         </rect>
         
 
@@ -160,7 +160,7 @@
         <!-- Animated progress bar -->
         
         <rect x="130" y="230" width="0" height="16" rx="8" fill="url(#barGrad)">
-            <animate attributeName="width" from="0" to="6.456" dur="0.9s" fill="freeze" />
+            <animate attributeName="width" from="0" to="6.4079999999999995" dur="0.9s" fill="freeze" />
         </rect>
         
 
@@ -183,13 +183,13 @@
         <!-- Animated progress bar -->
         
         <rect x="130" y="260" width="0" height="16" rx="8" fill="url(#barGrad)">
-            <animate attributeName="width" from="0" to="3.504" dur="0.9s" fill="freeze" />
+            <animate attributeName="width" from="0" to="3.4799999999999995" dur="0.9s" fill="freeze" />
         </rect>
         
 
         <!-- Percentage -->
         <text x="378" y="273" fill="#8b949e" font-size="12" font-weight="600">
-            1.5%
+            1.4%
         </text>
         
         <!-- Language dot -->

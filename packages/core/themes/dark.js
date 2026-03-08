@@ -12,5 +12,6 @@ module.exports = {
         barBg2: "#30363d",
         bar1: "#58a6ff",
         bar2: "#1f6feb",
+        cardBg: "#0d1117",
     },
 };
