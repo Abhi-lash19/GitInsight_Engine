@@ -1,265 +1,312 @@
 const { getTheme } = require("../themes");
+const { renderHeatmapGrid } = require("./heatmapCard");
+const { createDashboardLayout } = require("./layoutEngine");
+const { renderCard } = require("./cardRenderer");
 
 /**
- * Generate a single dashboard SVG for README
+ * Generate README dashboard SVG
  */
 function renderReadmeDashboard(stats, options = {}) {
 
     const { theme = "dark" } = options;
-
     const { colors } = getTheme(theme);
 
-    const width = 820;
-    const height = 440;
+    const width = 900;
+    const height = 1100;
 
     const padding = 32;
     const columnGap = 36;
+    const cardWidth = 390;
 
-    const cardWidth = 360;
+    const layout = createDashboardLayout({
+        startX: padding,
+        startY: 70,
+        cardWidth,
+        columnGap,
+        rowGap: 40,
+        columns: 2
+    });
 
-    const leftX = padding;
-    const rightX = padding + cardWidth + columnGap;
+    /** Card positions */
+    const overviewCard = layout.place(140);
+    const codeCard = layout.place(140);
+    const insightsCard = layout.place(140);
+    const trafficCard = layout.place(140);
+    const heatmapCard = layout.place(260);
+    const impactCard = layout.place(150);
+    const languagesCard = layout.place(150);
+    const reposCard = layout.place(150);
+    const commitsCard = layout.place(150);
 
-    const cardPadding = 20;
+    const safeStats = stats?.stats || stats?.data || stats || {};
 
-    let safeStats = stats;
-
-    if (stats?.stats) safeStats = stats.stats;
-    if (stats?.data) safeStats = stats.data;
-    if (stats?.data?.data) safeStats = stats.data.data;
-
-    const insights = safeStats.insights || {};
     const codeStats = safeStats.codeStats || {};
+    const traffic = safeStats.traffic || {};
 
-    // Safe stats fallback
     const totalRepos = safeStats.totalRepos ?? 0;
     const totalStars = safeStats.totalStars ?? 0;
     const totalForks = safeStats.totalForks ?? 0;
     const totalContributions = safeStats.totalContributions ?? 0;
-    const totalCommits = safeStats.totalCommits ?? insights.totalCommits ?? 0;
+    const totalCommits = safeStats.totalCommits ?? 0;
 
     const topRepo = safeStats.topRepo?.name || "N/A";
+
+    /**
+     * Card inner layout constants
+     */
+    const innerPadding = 20;
+    const labelWidth = 120;
+    const barMaxWidth = cardWidth - labelWidth - innerPadding - 40;
+
+    /**
+     * Languages
+     */
+
+    const languageIcons = {
+        JavaScript: "🟨",
+        TypeScript: "🔷",
+        Python: "🐍",
+        Java: "☕",
+        Go: "🐹",
+        Rust: "🦀",
+        HTML: "🌐",
+        CSS: "🎨",
+        Shell: "🐚",
+        C: "💻",
+        "C++": "⚙️"
+    };
 
     const languages = Object.entries(safeStats.languages || {})
         .map(([k, v]) => [k, parseFloat(v)])
         .sort((a, b) => b[1] - a[1])
         .slice(0, 5);
 
-    /**
-     * Layout constants
-     */
-    const labelWidth = 90;
-    const barWidth = 160;
+    const languageRows = languages.map(([name, percent], i) => {
 
-    const languageRows = languages.map((l, i) => {
+        const y = 60 + i * 24;
+        const icon = languageIcons[name] || "🧩";
 
-        const [name, percent] = l;
-
-        const y = 260 + i * 22;
-
-        const bar = (percent / 100) * barWidth;
+        const bar = (percent / 100) * barMaxWidth;
 
         return `
-
-<text
-x="${rightX + cardPadding}"
-y="${y}"
-fill="${colors.text}"
-font-size="13"
->
-${name}
+<text x="${innerPadding}" y="${y}" fill="${colors.text}" font-size="13">
+${icon} ${name}
 </text>
 
 <rect
-x="${rightX + cardPadding + labelWidth}"
+x="${labelWidth}"
 y="${y - 10}"
-width="${barWidth}"
+width="${barMaxWidth}"
 height="10"
 rx="5"
-fill="${colors.barBg1 || "#222"}"
-/>
+fill="${colors.barBg1}" />
 
 <rect
-x="${rightX + cardPadding + labelWidth}"
+x="${labelWidth}"
 y="${y - 10}"
 width="${bar}"
 height="10"
 rx="5"
-fill="${colors.accent || colors.title}"
-/>
+fill="${colors.title}" />
 
 <text
-x="${rightX + cardPadding + labelWidth + barWidth + 6}"
+x="${labelWidth + barMaxWidth + 6}"
 y="${y}"
 fill="${colors.text}"
-font-size="12"
->
+font-size="12">
 ${percent.toFixed(1)}%
 </text>
-
 `;
-
     }).join("");
 
-    return `
+    /**
+     * Repo Impact
+     */
+    const repoImpact = (safeStats.repoImpact || [])
+        .sort((a, b) => b.impactScore - a.impactScore)
+        .slice(0, 5);
 
-<svg width="${width}" height="${height}" viewBox="0 0 ${width} ${height}" xmlns="http://www.w3.org/2000/svg">
+    const maxImpact = Math.max(...repoImpact.map(r => r.impactScore), 1);
+
+    const impactRows = repoImpact.map((r, i) => {
+
+        const y = 60 + i * 24;
+        const bar = (r.impactScore / maxImpact) * barMaxWidth;
+
+        const repoName =
+            r.name.length > 18
+                ? r.name.substring(0, 18) + "…"
+                : r.name;
+
+        return `
+    <text x="${innerPadding}" y="${y}" fill="${colors.text}" font-size="13">
+    📦 ${repoName}
+    </text>
+    
+    <rect
+    x="${labelWidth}"
+    y="${y - 10}"
+    width="${barMaxWidth}"
+    height="10"
+    rx="5"
+    fill="${colors.barBg1}" />
+    
+    <rect
+    x="${labelWidth}"
+    y="${y - 10}"
+    width="${bar}"
+    height="10"
+    rx="5"
+    fill="${colors.title}" />
+    `;
+    }).join("");
+
+    /**
+     * Commit Sparkline
+     */
+    const commitTrend = safeStats.weeklyCommitTrend || [];
+    const maxTrend = Math.max(...commitTrend, 1);
+
+    const trendPath = commitTrend.map((v, i) => {
+
+        const x = innerPadding + i * 6;
+        const y = commitsCard.height - 20 - (v / maxTrend) * 60;
+
+        return `${i === 0 ? "M" : "L"} ${x} ${y}`;
+
+    }).join(" ");
+
+    /**
+     * Top repos
+     */
+    const commitsPerRepo = Object.entries(safeStats.commitsPerRepo || {})
+        .sort((a, b) => b[1] - a[1])
+        .slice(0, 5);
+
+    const repoRows = commitsPerRepo.map(([name, count], i) => {
+
+        const y = 60 + i * 20;
+
+        const repoName =
+            name.length > 22
+                ? name.substring(0, 22) + "…"
+                : name;
+
+        return `
+    <text x="${innerPadding}" y="${y}" fill="${colors.text}" font-size="13">
+    📦 ${repoName} — ${count}
+    </text>
+    `;
+    }).join("");
+
+    /**
+     * Heatmap scaling
+     */
+    const heatmapScale = 0.61;
+
+    /**
+     * SVG
+     */
+    return `
+<svg viewBox="0 0 ${width} ${height}" width="100%" xmlns="http://www.w3.org/2000/svg">
 
 <defs>
-
 <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
 <stop offset="0%" stop-color="${colors.bgStart}" />
 <stop offset="100%" stop-color="${colors.bgEnd}" />
 </linearGradient>
-
-<filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
-<feDropShadow dx="0" dy="3" stdDeviation="4" flood-opacity="0.25"/>
-</filter>
-
 </defs>
 
-<rect
-width="100%"
-height="100%"
-rx="20"
-fill="url(#bg)"
-stroke="${colors.border}"
-filter="url(#shadow)"
-/>
+<rect width="100%" height="100%" rx="20" fill="url(#bg)" stroke="${colors.border}" />
 
-<text
-x="${padding}"
-y="48"
-fill="${colors.title}"
-font-size="24"
-font-weight="700"
->
-GitInsight Profile
+<text x="${padding}" y="48" fill="${colors.title}" font-size="26" font-weight="700">
+🚀 GitInsight Profile
 </text>
 
+${renderCard({
+        ...overviewCard,
+        title: "📊 Overview",
+        colors,
+        content: `
+<text x="20" y="60" fill="${colors.text}">📦 Repositories: ${totalRepos}</text>
+<text x="20" y="80" fill="${colors.text}">⭐ Stars: ${totalStars}</text>
+<text x="20" y="100" fill="${colors.text}">🍴 Forks: ${totalForks}</text>
+<text x="20" y="120" fill="${colors.text}">🔥 Contributions: ${totalContributions}</text>
+`
+    })}
 
-<!-- OVERVIEW -->
+${renderCard({
+        ...codeCard,
+        title: "💻 Code Activity",
+        colors,
+        content: `
+<text x="20" y="60" fill="${colors.text}">➕ Lines Added: ${codeStats.totalLinesAdded ?? 0}</text>
+<text x="20" y="80" fill="${colors.text}">➖ Lines Deleted: ${codeStats.totalLinesDeleted ?? 0}</text>
+<text x="20" y="100" fill="${colors.text}">📈 Net Lines: ${codeStats.netLines ?? 0}</text>
+`
+    })}
 
-<rect
-x="${leftX}"
-y="70"
-width="${cardWidth}"
-height="150"
-rx="14"
-fill="${colors.cardBg || "#00000020"}"
-stroke="${colors.border}"
-/>
+${renderCard({
+        ...insightsCard,
+        title: "🧠 Developer Insights",
+        colors,
+        content: `
+<text x="20" y="60" fill="${colors.text}">🏆 Top Repo: ${topRepo}</text>
+<text x="20" y="80" fill="${colors.text}">📊 Total Commits: ${totalCommits}</text>
+`
+    })}
 
-<text x="${leftX + cardPadding}" y="100" fill="${colors.title}" font-size="17" font-weight="600">
-Overview
-</text>
+${renderCard({
+        ...trafficCard,
+        title: "🌐 Traffic Analytics",
+        colors,
+        content: `
+<text x="20" y="60" fill="${colors.text}">👀 Views: ${traffic.totalViews ?? 0}</text>
+<text x="20" y="80" fill="${colors.text}">🧑 Visitors: ${traffic.totalUniqueVisitors ?? 0}</text>
+`
+    })}
 
-<text x="${leftX + cardPadding}" y="130" fill="${colors.text}" font-size="14">
-📦 Repositories: ${totalRepos}
-</text>
+${renderCard({
+        ...heatmapCard,
+        title: "🔥 Contribution Heatmap",
+        colors,
+        content: `
+<g transform="translate(20,60) scale(${heatmapScale})">
+${renderHeatmapGrid(safeStats, { theme })}
+</g>
+`
+    })}
 
-<text x="${leftX + cardPadding}" y="152" fill="${colors.text}" font-size="14">
-⭐ Stars: ${totalStars}
-</text>
+${renderCard({
+        ...impactCard,
+        title: "📊 Repo Impact",
+        colors,
+        content: impactRows
+    })}
 
-<text x="${leftX + cardPadding}" y="174" fill="${colors.text}" font-size="14">
-🍴 Forks: ${totalForks}
-</text>
+${renderCard({
+        ...languagesCard,
+        title: "🧩 Languages",
+        colors,
+        content: languageRows
+    })}
 
-<text x="${leftX + cardPadding}" y="196" fill="${colors.text}" font-size="14">
-🔥 Contributions: ${totalContributions}
-</text>
+${renderCard({
+        ...reposCard,
+        title: "📦 Top Repositories",
+        colors,
+        content: repoRows
+    })}
 
-
-<!-- INSIGHTS -->
-
-<rect
-x="${leftX}"
-y="240"
-width="${cardWidth}"
-height="150"
-rx="14"
-fill="${colors.cardBg || "#00000020"}"
-stroke="${colors.border}"
-/>
-
-<text x="${leftX + cardPadding}" y="270" fill="${colors.title}" font-size="17" font-weight="600">
-Developer Insights
-</text>
-
-<text x="${leftX + cardPadding}" y="300" fill="${colors.text}" font-size="14">
-⚡ Productivity Score: ${insights.productivityScore ?? 0}
-</text>
-
-<text x="${leftX + cardPadding}" y="322" fill="${colors.text}" font-size="14">
-📈 Activity Level: ${insights.activityLevel ?? "N/A"}
-</text>
-
-<text x="${leftX + cardPadding}" y="344" fill="${colors.text}" font-size="14">
-📝 Commits: ${totalCommits}
-</text>
-
-<text x="${leftX + cardPadding}" y="366" fill="${colors.text}" font-size="14">
-🚀 Top Repo: ${topRepo}
-</text>
-
-
-<!-- CODE -->
-
-<rect
-x="${rightX}"
-y="70"
-width="${cardWidth}"
-height="120"
-rx="14"
-fill="${colors.cardBg || "#00000020"}"
-stroke="${colors.border}"
-/>
-
-<text x="${rightX + cardPadding}" y="100" fill="${colors.title}" font-size="17" font-weight="600">
-Code Activity
-</text>
-
-<text x="${rightX + cardPadding}" y="130" fill="${colors.text}" font-size="14">
-➕ Lines Added: ${codeStats.totalLinesAdded ?? 0}
-</text>
-
-<text x="${rightX + cardPadding}" y="152" fill="${colors.text}" font-size="14">
-➖ Lines Deleted: ${codeStats.totalLinesDeleted ?? 0}
-</text>
-
-<text x="${rightX + cardPadding}" y="174" fill="${colors.text}" font-size="14">
-📊 Net Lines: ${codeStats.netLines ?? 0}
-</text>
-
-
-<!-- LANGUAGES -->
-
-<rect
-x="${rightX}"
-y="210"
-width="${cardWidth}"
-height="180"
-rx="14"
-fill="${colors.cardBg || "#00000020"}"
-stroke="${colors.border}"
-/>
-
-<text
-x="${rightX + cardPadding}"
-y="235"
-fill="${colors.title}"
-font-size="17"
-font-weight="600"
->
-Top Languages
-</text>
-
-${languageRows}
+${renderCard({
+        ...commitsCard,
+        title: "📈 Commit Activity",
+        colors,
+        content: `<path d="${trendPath}" stroke="${colors.title}" fill="none" stroke-width="2"/>`
+    })}
 
 </svg>
 `;
-
 }
 
 module.exports = { renderReadmeDashboard };
