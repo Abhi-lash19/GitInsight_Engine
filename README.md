@@ -222,7 +222,13 @@ gitinsight export --format svg
 
 ---
 
-## 📊 Live GitHub Stats
+## 🚀 GitInsight Dashboard
+
+![Dashboard](./cards/Abhi-lash19-readme.svg)
+
+---
+
+## 📊 Individual Stats
 
 ![Overview](./cards/Abhi-lash19-overview.svg)
 ![Languages](./cards/Abhi-lash19-languages.svg)
