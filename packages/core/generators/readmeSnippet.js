@@ -14,14 +14,19 @@ function generateReadmeSnippet(username) {
 
     const snippet = `
 ---
-## 📊 GitHub Stats
+## 🚀 GitInsight Dashboard
+
+![Dashboard](${card("readme")})
+
+---
+
+## 📊 Individual Stats
 
 ![Overview](${card("overview")})
 ![Languages](${card("languages")})
 ![Insights](${card("insights")})
 ![Commits](${card("commits")})
 ![Code Stats](${card("codestats")})
-![Heatmap](${card("heatmap")})
 `;
 
     console.log("\n📋 Copy this into your root README.md:\n");
