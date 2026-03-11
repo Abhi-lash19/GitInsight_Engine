@@ -1,5 +1,5 @@
 
-<svg viewBox="0 0 900 1100" width="100%" xmlns="http://www.w3.org/2000/svg">
+<svg viewBox="0 0 900 1050" width="100%" xmlns="http://www.w3.org/2000/svg">
 
 <defs>
 <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
@@ -15,151 +15,187 @@
 </text>
 
 
-  <g transform="translate(32, 70)">
-  
-    <rect
-      width="390"
-      height="140"
-      rx="14"
-      fill="#0d1117"
-      stroke="#30363d"
-    />
-  
-    <text
-      x="20"
-      y="30"
-      fill="#58a6ff"
-      font-size="17"
-      font-weight="600">
-      📊 Overview
-    </text>
-  
-    <g transform="translate(0,0)">
-      
+<g transform="translate(32, 70)">
+
+  <defs>
+    <clipPath id="clip-32-70">
+      <rect width="390" height="140" rx="14"/>
+    </clipPath>
+  </defs>
+
+  <rect
+    width="390"
+    height="140"
+    rx="14"
+    fill="#0d1117"
+    stroke="#30363d"
+  />
+
+  <text
+    x="20"
+    y="30"
+    fill="#58a6ff"
+    font-size="17"
+    font-weight="600">
+    📊 Overview
+  </text>
+
+  <!--clip content so nothing overflows card -->
+  <g transform="translate(0,0)" clip-path="url(#clip-32-70)">
+    
 <text x="20" y="60" fill="#c9d1d9">📦 Repositories: 16</text>
 <text x="20" y="80" fill="#c9d1d9">⭐ Stars: 1</text>
 <text x="20" y="100" fill="#c9d1d9">🍴 Forks: 0</text>
-<text x="20" y="120" fill="#c9d1d9">🔥 Contributions: 338</text>
+<text x="20" y="120" fill="#c9d1d9">🔥 Contributions: 343</text>
 
-    </g>
-  
   </g>
-  
+
+</g>
 
 
-  <g transform="translate(458, 70)">
-  
-    <rect
-      width="390"
-      height="140"
-      rx="14"
-      fill="#0d1117"
-      stroke="#30363d"
-    />
-  
-    <text
-      x="20"
-      y="30"
-      fill="#58a6ff"
-      font-size="17"
-      font-weight="600">
-      💻 Code Activity
-    </text>
-  
-    <g transform="translate(0,0)">
-      
-<text x="20" y="60" fill="#c9d1d9">➕ Lines Added: 352781</text>
-<text x="20" y="80" fill="#c9d1d9">➖ Lines Deleted: 277221</text>
-<text x="20" y="100" fill="#c9d1d9">📈 Net Lines: 75560</text>
 
-    </g>
-  
-  </g>
-  
+<g transform="translate(458, 70)">
 
+  <defs>
+    <clipPath id="clip-458-70">
+      <rect width="390" height="140" rx="14"/>
+    </clipPath>
+  </defs>
 
-  <g transform="translate(32, 250)">
-  
-    <rect
-      width="390"
-      height="140"
-      rx="14"
-      fill="#0d1117"
-      stroke="#30363d"
-    />
-  
-    <text
-      x="20"
-      y="30"
-      fill="#58a6ff"
-      font-size="17"
-      font-weight="600">
-      🧠 Developer Insights
-    </text>
-  
-    <g transform="translate(0,0)">
-      
+  <rect
+    width="390"
+    height="140"
+    rx="14"
+    fill="#0d1117"
+    stroke="#30363d"
+  />
+
+  <text
+    x="20"
+    y="30"
+    fill="#58a6ff"
+    font-size="17"
+    font-weight="600">
+    🧠 Developer Insights
+  </text>
+
+  <!--clip content so nothing overflows card -->
+  <g transform="translate(0,0)" clip-path="url(#clip-458-70)">
+    
 <text x="20" y="60" fill="#c9d1d9">🏆 Top Repo: CoreGPT</text>
-<text x="20" y="80" fill="#c9d1d9">📊 Total Commits: 615</text>
+<text x="20" y="80" fill="#c9d1d9">📊 Total Commits: 619</text>
+<text x="20" y="100" fill="#c9d1d9">⚡ Productivity Score: 100</text>
 
-    </g>
-  
   </g>
-  
+
+</g>
 
 
-  <g transform="translate(458, 250)">
-  
-    <rect
-      width="390"
-      height="140"
-      rx="14"
-      fill="#0d1117"
-      stroke="#30363d"
-    />
-  
-    <text
-      x="20"
-      y="30"
-      fill="#58a6ff"
-      font-size="17"
-      font-weight="600">
-      🌐 Traffic Analytics
-    </text>
-  
-    <g transform="translate(0,0)">
-      
-<text x="20" y="60" fill="#c9d1d9">👀 Views: 229</text>
-<text x="20" y="80" fill="#c9d1d9">🧑 Visitors: 27</text>
 
-    </g>
-  
+<g transform="translate(32, 230)">
+
+  <defs>
+    <clipPath id="clip-32-230">
+      <rect width="390" height="140" rx="14"/>
+    </clipPath>
+  </defs>
+
+  <rect
+    width="390"
+    height="140"
+    rx="14"
+    fill="#0d1117"
+    stroke="#30363d"
+  />
+
+  <text
+    x="20"
+    y="30"
+    fill="#58a6ff"
+    font-size="17"
+    font-weight="600">
+    💻 Code Activity
+  </text>
+
+  <!--clip content so nothing overflows card -->
+  <g transform="translate(0,0)" clip-path="url(#clip-32-230)">
+    
+<text x="20" y="60" fill="#c9d1d9">➕ Lines Added: 103335</text>
+<text x="20" y="80" fill="#c9d1d9">➖ Lines Deleted: 64586</text>
+<text x="20" y="100" fill="#c9d1d9">📈 Net Lines: 38749</text>
+
   </g>
-  
+
+</g>
 
 
-  <g transform="translate(32, 430)">
-  
-    <rect
-      width="390"
-      height="260"
-      rx="14"
-      fill="#0d1117"
-      stroke="#30363d"
-    />
-  
-    <text
-      x="20"
-      y="30"
-      fill="#58a6ff"
-      font-size="17"
-      font-weight="600">
-      🔥 Contribution Heatmap
-    </text>
-  
-    <g transform="translate(0,0)">
-      
-<g transform="translate(20,60) scale(0.61)">
+
+<g transform="translate(458, 230)">
+
+  <defs>
+    <clipPath id="clip-458-230">
+      <rect width="390" height="140" rx="14"/>
+    </clipPath>
+  </defs>
+
+  <rect
+    width="390"
+    height="140"
+    rx="14"
+    fill="#0d1117"
+    stroke="#30363d"
+  />
+
+  <text
+    x="20"
+    y="30"
+    fill="#58a6ff"
+    font-size="17"
+    font-weight="600">
+    🌐 Traffic Analytics
+  </text>
+
+  <!--clip content so nothing overflows card -->
+  <g transform="translate(0,0)" clip-path="url(#clip-458-230)">
+    
+<text x="20" y="60" fill="#c9d1d9">👀 Views: 215</text>
+<text x="20" y="80" fill="#c9d1d9">🧑 Visitors: 26</text>
+
+  </g>
+
+</g>
+
+
+
+<g transform="translate(32, 390)">
+
+  <defs>
+    <clipPath id="clip-32-390">
+      <rect width="816" height="260" rx="14"/>
+    </clipPath>
+  </defs>
+
+  <rect
+    width="816"
+    height="260"
+    rx="14"
+    fill="#0d1117"
+    stroke="#30363d"
+  />
+
+  <text
+    x="20"
+    y="30"
+    fill="#58a6ff"
+    font-size="17"
+    font-weight="600">
+    🔥 Contribution Heatmap
+  </text>
+
+  <!--clip content so nothing overflows card -->
+  <g transform="translate(0,0)" clip-path="url(#clip-32-390)">
+    
+<g transform="translate(40,60) scale(1.1572327044025157)">
 
 <rect
 x="0"
@@ -1607,7 +1643,7 @@ y="60"
 width="9"
 height="9"
 rx="2"
-fill="#21262d"
+fill="#39d353"
 />
 <rect
 x="300"
@@ -1623,19 +1659,11 @@ y="0"
 width="9"
 height="9"
 rx="2"
-fill="#39d353"
-/>
-<rect
-x="312"
-y="12"
-width="9"
-height="9"
-rx="2"
 fill="#21262d"
 />
 <rect
 x="312"
-y="24"
+y="12"
 width="9"
 height="9"
 rx="2"
@@ -1643,7 +1671,7 @@ fill="#21262d"
 />
 <rect
 x="312"
-y="36"
+y="24"
 width="9"
 height="9"
 rx="2"
@@ -1651,11 +1679,19 @@ fill="#21262d"
 />
 <rect
 x="312"
-y="48"
+y="36"
 width="9"
 height="9"
 rx="2"
 fill="#39d353"
+/>
+<rect
+x="312"
+y="48"
+width="9"
+height="9"
+rx="2"
+fill="#21262d"
 />
 <rect
 x="312"
@@ -1703,19 +1739,11 @@ y="36"
 width="9"
 height="9"
 rx="2"
-fill="#21262d"
-/>
-<rect
-x="324"
-y="48"
-width="9"
-height="9"
-rx="2"
 fill="#39d353"
 />
 <rect
 x="324"
-y="60"
+y="48"
 width="9"
 height="9"
 rx="2"
@@ -1723,6 +1751,14 @@ fill="#21262d"
 />
 <rect
 x="324"
+y="60"
+width="9"
+height="9"
+rx="2"
+fill="#21262d"
+/>
+<rect
+x="324"
 y="72"
 width="9"
 height="9"
@@ -2279,7 +2315,7 @@ y="60"
 width="9"
 height="9"
 rx="2"
-fill="#21262d"
+fill="#39d353"
 />
 <rect
 x="444"
@@ -2295,19 +2331,11 @@ y="0"
 width="9"
 height="9"
 rx="2"
-fill="#39d353"
-/>
-<rect
-x="456"
-y="12"
-width="9"
-height="9"
-rx="2"
 fill="#21262d"
 />
 <rect
 x="456"
-y="24"
+y="12"
 width="9"
 height="9"
 rx="2"
@@ -2315,6 +2343,14 @@ fill="#39d353"
 />
 <rect
 x="456"
+y="24"
+width="9"
+height="9"
+rx="2"
+fill="#21262d"
+/>
+<rect
+x="456"
 y="36"
 width="9"
 height="9"
@@ -2335,7 +2371,7 @@ y="60"
 width="9"
 height="9"
 rx="2"
-fill="#21262d"
+fill="#39d353"
 />
 <rect
 x="456"
@@ -2343,7 +2379,7 @@ y="72"
 width="9"
 height="9"
 rx="2"
-fill="#39d353"
+fill="#21262d"
 />
 <rect
 x="468"
@@ -2351,7 +2387,7 @@ y="0"
 width="9"
 height="9"
 rx="2"
-fill="#21262d"
+fill="#39d353"
 />
 <rect
 x="468"
@@ -2359,7 +2395,7 @@ y="12"
 width="9"
 height="9"
 rx="2"
-fill="#39d353"
+fill="#21262d"
 />
 <rect
 x="468"
@@ -2375,7 +2411,7 @@ y="36"
 width="9"
 height="9"
 rx="2"
-fill="#21262d"
+fill="#39d353"
 />
 <rect
 x="468"
@@ -2391,7 +2427,7 @@ y="60"
 width="9"
 height="9"
 rx="2"
-fill="#39d353"
+fill="#21262d"
 />
 <rect
 x="468"
@@ -2447,7 +2483,7 @@ y="60"
 width="9"
 height="9"
 rx="2"
-fill="#21262d"
+fill="#39d353"
 />
 <rect
 x="480"
@@ -2455,7 +2491,7 @@ y="72"
 width="9"
 height="9"
 rx="2"
-fill="#39d353"
+fill="#21262d"
 />
 <rect
 x="492"
@@ -2463,7 +2499,7 @@ y="0"
 width="9"
 height="9"
 rx="2"
-fill="#21262d"
+fill="#39d353"
 />
 <rect
 x="492"
@@ -2471,7 +2507,7 @@ y="12"
 width="9"
 height="9"
 rx="2"
-fill="#39d353"
+fill="#21262d"
 />
 <rect
 x="492"
@@ -2527,7 +2563,7 @@ y="12"
 width="9"
 height="9"
 rx="2"
-fill="#21262d"
+fill="#39d353"
 />
 <rect
 x="504"
@@ -2575,7 +2611,7 @@ y="0"
 width="9"
 height="9"
 rx="2"
-fill="#39d353"
+fill="#21262d"
 />
 <rect
 x="516"
@@ -2583,7 +2619,7 @@ y="12"
 width="9"
 height="9"
 rx="2"
-fill="#21262d"
+fill="#39d353"
 />
 <rect
 x="516"
@@ -2607,7 +2643,7 @@ y="48"
 width="9"
 height="9"
 rx="2"
-fill="#39d353"
+fill="#21262d"
 />
 <rect
 x="516"
@@ -2623,7 +2659,7 @@ y="72"
 width="9"
 height="9"
 rx="2"
-fill="#21262d"
+fill="#39d353"
 />
 <rect
 x="528"
@@ -2631,7 +2667,7 @@ y="0"
 width="9"
 height="9"
 rx="2"
-fill="#39d353"
+fill="#21262d"
 />
 <rect
 x="528"
@@ -2647,7 +2683,7 @@ y="24"
 width="9"
 height="9"
 rx="2"
-fill="#21262d"
+fill="#39d353"
 />
 <rect
 x="528"
@@ -2671,7 +2707,7 @@ y="60"
 width="9"
 height="9"
 rx="2"
-fill="#39d353"
+fill="#21262d"
 />
 <rect
 x="528"
@@ -2735,7 +2771,7 @@ y="72"
 width="9"
 height="9"
 rx="2"
-fill="#21262d"
+fill="#39d353"
 />
 <rect
 x="552"
@@ -2751,7 +2787,7 @@ y="12"
 width="9"
 height="9"
 rx="2"
-fill="#39d353"
+fill="#21262d"
 />
 <rect
 x="552"
@@ -2759,7 +2795,7 @@ y="24"
 width="9"
 height="9"
 rx="2"
-fill="#21262d"
+fill="#39d353"
 />
 <rect
 x="552"
@@ -2807,7 +2843,7 @@ y="12"
 width="9"
 height="9"
 rx="2"
-fill="#39d353"
+fill="#21262d"
 />
 <rect
 x="564"
@@ -2847,7 +2883,7 @@ y="72"
 width="9"
 height="9"
 rx="2"
-fill="#21262d"
+fill="#39d353"
 />
 <rect
 x="576"
@@ -2863,7 +2899,7 @@ y="12"
 width="9"
 height="9"
 rx="2"
-fill="#39d353"
+fill="#21262d"
 />
 <rect
 x="576"
@@ -2887,7 +2923,7 @@ y="48"
 width="9"
 height="9"
 rx="2"
-fill="#21262d"
+fill="#39d353"
 />
 <rect
 x="576"
@@ -3131,160 +3167,40 @@ fill="#21262d"
 />
 </g>
 
-    </g>
-  
   </g>
-  
+
+</g>
 
 
-  <g transform="translate(458, 430)">
-  
-    <rect
-      width="390"
-      height="150"
-      rx="14"
-      fill="#0d1117"
-      stroke="#30363d"
-    />
-  
-    <text
-      x="20"
-      y="30"
-      fill="#58a6ff"
-      font-size="17"
-      font-weight="600">
-      📊 Repo Impact
-    </text>
-  
-    <g transform="translate(0,0)">
-      
-    <text x="20" y="60" fill="#c9d1d9" font-size="13">
-    📦 3d-portfolio
-    </text>
-    
-    <rect
-    x="120"
-    y="50"
-    width="210"
-    height="10"
-    rx="5"
-    fill="#21262d" />
-    
-    <rect
-    x="120"
-    y="50"
-    width="210"
-    height="10"
-    rx="5"
-    fill="#58a6ff" />
-    
-    <text x="20" y="84" fill="#c9d1d9" font-size="13">
-    📦 apollo-graphql-fed…
-    </text>
-    
-    <rect
-    x="120"
-    y="74"
-    width="210"
-    height="10"
-    rx="5"
-    fill="#21262d" />
-    
-    <rect
-    x="120"
-    y="74"
-    width="19.084221281564734"
-    height="10"
-    rx="5"
-    fill="#58a6ff" />
-    
-    <text x="20" y="108" fill="#c9d1d9" font-size="13">
-    📦 Abhi-lash19
-    </text>
-    
-    <rect
-    x="120"
-    y="98"
-    width="210"
-    height="10"
-    rx="5"
-    fill="#21262d" />
-    
-    <rect
-    x="120"
-    y="98"
-    width="8.588819150488979"
-    height="10"
-    rx="5"
-    fill="#58a6ff" />
-    
-    <text x="20" y="132" fill="#c9d1d9" font-size="13">
-    📦 infra-deploy-aws
-    </text>
-    
-    <rect
-    x="120"
-    y="122"
-    width="210"
-    height="10"
-    rx="5"
-    fill="#21262d" />
-    
-    <rect
-    x="120"
-    y="122"
-    width="4.352649248284922"
-    height="10"
-    rx="5"
-    fill="#58a6ff" />
-    
-    <text x="20" y="156" fill="#c9d1d9" font-size="13">
-    📦 MonitorPro
-    </text>
-    
-    <rect
-    x="120"
-    y="146"
-    width="210"
-    height="10"
-    rx="5"
-    fill="#21262d" />
-    
-    <rect
-    x="120"
-    y="146"
-    width="3.8989928477594513"
-    height="10"
-    rx="5"
-    fill="#58a6ff" />
-    
-    </g>
-  
-  </g>
-  
 
+<g transform="translate(32, 690)">
 
-  <g transform="translate(32, 730)">
-  
-    <rect
-      width="390"
-      height="150"
-      rx="14"
-      fill="#0d1117"
-      stroke="#30363d"
-    />
-  
-    <text
-      x="20"
-      y="30"
-      fill="#58a6ff"
-      font-size="17"
-      font-weight="600">
-      🧩 Languages
-    </text>
-  
-    <g transform="translate(0,0)">
-      
+  <defs>
+    <clipPath id="clip-32-690">
+      <rect width="390" height="150" rx="14"/>
+    </clipPath>
+  </defs>
+
+  <rect
+    width="390"
+    height="150"
+    rx="14"
+    fill="#0d1117"
+    stroke="#30363d"
+  />
+
+  <text
+    x="20"
+    y="30"
+    fill="#58a6ff"
+    font-size="17"
+    font-weight="600">
+    🧩 Languages
+  </text>
+
+  <!--clip content so nothing overflows card -->
+  <g transform="translate(0,0)" clip-path="url(#clip-32-690)">
+    
 <text x="20" y="60" fill="#c9d1d9" font-size="13">
 🔷 TypeScript
 </text>
@@ -3300,7 +3216,7 @@ fill="#21262d" />
 <rect
 x="120"
 y="50"
-width="84.525"
+width="84.21000000000001"
 height="10"
 rx="5"
 fill="#58a6ff" />
@@ -3310,7 +3226,7 @@ x="336"
 y="60"
 fill="#c9d1d9"
 font-size="12">
-40.3%
+40.1%
 </text>
 
 <text x="20" y="84" fill="#c9d1d9" font-size="13">
@@ -3328,7 +3244,7 @@ fill="#21262d" />
 <rect
 x="120"
 y="74"
-width="75.95700000000001"
+width="76.44"
 height="10"
 rx="5"
 fill="#58a6ff" />
@@ -3338,7 +3254,7 @@ x="336"
 y="84"
 fill="#c9d1d9"
 font-size="12">
-36.2%
+36.4%
 </text>
 
 <text x="20" y="108" fill="#c9d1d9" font-size="13">
@@ -3356,7 +3272,7 @@ fill="#21262d" />
 <rect
 x="120"
 y="98"
-width="23.415"
+width="23.331"
 height="10"
 rx="5"
 fill="#58a6ff" />
@@ -3366,7 +3282,7 @@ x="336"
 y="108"
 fill="#c9d1d9"
 font-size="12">
-11.2%
+11.1%
 </text>
 
 <text x="20" y="132" fill="#c9d1d9" font-size="13">
@@ -3384,7 +3300,7 @@ fill="#21262d" />
 <rect
 x="120"
 y="122"
-width="8.777999999999999"
+width="8.757"
 height="10"
 rx="5"
 fill="#58a6ff" />
@@ -3412,7 +3328,7 @@ fill="#21262d" />
 <rect
 x="120"
 y="146"
-width="6.069000000000001"
+width="6.027"
 height="10"
 rx="5"
 fill="#58a6ff" />
@@ -3425,83 +3341,228 @@ font-size="12">
 2.9%
 </text>
 
-    </g>
-  
   </g>
-  
+
+</g>
 
 
-  <g transform="translate(458, 730)">
-  
-    <rect
-      width="390"
-      height="150"
-      rx="14"
-      fill="#0d1117"
-      stroke="#30363d"
-    />
-  
-    <text
-      x="20"
-      y="30"
-      fill="#58a6ff"
-      font-size="17"
-      font-weight="600">
-      📦 Top Repositories
-    </text>
-  
-    <g transform="translate(0,0)">
-      
-    <text x="20" y="60" fill="#c9d1d9" font-size="13">
-    📦 apollo-graphql-federat… — 121
-    </text>
+<g transform="translate(458, 690)">
+
+  <defs>
+    <clipPath id="clip-458-690">
+      <rect width="390" height="150" rx="14"/>
+    </clipPath>
+  </defs>
+
+  <rect
+    width="390"
+    height="150"
+    rx="14"
+    fill="#0d1117"
+    stroke="#30363d"
+  />
+
+  <text
+    x="20"
+    y="30"
+    fill="#58a6ff"
+    font-size="17"
+    font-weight="600">
+    📦 Top Repositories
+  </text>
+
+  <!--clip content so nothing overflows card -->
+  <g transform="translate(0,0)" clip-path="url(#clip-458-690)">
     
-    <text x="20" y="80" fill="#c9d1d9" font-size="13">
-    📦 express-typescript-bac… — 76
-    </text>
-    
-    <text x="20" y="100" fill="#c9d1d9" font-size="13">
-    📦 3d-portfolio — 74
-    </text>
-    
-    <text x="20" y="120" fill="#c9d1d9" font-size="13">
-    📦 GitInsight_Engine — 72
-    </text>
-    
-    <text x="20" y="140" fill="#c9d1d9" font-size="13">
-    📦 Abhi-lash19 — 50
-    </text>
-    
-    </g>
-  
+<text x="20" y="60" fill="#c9d1d9" font-size="13">
+📦 apollo-graphql-federat… — 121
+</text>
+
+<text x="20" y="80" fill="#c9d1d9" font-size="13">
+📦 express-typescript-bac… — 76
+</text>
+
+<text x="20" y="100" fill="#c9d1d9" font-size="13">
+📦 GitInsight_Engine — 75
+</text>
+
+<text x="20" y="120" fill="#c9d1d9" font-size="13">
+📦 3d-portfolio — 74
+</text>
+
+<text x="20" y="140" fill="#c9d1d9" font-size="13">
+📦 Abhi-lash19 — 51
+</text>
+
   </g>
-  
+
+</g>
 
 
-  <g transform="translate(32, 920)">
-  
-    <rect
-      width="390"
-      height="150"
-      rx="14"
-      fill="#0d1117"
-      stroke="#30363d"
-    />
-  
-    <text
-      x="20"
-      y="30"
-      fill="#58a6ff"
-      font-size="17"
-      font-weight="600">
-      📈 Commit Activity
-    </text>
-  
-    <g transform="translate(0,0)">
-      <path d="M 20 130 L 26 130 L 32 130 L 38 130 L 44 130 L 50 130 L 56 130 L 62 130 L 68 130 L 74 130 L 80 130 L 86 130 L 92 130 L 98 130 L 104 130 L 110 130 L 116 130 L 122 130 L 128 130 L 134 130 L 140 130 L 146 130 L 152 130 L 158 130 L 164 130 L 170 117.2 L 176 126.8 L 182 130 L 188 130 L 194 130 L 200 130 L 206 130 L 212 130 L 218 130 L 224 130 L 230 130 L 236 130 L 242 125.2 L 248 124.4 L 254 128.4 L 260 126.8 L 266 120.4 L 272 104.4 L 278 94 L 284 130 L 290 102 L 296 122 L 302 122.8 L 308 70 L 314 100.4 L 320 97.2 L 326 110.8" stroke="#58a6ff" fill="none" stroke-width="2"/>
-    </g>
-  
+<g transform="translate(32, 870)">
+
+  <defs>
+    <clipPath id="clip-32-870">
+      <rect width="390" height="150" rx="14"/>
+    </clipPath>
+  </defs>
+
+  <rect
+    width="390"
+    height="150"
+    rx="14"
+    fill="#0d1117"
+    stroke="#30363d"
+  />
+
+  <text
+    x="20"
+    y="30"
+    fill="#58a6ff"
+    font-size="17"
+    font-weight="600">
+    📊 Repo Impact
+  </text>
+
+  <!--clip content so nothing overflows card -->
+  <g transform="translate(0,0)" clip-path="url(#clip-32-870)">
+    
+<text x="20" y="60" fill="#c9d1d9" font-size="13">
+📦 3d-portfolio
+</text>
+
+<rect
+x="120"
+y="50"
+width="210"
+height="10"
+rx="5"
+fill="#21262d" />
+
+<rect
+x="120"
+y="50"
+width="210"
+height="10"
+rx="5"
+fill="#58a6ff" />
+
+<text x="20" y="84" fill="#c9d1d9" font-size="13">
+📦 apollo-graphql-fed…
+</text>
+
+<rect
+x="120"
+y="74"
+width="210"
+height="10"
+rx="5"
+fill="#21262d" />
+
+<rect
+x="120"
+y="74"
+width="19.084221281564734"
+height="10"
+rx="5"
+fill="#58a6ff" />
+
+<text x="20" y="108" fill="#c9d1d9" font-size="13">
+📦 Abhi-lash19
+</text>
+
+<rect
+x="120"
+y="98"
+width="210"
+height="10"
+rx="5"
+fill="#21262d" />
+
+<rect
+x="120"
+y="98"
+width="10.237921471318055"
+height="10"
+rx="5"
+fill="#58a6ff" />
+
+<text x="20" y="132" fill="#c9d1d9" font-size="13">
+📦 infra-deploy-aws
+</text>
+
+<rect
+x="120"
+y="122"
+width="210"
+height="10"
+rx="5"
+fill="#21262d" />
+
+<rect
+x="120"
+y="122"
+width="4.352649248284922"
+height="10"
+rx="5"
+fill="#58a6ff" />
+
+<text x="20" y="156" fill="#c9d1d9" font-size="13">
+📦 MonitorPro
+</text>
+
+<rect
+x="120"
+y="146"
+width="210"
+height="10"
+rx="5"
+fill="#21262d" />
+
+<rect
+x="120"
+y="146"
+width="3.8989928477594513"
+height="10"
+rx="5"
+fill="#58a6ff" />
+
   </g>
-  
+
+</g>
+
+
+<g transform="translate(458, 870)">
+
+  <defs>
+    <clipPath id="clip-458-870">
+      <rect width="390" height="150" rx="14"/>
+    </clipPath>
+  </defs>
+
+  <rect
+    width="390"
+    height="150"
+    rx="14"
+    fill="#0d1117"
+    stroke="#30363d"
+  />
+
+  <text
+    x="20"
+    y="30"
+    fill="#58a6ff"
+    font-size="17"
+    font-weight="600">
+    📈 Commit Activity
+  </text>
+
+  <!--clip content so nothing overflows card -->
+  <g transform="translate(0,0)" clip-path="url(#clip-458-870)">
+    <path d="M 20 130 L 26.73076923076923 130 L 33.46153846153846 130 L 40.19230769230769 130 L 46.92307692307692 130 L 53.65384615384615 130 L 60.38461538461539 130 L 67.11538461538461 130 L 73.84615384615384 130 L 80.57692307692308 130 L 87.3076923076923 130 L 94.03846153846153 130 L 100.76923076923077 130 L 107.5 130 L 114.23076923076923 130 L 120.96153846153847 130 L 127.6923076923077 130 L 134.4230769230769 130 L 141.15384615384616 130 L 147.8846153846154 130 L 154.6153846153846 130 L 161.34615384615384 130 L 168.07692307692307 130 L 174.80769230769232 130 L 181.53846153846155 126.52173913043478 L 188.26923076923077 119.56521739130434 L 195 126.52173913043478 L 201.73076923076923 130 L 208.46153846153845 130 L 215.1923076923077 130 L 221.92307692307693 130 L 228.65384615384616 130 L 235.3846153846154 130 L 242.1153846153846 130 L 248.84615384615384 130 L 255.57692307692307 130 L 262.3076923076923 126.52173913043478 L 269.03846153846155 127.3913043478261 L 275.7692307692308 124.78260869565217 L 282.5 128.2608695652174 L 289.2307692307692 126.52173913043478 L 295.96153846153845 116.08695652173913 L 302.6923076923077 102.17391304347827 L 309.4230769230769 94.34782608695653 L 316.15384615384613 130 L 322.8846153846154 91.73913043478261 L 329.61538461538464 128.2608695652174 L 336.34615384615387 113.47826086956522 L 343.0769230769231 70 L 349.8076923076923 88.26086956521739 L 356.53846153846155 103.91304347826087 L 363.2692307692308 110" stroke="#58a6ff" fill="none" stroke-width="2"/>
+  </g>
+
+</g>
+
 
 </svg>

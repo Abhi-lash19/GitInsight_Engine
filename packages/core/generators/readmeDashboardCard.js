@@ -1,6 +1,5 @@
 const { getTheme } = require("../themes");
 const { renderHeatmapGrid } = require("./heatmapCard");
-const { createDashboardLayout } = require("./layoutEngine");
 const { renderCard } = require("./cardRenderer");
 
 /**
@@ -12,36 +11,49 @@ function renderReadmeDashboard(stats, options = {}) {
     const { colors } = getTheme(theme);
 
     const width = 900;
-    const height = 1100;
+    const height = 1050;
 
     const padding = 32;
     const columnGap = 36;
     const cardWidth = 390;
 
-    const layout = createDashboardLayout({
-        startX: padding,
-        startY: 70,
-        cardWidth,
-        columnGap,
-        rowGap: 40,
-        columns: 2
-    });
+    const leftX = padding;
+    const rightX = padding + cardWidth + columnGap;
+
+    /**
+     * Fixed row layout (prevents layout engine misplacement)
+     */
+    const row1Y = 70;
+    const row2Y = row1Y + 160;
+    const row3Y = row2Y + 160;
+    const row4Y = row3Y + 300;
+    const row5Y = row4Y + 180;
 
     /** Card positions */
-    const overviewCard = layout.place(140);
-    const codeCard = layout.place(140);
-    const insightsCard = layout.place(140);
-    const trafficCard = layout.place(140);
-    const heatmapCard = layout.place(260);
-    const impactCard = layout.place(150);
-    const languagesCard = layout.place(150);
-    const reposCard = layout.place(150);
-    const commitsCard = layout.place(150);
+    const overviewCard = { x: leftX, y: row1Y, width: cardWidth, height: 140 };
+    const insightsCard = { x: rightX, y: row1Y, width: cardWidth, height: 140 };
+
+    const codeCard = { x: leftX, y: row2Y, width: cardWidth, height: 140 };
+    const trafficCard = { x: rightX, y: row2Y, width: cardWidth, height: 140 };
+
+    const heatmapCard = {
+        x: leftX,
+        y: row3Y,
+        width: cardWidth * 2 + columnGap,
+        height: 260
+    };
+
+    const languagesCard = { x: leftX, y: row4Y, width: cardWidth, height: 150 };
+    const reposCard = { x: rightX, y: row4Y, width: cardWidth, height: 150 };
+
+    const impactCard = { x: leftX, y: row5Y, width: cardWidth, height: 150 };
+    const commitsCard = { x: rightX, y: row5Y, width: cardWidth, height: 150 };
 
     const safeStats = stats?.stats || stats?.data || stats || {};
 
     const codeStats = safeStats.codeStats || {};
     const traffic = safeStats.traffic || {};
+    const insights = safeStats.insights || {};
 
     const totalRepos = safeStats.totalRepos ?? 0;
     const totalStars = safeStats.totalStars ?? 0;
@@ -61,7 +73,6 @@ function renderReadmeDashboard(stats, options = {}) {
     /**
      * Languages
      */
-
     const languageIcons = {
         JavaScript: "🟨",
         TypeScript: "🔷",
@@ -139,26 +150,26 @@ ${percent.toFixed(1)}%
                 : r.name;
 
         return `
-    <text x="${innerPadding}" y="${y}" fill="${colors.text}" font-size="13">
-    📦 ${repoName}
-    </text>
-    
-    <rect
-    x="${labelWidth}"
-    y="${y - 10}"
-    width="${barMaxWidth}"
-    height="10"
-    rx="5"
-    fill="${colors.barBg1}" />
-    
-    <rect
-    x="${labelWidth}"
-    y="${y - 10}"
-    width="${bar}"
-    height="10"
-    rx="5"
-    fill="${colors.title}" />
-    `;
+<text x="${innerPadding}" y="${y}" fill="${colors.text}" font-size="13">
+📦 ${repoName}
+</text>
+
+<rect
+x="${labelWidth}"
+y="${y - 10}"
+width="${barMaxWidth}"
+height="10"
+rx="5"
+fill="${colors.barBg1}" />
+
+<rect
+x="${labelWidth}"
+y="${y - 10}"
+width="${bar}"
+height="10"
+rx="5"
+fill="${colors.title}" />
+`;
     }).join("");
 
     /**
@@ -167,9 +178,11 @@ ${percent.toFixed(1)}%
     const commitTrend = safeStats.weeklyCommitTrend || [];
     const maxTrend = Math.max(...commitTrend, 1);
 
+    const step = (cardWidth - innerPadding * 2) / Math.max(commitTrend.length, 1);
+
     const trendPath = commitTrend.map((v, i) => {
 
-        const x = innerPadding + i * 6;
+        const x = innerPadding + i * step;
         const y = commitsCard.height - 20 - (v / maxTrend) * 60;
 
         return `${i === 0 ? "M" : "L"} ${x} ${y}`;
@@ -193,16 +206,17 @@ ${percent.toFixed(1)}%
                 : name;
 
         return `
-    <text x="${innerPadding}" y="${y}" fill="${colors.text}" font-size="13">
-    📦 ${repoName} — ${count}
-    </text>
-    `;
+<text x="${innerPadding}" y="${y}" fill="${colors.text}" font-size="13">
+📦 ${repoName} — ${count}
+</text>
+`;
     }).join("");
 
     /**
-     * Heatmap scaling
+     * dynamic heatmap scale
      */
-    const heatmapScale = 0.61;
+    const heatmapWidth = 53 * (9 + 3);
+    const heatmapScale = (heatmapCard.width - 80) / heatmapWidth;
 
     /**
      * SVG
@@ -236,6 +250,17 @@ ${renderCard({
     })}
 
 ${renderCard({
+        ...insightsCard,
+        title: "🧠 Developer Insights",
+        colors,
+        content: `
+<text x="20" y="60" fill="${colors.text}">🏆 Top Repo: ${topRepo}</text>
+<text x="20" y="80" fill="${colors.text}">📊 Total Commits: ${totalCommits}</text>
+<text x="20" y="100" fill="${colors.text}">⚡ Productivity Score: ${insights.productivityScore ?? 0}</text>
+`
+    })}
+
+${renderCard({
         ...codeCard,
         title: "💻 Code Activity",
         colors,
@@ -243,16 +268,6 @@ ${renderCard({
 <text x="20" y="60" fill="${colors.text}">➕ Lines Added: ${codeStats.totalLinesAdded ?? 0}</text>
 <text x="20" y="80" fill="${colors.text}">➖ Lines Deleted: ${codeStats.totalLinesDeleted ?? 0}</text>
 <text x="20" y="100" fill="${colors.text}">📈 Net Lines: ${codeStats.netLines ?? 0}</text>
-`
-    })}
-
-${renderCard({
-        ...insightsCard,
-        title: "🧠 Developer Insights",
-        colors,
-        content: `
-<text x="20" y="60" fill="${colors.text}">🏆 Top Repo: ${topRepo}</text>
-<text x="20" y="80" fill="${colors.text}">📊 Total Commits: ${totalCommits}</text>
 `
     })}
 
@@ -271,17 +286,10 @@ ${renderCard({
         title: "🔥 Contribution Heatmap",
         colors,
         content: `
-<g transform="translate(20,60) scale(${heatmapScale})">
+<g transform="translate(40,60) scale(${heatmapScale})">
 ${renderHeatmapGrid(safeStats, { theme })}
 </g>
 `
-    })}
-
-${renderCard({
-        ...impactCard,
-        title: "📊 Repo Impact",
-        colors,
-        content: impactRows
     })}
 
 ${renderCard({
@@ -296,6 +304,13 @@ ${renderCard({
         title: "📦 Top Repositories",
         colors,
         content: repoRows
+    })}
+
+${renderCard({
+        ...impactCard,
+        title: "📊 Repo Impact",
+        colors,
+        content: impactRows
     })}
 
 ${renderCard({

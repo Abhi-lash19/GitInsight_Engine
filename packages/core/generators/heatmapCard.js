@@ -80,8 +80,15 @@ function renderHeatmapCard(stats, options = {}) {
     const cell = 9;
     const gap = 3;
 
-    const width = cols * (cell + gap) + 60;
-    const height = rows * (cell + gap) + 90;
+    /**
+     * calculate grid width dynamically
+     * prevents broken scaling when embedded in dashboard
+     */
+    const gridWidth = cols * (cell + gap);
+    const gridHeight = rows * (cell + gap);
+
+    const width = gridWidth + 60;
+    const height = gridHeight + 90;
 
     const grid = renderHeatmapGrid(stats, options);
 
