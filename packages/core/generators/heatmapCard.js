@@ -1,8 +1,21 @@
 const { getTheme } = require("../themes");
 
 /**
+ * Dashboard heatmap renderer
+ */
+function renderHeatmapContent(stats, options = {}) {
+
+    const grid = renderHeatmapGrid(stats, options);
+
+    return `
+<g transform="translate(0,0)">
+${grid}
+</g>
+`;
+}
+
+/**
  * Internal grid renderer
- * Used by both dashboard and standalone heatmap card
  */
 function renderHeatmapGrid(stats, options = {}) {
 
@@ -17,8 +30,11 @@ function renderHeatmapGrid(stats, options = {}) {
     const cols = 53;
     const rows = 7;
 
-    const cell = 9;
-    const gap = 3;
+    /**
+     * Smaller cells for dashboard
+     */
+    const cell = 6;
+    const gap = 2;
 
     const totalDays = cols * rows;
     const aligned = new Array(totalDays).fill(0);
@@ -57,7 +73,7 @@ x="${x}"
 y="${y}"
 width="${cell}"
 height="${cell}"
-rx="2"
+rx="1"
 fill="${getColor(value)}"
 />`;
     });
@@ -66,34 +82,17 @@ fill="${getColor(value)}"
 }
 
 /**
- * Full heatmap card
- * Used by the individual heatmap SVG generator
+ * Standalone heatmap card
  */
 function renderHeatmapCard(stats, options = {}) {
 
     const { theme = "dark" } = options;
     const { colors } = getTheme(theme);
 
-    const cols = 53;
-    const rows = 7;
-
-    const cell = 9;
-    const gap = 3;
-
-    /**
-     * calculate grid width dynamically
-     * prevents broken scaling when embedded in dashboard
-     */
-    const gridWidth = cols * (cell + gap);
-    const gridHeight = rows * (cell + gap);
-
-    const width = gridWidth + 60;
-    const height = gridHeight + 90;
-
     const grid = renderHeatmapGrid(stats, options);
 
     return `
-<svg viewBox="0 0 ${width} ${height}" width="100%" xmlns="http://www.w3.org/2000/svg">
+<svg viewBox="0 0 420 120" width="100%" xmlns="http://www.w3.org/2000/svg">
 
 <defs>
 <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
@@ -104,11 +103,11 @@ function renderHeatmapCard(stats, options = {}) {
 
 <rect width="100%" height="100%" rx="16" fill="url(#bg)" stroke="${colors.border}" />
 
-<text x="20" y="35" fill="${colors.title}" font-size="18" font-weight="600">
+<text x="20" y="30" fill="${colors.title}" font-size="18" font-weight="600">
 🔥 Commit Heatmap
 </text>
 
-<g transform="translate(20,50)">
+<g transform="translate(20,45)">
 ${grid}
 </g>
 
@@ -118,5 +117,6 @@ ${grid}
 
 module.exports = {
     renderHeatmapCard,
-    renderHeatmapGrid
+    renderHeatmapGrid,
+    renderHeatmapContent
 };

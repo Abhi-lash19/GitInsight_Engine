@@ -1,5 +1,30 @@
 const { getTheme } = require("../themes");
 
+
+/**
+ * Dashboard content renderer
+ */
+function renderImpactContent(stats) {
+
+    const data = (stats.repoImpact || [])
+        .sort((a, b) => b.impactScore - a.impactScore)
+        .slice(0, 5);
+
+    let y = 0;
+
+    return data.map(repo => {
+        const name =
+            repo.name.length > 20
+                ? repo.name.substring(0, 20) + "…"
+                : repo.name;
+
+        const line = `<text x="0" y="${y}">${name}: ${repo.impactScore.toFixed(1)}</text>`;
+        y += 18;
+
+        return line;
+    }).join("");
+}
+
 /**
  * Repo Impact Visualization (clean & readable)
  */
@@ -96,4 +121,7 @@ function renderImpactCard(stats, options = {}) {
 `;
 }
 
-module.exports = { renderImpactCard };
+module.exports = {
+    renderImpactCard,
+    renderImpactContent
+};
