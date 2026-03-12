@@ -1,7 +1,27 @@
 const { createCard } = require("./svgGenerator");
 
 /**
- * Generate overview SVG card
+ * ===============================
+ * Dashboard Content Renderer
+ * ===============================
+ * Used inside dashboard card container
+ */
+function renderOverviewContent(stats) {
+
+    const insights = stats.insights || {};
+
+    return `
+<text x="0" y="0">Repositories: ${stats.totalRepos || 0}</text>
+<text x="0" y="18">Stars Earned: ${stats.totalStars || 0}</text>
+<text x="0" y="36">Forks: ${stats.totalForks || 0}</text>
+<text x="0" y="54">Productivity: ${insights.productivityScore || 0}</text>
+`;
+}
+
+/**
+ * ===============================
+ * Full standalone SVG card
+ * ===============================
  */
 function renderOverviewCard(stats, options = {}) {
     const {
@@ -70,4 +90,7 @@ function renderOverviewCard(stats, options = {}) {
     });
 }
 
-module.exports = { renderOverviewCard };
+module.exports = {
+    renderOverviewCard,
+    renderOverviewContent
+};

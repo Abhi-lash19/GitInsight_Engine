@@ -1,7 +1,22 @@
 const { createCard } = require("./svgGenerator");
 
 /**
- * Generate developer insights SVG card
+ * Dashboard content renderer
+ */
+function renderInsightsContent(stats) {
+
+    const insights = stats.insights || {};
+
+    return `
+<text x="0" y="0">Productivity: ${insights.productivityScore ?? 0}</text>
+<text x="0" y="18">Activity Level: ${insights.activityLevel ?? "N/A"}</text>
+<text x="0" y="36">Churn Ratio: ${insights.churnRatio ?? 0}</text>
+<text x="0" y="54">Avg Commits/Week: ${insights.averageCommitsPerWeek ?? 0}</text>
+`;
+}
+
+/**
+ * Full standalone SVG card
  */
 function renderInsightsCard(stats, options = {}) {
     const {
@@ -31,4 +46,7 @@ function renderInsightsCard(stats, options = {}) {
     });
 }
 
-module.exports = { renderInsightsCard };
+module.exports = {
+    renderInsightsCard,
+    renderInsightsContent
+};

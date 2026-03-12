@@ -1,6 +1,24 @@
 const { getTheme } = require("../themes");
 
 /**
+ * Dashboard language renderer
+ */
+function renderLanguageContent(languages = {}) {
+
+    const sorted = Object.entries(languages)
+        .sort((a, b) => b[1] - a[1])
+        .slice(0, 5);
+
+    let y = 0;
+
+    return sorted.map(([lang, percent]) => {
+        const line = `<text x="0" y="${y}">${lang}: ${percent}%</text>`;
+        y += 18;
+        return line;
+    }).join("");
+}
+
+/**
  * Generate language bar chart SVG (modern style)
  */
 function renderLanguageCard(languages, options = {}) {
@@ -121,4 +139,7 @@ function renderLanguageCard(languages, options = {}) {
     return svg;
 }
 
-module.exports = { renderLanguageCard };
+module.exports = {
+    renderLanguageCard,
+    renderLanguageContent
+};

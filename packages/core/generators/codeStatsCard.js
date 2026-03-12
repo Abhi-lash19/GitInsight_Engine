@@ -1,7 +1,21 @@
 const { createCard } = require("./svgGenerator");
 
 /**
- * Generate code stats SVG card
+ * Dashboard content renderer
+ */
+function renderCodeStatsContent(stats) {
+
+    const code = stats.codeStats || {};
+
+    return `
+<text x="0" y="0">Lines Added: ${code.totalLinesAdded ?? 0}</text>
+<text x="0" y="18">Lines Deleted: ${code.totalLinesDeleted ?? 0}</text>
+<text x="0" y="36">Net Lines: ${code.netLines ?? 0}</text>
+`;
+}
+
+/**
+ * Standalone SVG card
  */
 function renderCodeStatsCard(stats, options = {}) {
     const { theme = "dark" } = options;
@@ -21,4 +35,7 @@ function renderCodeStatsCard(stats, options = {}) {
     });
 }
 
-module.exports = { renderCodeStatsCard };
+module.exports = {
+    renderCodeStatsCard,
+    renderCodeStatsContent
+};
