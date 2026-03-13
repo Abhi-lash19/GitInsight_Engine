@@ -18,7 +18,10 @@ function renderCard({
   const {
     cardBg = "#0d1117",
     border = "#30363d",
-    title: titleColor = "#58a6ff"
+    title: titleColor = "#58a6ff",
+    // Allow callers to override title font size while defaulting
+    // to the original value to avoid changing existing SVG output.
+    titleFontSize = 17
   } = colors;
 
   /**
@@ -48,7 +51,7 @@ function renderCard({
     x="20"
     y="30"
     fill="${titleColor}"
-    font-size="17"
+    font-size="${titleFontSize}"
     font-weight="600">
     ${title}
   </text>
