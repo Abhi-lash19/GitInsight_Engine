@@ -1,5 +1,5 @@
 
-<svg viewBox="0 0 900 1050" width="100%" xmlns="http://www.w3.org/2000/svg">
+<svg viewBox="0 0 900 752" width="100%" xmlns="http://www.w3.org/2000/svg">
 
 <rect width="100%" height="100%" rx="20" fill="#0d1117" stroke="#30363d" />
 
@@ -30,7 +30,7 @@
     fill="#58a6ff"
     font-size="17"
     font-weight="600">
-    Overview
+    Developer Insights
   </text>
 
   <!--clip content so nothing overflows card -->
@@ -38,16 +38,15 @@
     
 <g transform="translate(20,50)" fill="#c9d1d9" font-size="13">
 
-<text x="0" y="0">Repositories: 16</text>
-<text x="0" y="18">Stars Earned: 1</text>
-<text x="0" y="36">Forks: 0</text>
-<text x="0" y="54">Productivity: 100</text>
+<text x="0" y="0">Productivity: 100</text>
+<text x="0" y="18">Activity Level: High</text>
+<text x="0" y="36">Churn Ratio: 0.637</text>
+<text x="0" y="54">Avg Commits/Week: 7.12</text>
 
 </g>
   </g>
 
 </g>
-
 
 <g transform="translate(458, 70)">
 
@@ -71,7 +70,7 @@
     fill="#58a6ff"
     font-size="17"
     font-weight="600">
-    Developer Insights
+    Code Activity
   </text>
 
   <!--clip content so nothing overflows card -->
@@ -79,62 +78,19 @@
     
 <g transform="translate(20,50)" fill="#c9d1d9" font-size="13">
 
-<text x="0" y="0">Productivity: 100</text>
-<text x="0" y="18">Activity Level: High</text>
-<text x="0" y="36">Churn Ratio: 0.61</text>
-<text x="0" y="54">Avg Commits/Week: 7.08</text>
+<text x="0" y="0">Lines Added: 100068</text>
+<text x="0" y="18">Lines Deleted: 63790</text>
+<text x="0" y="36">Net Lines: 36278</text>
 
 </g>
   </g>
 
 </g>
 
-
-
-<g transform="translate(32, 230)">
+<g transform="translate(32, 240)">
 
   <defs>
-    <clipPath id="clip-32-230">
-      <rect width="390" height="140" rx="14"/>
-    </clipPath>
-  </defs>
-
-  <rect
-    width="390"
-    height="140"
-    rx="14"
-    fill="#0d1117"
-    stroke="#30363d"
-  />
-
-  <text
-    x="20"
-    y="30"
-    fill="#58a6ff"
-    font-size="17"
-    font-weight="600">
-    Code Activity
-  </text>
-
-  <!--clip content so nothing overflows card -->
-  <g transform="translate(0,0)" clip-path="url(#clip-32-230)">
-    
-<g transform="translate(20,50)" fill="#c9d1d9" font-size="13">
-
-<text x="0" y="0">Lines Added: 95445</text>
-<text x="0" y="18">Lines Deleted: 58228</text>
-<text x="0" y="36">Net Lines: 37217</text>
-
-</g>
-  </g>
-
-</g>
-
-
-<g transform="translate(458, 230)">
-
-  <defs>
-    <clipPath id="clip-458-230">
+    <clipPath id="clip-32-240">
       <rect width="390" height="140" rx="14"/>
     </clipPath>
   </defs>
@@ -157,28 +113,61 @@
   </text>
 
   <!--clip content so nothing overflows card -->
-  <g transform="translate(0,0)" clip-path="url(#clip-458-230)">
+  <g transform="translate(0,0)" clip-path="url(#clip-32-240)">
     
 <g transform="translate(20,50)" fill="#c9d1d9" font-size="13">
-<text x="0" y="0">apollo-graphql-federation-demo: 121</text><text x="0" y="18">GitInsight_Engine: 79</text><text x="0" y="36">express-typescript-backend: 76</text><text x="0" y="54">3d-portfolio: 74</text>
+<text x="0" y="0">apollo-graphql-federation-demo: 121</text><text x="0" y="18">GitInsight_Engine: 81</text><text x="0" y="36">express-typescript-backend: 76</text><text x="0" y="54">3d-portfolio: 74</text>
 </g>
   </g>
 
 </g>
 
-
-
-<g transform="translate(32, 390)">
+<g transform="translate(458, 240)">
 
   <defs>
-    <clipPath id="clip-32-390">
-      <rect width="816" height="260" rx="14"/>
+    <clipPath id="clip-458-240">
+      <rect width="390" height="140" rx="14"/>
+    </clipPath>
+  </defs>
+
+  <rect
+    width="390"
+    height="140"
+    rx="14"
+    fill="#0d1117"
+    stroke="#30363d"
+  />
+
+  <text
+    x="20"
+    y="30"
+    fill="#58a6ff"
+    font-size="17"
+    font-weight="600">
+    Languages
+  </text>
+
+  <!--clip content so nothing overflows card -->
+  <g transform="translate(0,0)" clip-path="url(#clip-458-240)">
+    
+<g transform="translate(20,50)" fill="#c9d1d9" font-size="13">
+<text x="0" y="0">TypeScript: 40.16%</text><text x="0" y="18">JavaScript: 36.31%</text><text x="0" y="36">Python: 11.13%</text><text x="0" y="54">HTML: 4.18%</text><text x="0" y="72">EJS: 2.88%</text>
+</g>
+  </g>
+
+</g>
+
+<g transform="translate(32, 410)">
+
+  <defs>
+    <clipPath id="clip-32-410">
+      <rect width="816" height="140" rx="14"/>
     </clipPath>
   </defs>
 
   <rect
     width="816"
-    height="260"
+    height="140"
     rx="14"
     fill="#0d1117"
     stroke="#30363d"
@@ -194,8 +183,10 @@
   </text>
 
   <!--clip content so nothing overflows card -->
-  <g transform="translate(0,0)" clip-path="url(#clip-32-390)">
-    <g transform="translate(40,60)">
+  <g transform="translate(0,0)" clip-path="url(#clip-32-410)">
+    
+<g transform="translate(20,50)" fill="#c9d1d9" font-size="13">
+
 <g transform="translate(0,0)">
 
 <rect
@@ -1628,19 +1619,11 @@ y="24"
 width="6"
 height="6"
 rx="1"
-fill="#21262d"
-/>
-<rect
-x="200"
-y="32"
-width="6"
-height="6"
-rx="1"
 fill="#39d353"
 />
 <rect
 x="200"
-y="40"
+y="32"
 width="6"
 height="6"
 rx="1"
@@ -1648,6 +1631,14 @@ fill="#39d353"
 />
 <rect
 x="200"
+y="40"
+width="6"
+height="6"
+rx="1"
+fill="#21262d"
+/>
+<rect
+x="200"
 y="48"
 width="6"
 height="6"
@@ -1668,7 +1659,7 @@ y="8"
 width="6"
 height="6"
 rx="1"
-fill="#21262d"
+fill="#39d353"
 />
 <rect
 x="208"
@@ -1676,7 +1667,7 @@ y="16"
 width="6"
 height="6"
 rx="1"
-fill="#39d353"
+fill="#21262d"
 />
 <rect
 x="208"
@@ -1724,7 +1715,7 @@ y="8"
 width="6"
 height="6"
 rx="1"
-fill="#21262d"
+fill="#39d353"
 />
 <rect
 x="216"
@@ -1732,7 +1723,7 @@ y="16"
 width="6"
 height="6"
 rx="1"
-fill="#39d353"
+fill="#21262d"
 />
 <rect
 x="216"
@@ -2300,19 +2291,11 @@ y="24"
 width="6"
 height="6"
 rx="1"
-fill="#21262d"
-/>
-<rect
-x="296"
-y="32"
-width="6"
-height="6"
-rx="1"
 fill="#39d353"
 />
 <rect
 x="296"
-y="40"
+y="32"
 width="6"
 height="6"
 rx="1"
@@ -2320,11 +2303,19 @@ fill="#39d353"
 />
 <rect
 x="296"
-y="48"
+y="40"
 width="6"
 height="6"
 rx="1"
 fill="#21262d"
+/>
+<rect
+x="296"
+y="48"
+width="6"
+height="6"
+rx="1"
+fill="#39d353"
 />
 <rect
 x="304"
@@ -2332,7 +2323,7 @@ y="0"
 width="6"
 height="6"
 rx="1"
-fill="#39d353"
+fill="#21262d"
 />
 <rect
 x="304"
@@ -2356,19 +2347,11 @@ y="24"
 width="6"
 height="6"
 rx="1"
-fill="#21262d"
-/>
-<rect
-x="304"
-y="32"
-width="6"
-height="6"
-rx="1"
 fill="#39d353"
 />
 <rect
 x="304"
-y="40"
+y="32"
 width="6"
 height="6"
 rx="1"
@@ -2376,11 +2359,19 @@ fill="#21262d"
 />
 <rect
 x="304"
-y="48"
+y="40"
 width="6"
 height="6"
 rx="1"
 fill="#39d353"
+/>
+<rect
+x="304"
+y="48"
+width="6"
+height="6"
+rx="1"
+fill="#21262d"
 />
 <rect
 x="312"
@@ -2396,7 +2387,7 @@ y="8"
 width="6"
 height="6"
 rx="1"
-fill="#21262d"
+fill="#39d353"
 />
 <rect
 x="312"
@@ -2412,7 +2403,7 @@ y="24"
 width="6"
 height="6"
 rx="1"
-fill="#39d353"
+fill="#21262d"
 />
 <rect
 x="312"
@@ -2468,7 +2459,7 @@ y="24"
 width="6"
 height="6"
 rx="1"
-fill="#21262d"
+fill="#39d353"
 />
 <rect
 x="320"
@@ -2476,7 +2467,7 @@ y="32"
 width="6"
 height="6"
 rx="1"
-fill="#39d353"
+fill="#21262d"
 />
 <rect
 x="320"
@@ -2484,7 +2475,7 @@ y="40"
 width="6"
 height="6"
 rx="1"
-fill="#21262d"
+fill="#39d353"
 />
 <rect
 x="320"
@@ -2492,7 +2483,7 @@ y="48"
 width="6"
 height="6"
 rx="1"
-fill="#39d353"
+fill="#21262d"
 />
 <rect
 x="328"
@@ -2548,7 +2539,7 @@ y="48"
 width="6"
 height="6"
 rx="1"
-fill="#21262d"
+fill="#39d353"
 />
 <rect
 x="336"
@@ -2596,7 +2587,7 @@ y="40"
 width="6"
 height="6"
 rx="1"
-fill="#39d353"
+fill="#21262d"
 />
 <rect
 x="336"
@@ -2604,7 +2595,7 @@ y="48"
 width="6"
 height="6"
 rx="1"
-fill="#21262d"
+fill="#39d353"
 />
 <rect
 x="344"
@@ -2628,7 +2619,7 @@ y="16"
 width="6"
 height="6"
 rx="1"
-fill="#39d353"
+fill="#21262d"
 />
 <rect
 x="344"
@@ -2644,7 +2635,7 @@ y="32"
 width="6"
 height="6"
 rx="1"
-fill="#21262d"
+fill="#39d353"
 />
 <rect
 x="344"
@@ -2652,7 +2643,7 @@ y="40"
 width="6"
 height="6"
 rx="1"
-fill="#39d353"
+fill="#21262d"
 />
 <rect
 x="344"
@@ -2668,7 +2659,7 @@ y="0"
 width="6"
 height="6"
 rx="1"
-fill="#21262d"
+fill="#39d353"
 />
 <rect
 x="352"
@@ -2692,7 +2683,7 @@ y="24"
 width="6"
 height="6"
 rx="1"
-fill="#39d353"
+fill="#21262d"
 />
 <rect
 x="352"
@@ -2756,7 +2747,7 @@ y="32"
 width="6"
 height="6"
 rx="1"
-fill="#21262d"
+fill="#39d353"
 />
 <rect
 x="360"
@@ -2772,7 +2763,7 @@ y="48"
 width="6"
 height="6"
 rx="1"
-fill="#39d353"
+fill="#21262d"
 />
 <rect
 x="368"
@@ -2780,7 +2771,7 @@ y="0"
 width="6"
 height="6"
 rx="1"
-fill="#21262d"
+fill="#39d353"
 />
 <rect
 x="368"
@@ -2828,7 +2819,7 @@ y="48"
 width="6"
 height="6"
 rx="1"
-fill="#39d353"
+fill="#21262d"
 />
 <rect
 x="376"
@@ -2868,7 +2859,7 @@ y="32"
 width="6"
 height="6"
 rx="1"
-fill="#21262d"
+fill="#39d353"
 />
 <rect
 x="376"
@@ -2884,7 +2875,7 @@ y="48"
 width="6"
 height="6"
 rx="1"
-fill="#39d353"
+fill="#21262d"
 />
 <rect
 x="384"
@@ -2908,7 +2899,7 @@ y="16"
 width="6"
 height="6"
 rx="1"
-fill="#21262d"
+fill="#39d353"
 />
 <rect
 x="384"
@@ -3167,97 +3158,23 @@ rx="1"
 fill="#21262d"
 />
 </g>
-</g>
-  </g>
 
-</g>
-
-
-
-<g transform="translate(32, 690)">
-
-  <defs>
-    <clipPath id="clip-32-690">
-      <rect width="390" height="150" rx="14"/>
-    </clipPath>
-  </defs>
-
-  <rect
-    width="390"
-    height="150"
-    rx="14"
-    fill="#0d1117"
-    stroke="#30363d"
-  />
-
-  <text
-    x="20"
-    y="30"
-    fill="#58a6ff"
-    font-size="17"
-    font-weight="600">
-    Languages
-  </text>
-
-  <!--clip content so nothing overflows card -->
-  <g transform="translate(0,0)" clip-path="url(#clip-32-690)">
-    
-<g transform="translate(20,50)" fill="#c9d1d9" font-size="13">
-<text x="0" y="0">TypeScript: 40.03%</text><text x="0" y="18">JavaScript: 36.51%</text><text x="0" y="36">Python: 11.09%</text><text x="0" y="54">HTML: 4.16%</text><text x="0" y="72">EJS: 2.87%</text>
 </g>
   </g>
 
 </g>
 
-
-<g transform="translate(458, 690)">
+<g transform="translate(32, 580)">
 
   <defs>
-    <clipPath id="clip-458-690">
-      <rect width="390" height="150" rx="14"/>
+    <clipPath id="clip-32-580">
+      <rect width="390" height="140" rx="14"/>
     </clipPath>
   </defs>
 
   <rect
     width="390"
-    height="150"
-    rx="14"
-    fill="#0d1117"
-    stroke="#30363d"
-  />
-
-  <text
-    x="20"
-    y="30"
-    fill="#58a6ff"
-    font-size="17"
-    font-weight="600">
-    Top Repositories
-  </text>
-
-  <!--clip content so nothing overflows card -->
-  <g transform="translate(0,0)" clip-path="url(#clip-458-690)">
-    
-<g transform="translate(20,50)" fill="#c9d1d9" font-size="13">
-<text x="0" y="0">apollo-graphql-federation-demo: 121</text><text x="0" y="18">GitInsight_Engine: 79</text><text x="0" y="36">express-typescript-backend: 76</text><text x="0" y="54">3d-portfolio: 74</text>
-</g>
-  </g>
-
-</g>
-
-
-
-<g transform="translate(32, 870)">
-
-  <defs>
-    <clipPath id="clip-32-870">
-      <rect width="390" height="150" rx="14"/>
-    </clipPath>
-  </defs>
-
-  <rect
-    width="390"
-    height="150"
+    height="140"
     rx="14"
     fill="#0d1117"
     stroke="#30363d"
@@ -3273,27 +3190,26 @@ fill="#21262d"
   </text>
 
   <!--clip content so nothing overflows card -->
-  <g transform="translate(0,0)" clip-path="url(#clip-32-870)">
+  <g transform="translate(0,0)" clip-path="url(#clip-32-580)">
     
 <g transform="translate(20,50)" fill="#c9d1d9" font-size="13">
-<text x="0" y="0">3d-portfolio: 342.6</text><text x="0" y="18">apollo-graphql-feder…: 31.1</text><text x="0" y="36">Abhi-lash19: 18.8</text><text x="0" y="54">infra-deploy-aws: 7.1</text><text x="0" y="72">MonitorPro: 6.4</text>
+<text x="0" y="0">3d-portfolio: 342.6</text><text x="0" y="18">apollo-graphql-feder…: 31.1</text><text x="0" y="36">Abhi-lash19: 19.4</text><text x="0" y="54">infra-deploy-aws: 7.1</text><text x="0" y="72">MonitorPro: 6.4</text>
 </g>
   </g>
 
 </g>
 
-
-<g transform="translate(458, 870)">
+<g transform="translate(458, 580)">
 
   <defs>
-    <clipPath id="clip-458-870">
-      <rect width="390" height="150" rx="14"/>
+    <clipPath id="clip-458-580">
+      <rect width="390" height="140" rx="14"/>
     </clipPath>
   </defs>
 
   <rect
     width="390"
-    height="150"
+    height="140"
     rx="14"
     fill="#0d1117"
     stroke="#30363d"
@@ -3305,14 +3221,19 @@ fill="#21262d"
     fill="#58a6ff"
     font-size="17"
     font-weight="600">
-    Commit Activity
+    TEST OVERVIEW
   </text>
 
   <!--clip content so nothing overflows card -->
-  <g transform="translate(0,0)" clip-path="url(#clip-458-870)">
+  <g transform="translate(0,0)" clip-path="url(#clip-458-580)">
     
 <g transform="translate(20,50)" fill="#c9d1d9" font-size="13">
-<text x="0" y="0">apollo-graphql-federation-demo: 121</text><text x="0" y="18">GitInsight_Engine: 79</text><text x="0" y="36">express-typescript-backend: 76</text><text x="0" y="54">3d-portfolio: 74</text>
+
+<text x="0" y="0">Repositories: 16</text>
+<text x="0" y="18">Stars Earned: 1</text>
+<text x="0" y="36">Forks: 0</text>
+<text x="0" y="54">Productivity: 100</text>
+
 </g>
   </g>
 

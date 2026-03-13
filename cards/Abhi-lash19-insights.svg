@@ -30,30 +30,30 @@
             Churn Ratio:
         </text>
         <text x="396" y="136" fill="#ffffff" font-size="15" text-anchor="end">
-            0.61
+            0.637
         </text>
         <text x="24" y="164" fill="#c9d1d9" font-size="15">
             Avg Commits/Week:
         </text>
         <text x="396" y="164" fill="#ffffff" font-size="15" text-anchor="end">
-            7.08
+            7.12
         </text>
         <text x="24" y="192" fill="#c9d1d9" font-size="15">
             Most Active Week:
         </text>
         <text x="396" y="192" fill="#ffffff" font-size="15" text-anchor="end">
-            48
+            47
         </text>
         <text x="24" y="220" fill="#c9d1d9" font-size="15">
             Repo Impact:
         </text>
         <text x="396" y="220" fill="#ffffff" font-size="15" text-anchor="end">
-            421
+            421.73
         </text>
         <text x="24" y="248" fill="#c9d1d9" font-size="15">
             Total Commits:
         </text>
         <text x="396" y="248" fill="#ffffff" font-size="15" text-anchor="end">
-            624
+            626
         </text>
 </svg>
