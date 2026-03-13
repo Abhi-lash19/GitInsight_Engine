@@ -19,7 +19,7 @@ async function computeStats(username) {
 
     const [
         languageStats,
-        totalContributions,
+        contributionData,
         trafficStats,
         codeStats,
     ] = await Promise.all([
@@ -28,6 +28,8 @@ async function computeStats(username) {
         calculateTrafficStats(repos),
         calculateCodeFrequencyStats(repos),
     ]);
+
+    const totalContributions = contributionData.totalContributions;
 
     const advancedStats = await calculateAdvancedCommitStats(
         repos,
@@ -41,7 +43,9 @@ async function computeStats(username) {
         totalContributions,
         trafficStats,
         codeStats,
-        advancedStats
+        advancedStats,
+        contributionData.contributions,
+        repos
     );
 
     await setApiCache(cacheKey, stats);

@@ -1,107 +1,50 @@
 const { getTheme } = require("../themes");
-
+const { multiProgressBars } = require("./components");
 
 /**
  * Dashboard content renderer
  */
 function renderImpactContent(stats) {
+    const themeObj = getTheme();
+    const colors = themeObj.colors;
 
     const data = (stats.repoImpact || [])
         .sort((a, b) => b.impactScore - a.impactScore)
         .slice(0, 5);
 
-    let y = 0;
+    const progressData = data.map(repo => ({
+        label: repo.name.length > 20 ? repo.name.substring(0, 20) + "…" : repo.name,
+        value: repo.impactScore
+    }));
 
-    return data.map(repo => {
-        const name =
-            repo.name.length > 20
-                ? repo.name.substring(0, 20) + "…"
-                : repo.name;
-
-        const line = `<text x="0" y="${y}">${name}: ${repo.impactScore.toFixed(1)}</text>`;
-        y += 18;
-
-        return line;
-    }).join("");
+    return multiProgressBars(progressData, {
+        maxBarWidth: 200,
+        barColor: colors.title,
+        barBgColor: colors.barBg1
+    });
 }
 
 /**
  * Repo Impact Visualization (clean & readable)
  */
 function renderImpactCard(stats, options = {}) {
-    const { theme = "dark", animate = true } = options;
+    const { theme = "dark" } = options;
     const { colors } = getTheme(theme);
 
     const data = (stats.repoImpact || [])
         .sort((a, b) => b.impactScore - a.impactScore)
         .slice(0, 7);
 
-    const width = 460;
-    const barHeight = 22;
-    const gap = 18;
-    const startY = 70;
+    const progressData = data.map(repo => ({
+        label: repo.name.length > 25 ? repo.name.substring(0, 25) + "…" : repo.name,
+        value: repo.impactScore
+    }));
 
-    /**
-     * ===== Dynamic padding based on longest repo name =====
-     * Approx 7px per character (SVG font avg)
-     */
-    const longestNameLength = data.reduce(
-        (max, d) => Math.max(max, (d.name || "").length),
-        0
-    );
-
-    const labelWidth = longestNameLength * 7 + 40; // dynamic label area
-    const leftPadding = labelWidth;
-    const rightPadding = 40;
-    const chartWidth = width - leftPadding - rightPadding;
-
-    const max = Math.max(...data.map(d => d.impactScore), 1);
-
-    const rows = data.map((d, i) => {
-        const y = startY + i * (barHeight + gap);
-        const barWidth = (d.impactScore / max) * chartWidth;
-
-        return `
-            <text x="24" y="${y + 16}" fill="${colors.text}" font-size="13">
-                ${d.name}
-            </text>
-
-            <!-- Background bar -->
-            <rect
-                x="${leftPadding}"
-                y="${y}"
-                width="${chartWidth}"
-                height="${barHeight}"
-                rx="8"
-                fill="${colors.barBg1}"
-            />
-
-            <!-- Progress bar -->
-            ${animate
-                ? `<rect x="${leftPadding}" y="${y}" width="0" height="${barHeight}" rx="8" fill="${colors.title}">
-                        <animate attributeName="width" from="0" to="${barWidth}" dur="0.8s" fill="freeze" />
-                       </rect>`
-                : `<rect x="${leftPadding}" y="${y}" width="${barWidth}" height="${barHeight}" rx="8" fill="${colors.title}" />`
-            }
-
-            <!-- Score -->
-            <text
-                x="${leftPadding + chartWidth - 6}"
-                y="${y + 16}"
-                fill="${colors.text}"
-                font-size="12"
-                text-anchor="end"
-            >
-                ${d.impactScore.toFixed(1)}
-            </text>
-        `;
-    }).join("");
-
-    const height = startY + data.length * (barHeight + gap) + 40;
+    const width = 420;
+    const height = 220;
 
     return `
-<svg width="100%" viewBox="0 0 ${width} ${height}" xmlns="http://www.w3.org/2000/svg">
-
+<svg width="${width}" height="${height}" viewBox="0 0 ${width} ${height}" xmlns="http://www.w3.org/2000/svg">
     <defs>
         <linearGradient id="cardBg" x1="0" y1="0" x2="1" y2="1">
             <stop offset="0%" stop-color="${colors.bgStart}"/>
@@ -109,13 +52,23 @@ function renderImpactCard(stats, options = {}) {
         </linearGradient>
     </defs>
 
+    <!-- Card background -->
     <rect width="100%" height="100%" rx="16" fill="url(#cardBg)" stroke="${colors.border}" />
 
-    <text x="24" y="38" fill="${colors.title}" font-size="20" font-weight="600">
+    <!-- Title -->
+    <text x="24" y="44" fill="${colors.title}" font-size="20" font-weight="600">
         Repo Impact Ranking
     </text>
 
-    ${rows}
+    <!-- Progress bars -->
+    <g transform="translate(24, 80)">
+        ${multiProgressBars(progressData, {
+        maxBarWidth: 320,
+        barColor: colors.title,
+        barBgColor: colors.barBg1,
+        showPercentage: false
+    })}
+    </g>
 
 </svg>
 `;

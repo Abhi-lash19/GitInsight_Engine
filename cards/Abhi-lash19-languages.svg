@@ -1,219 +1,436 @@
 
-<svg width="430" height="348" viewBox="0 0 430 348" xmlns="http://www.w3.org/2000/svg">
-
+<svg width="420" height="200" viewBox="0 0 420 200" xmlns="http://www.w3.org/2000/svg">
     <defs>
         <linearGradient id="cardBg" x1="0" y1="0" x2="1" y2="1">
             <stop offset="0%" stop-color="#0d1117"/>
             <stop offset="100%" stop-color="#161b22"/>
         </linearGradient>
-
-        <linearGradient id="barGrad" x1="0" y1="0" x2="1" y2="0">
-            <stop offset="0%" stop-color="#58a6ff"/>
-            <stop offset="100%" stop-color="#1f6feb"/>
-        </linearGradient>
-
-        <linearGradient id="barBg" x1="0" y1="0" x2="1" y2="0">
-            <stop offset="0%" stop-color="#21262d"/>
-            <stop offset="100%" stop-color="#30363d"/>
-        </linearGradient>
-
-        <filter id="softShadow" x="-20%" y="-20%" width="140%" height="140%">
-            <feDropShadow dx="0" dy="2" stdDeviation="3" flood-color="#000" flood-opacity="0.25"/>
-        </filter>
     </defs>
 
     <!-- Card background -->
-    <rect width="100%" height="100%" rx="16" fill="url(#cardBg)" stroke="#30363d" filter="url(#softShadow)"/>
+    <rect width="100%" height="100%" rx="16" fill="url(#cardBg)" stroke="#30363d"/>
 
     <!-- Title -->
-    <text x="24" y="48" fill="#58a6ff" font-size="20" font-weight="700">
+    <text x="24" y="44" fill="#58a6ff" font-size="20" font-weight="600">
         Top Languages
     </text>
 
-    
-        <!-- Language dot -->
-        <circle cx="24" cy="88" r="5" fill="#3178c6" />
+    <!-- Progress bars -->
+    <g transform="translate(24, 80)">
+        
+    <g>
+      
+      <text
+        x="0"
+        y="18"
+        fill="#c9d1d9"
+        font-size="12">
+        TypeScript
+      </text>
 
-        <!-- Language label -->
-        <text x="36" y="93" fill="#c9d1d9" font-size="13" font-weight="500">
+      <rect
+        x="120"
+        y="12"
+        width="240"
+        height="8"
+        rx="4"
+        fill="#21262d"
+      />
+
+      <rect
+        x="120"
+        y="12"
+        width="240"
+        height="8"
+        rx="4"
+        fill="#58a6ff"
+      />
+      
+      
+      <text
+        x="368"
+        y="18"
+        fill="#8b949e"
+        font-size="11"
+        text-anchor="start">
+        100%
+      </text>
+    
+      <text
+        x="0"
+        y="42"
+        fill="#c9d1d9"
+        font-size="12">
+        JavaScript
+      </text>
+
+      <rect
+        x="120"
+        y="36"
+        width="240"
+        height="8"
+        rx="4"
+        fill="#21262d"
+      />
+
+      <rect
+        x="120"
+        y="36"
+        width="232.03472044932343"
+        height="8"
+        rx="4"
+        fill="#58a6ff"
+      />
+      
+      
+      <text
+        x="368"
+        y="42"
+        fill="#8b949e"
+        font-size="11"
+        text-anchor="start">
+        97%
+      </text>
+    
+      <text
+        x="0"
+        y="66"
+        fill="#c9d1d9"
+        font-size="12">
+        Python
+      </text>
+
+      <rect
+        x="120"
+        y="60"
+        width="240"
+        height="8"
+        rx="4"
+        fill="#21262d"
+      />
+
+      <rect
+        x="120"
+        y="60"
+        width="66.47944855756957"
+        height="8"
+        rx="4"
+        fill="#58a6ff"
+      />
+      
+      
+      <text
+        x="368"
+        y="66"
+        fill="#8b949e"
+        font-size="11"
+        text-anchor="start">
+        28%
+      </text>
+    
+      <text
+        x="0"
+        y="90"
+        fill="#c9d1d9"
+        font-size="12">
+        HTML
+      </text>
+
+      <rect
+        x="120"
+        y="84"
+        width="240"
+        height="8"
+        rx="4"
+        fill="#21262d"
+      />
+
+      <rect
+        x="120"
+        y="84"
+        width="24.937452131733473"
+        height="8"
+        rx="4"
+        fill="#58a6ff"
+      />
+      
+      
+      <text
+        x="368"
+        y="90"
+        fill="#8b949e"
+        font-size="11"
+        text-anchor="start">
+        10%
+      </text>
+    
+      <text
+        x="0"
+        y="114"
+        fill="#c9d1d9"
+        font-size="12">
+        EJS
+      </text>
+
+      <rect
+        x="120"
+        y="108"
+        width="240"
+        height="8"
+        rx="4"
+        fill="#21262d"
+      />
+
+      <rect
+        x="120"
+        y="108"
+        width="17.21725810569313"
+        height="8"
+        rx="4"
+        fill="#58a6ff"
+      />
+      
+      
+      <text
+        x="368"
+        y="114"
+        fill="#8b949e"
+        font-size="11"
+        text-anchor="start">
+        7%
+      </text>
+    
+      <text
+        x="0"
+        y="138"
+        fill="#c9d1d9"
+        font-size="12">
+        CSS
+      </text>
+
+      <rect
+        x="120"
+        y="132"
+        width="240"
+        height="8"
+        rx="4"
+        fill="#21262d"
+      />
+
+      <rect
+        x="120"
+        y="132"
+        width="15.869287720194023"
+        height="8"
+        rx="4"
+        fill="#58a6ff"
+      />
+      
+      
+      <text
+        x="368"
+        y="138"
+        fill="#8b949e"
+        font-size="11"
+        text-anchor="start">
+        7%
+      </text>
+    
+      <text
+        x="0"
+        y="162"
+        fill="#c9d1d9"
+        font-size="12">
+        HCL
+      </text>
+
+      <rect
+        x="120"
+        y="156"
+        width="240"
+        height="8"
+        rx="4"
+        fill="#21262d"
+      />
+
+      <rect
+        x="120"
+        y="156"
+        width="8.577993362267039"
+        height="8"
+        rx="4"
+        fill="#58a6ff"
+      />
+      
+      
+      <text
+        x="368"
+        y="162"
+        fill="#8b949e"
+        font-size="11"
+        text-anchor="start">
+        4%
+      </text>
+    
+      <text
+        x="0"
+        y="186"
+        fill="#c9d1d9"
+        font-size="12">
+        Shell
+      </text>
+
+      <rect
+        x="120"
+        y="180"
+        width="240"
+        height="8"
+        rx="4"
+        fill="#21262d"
+      />
+
+      <rect
+        x="120"
+        y="180"
+        width="2.4508552463620115"
+        height="8"
+        rx="4"
+        fill="#58a6ff"
+      />
+      
+      
+      <text
+        x="368"
+        y="186"
+        fill="#8b949e"
+        font-size="11"
+        text-anchor="start">
+        1%
+      </text>
+    
+    </g>
+    
+    </g>
+
+    <!-- Legend -->
+    <g transform="translate(24, 160)">
+        
+    <g>
+      
+        <circle
+            cx="4"
+            cy="8"
+            r="4"
+            fill="#3178c6"
+        />
+        <text
+            x="12"
+            y="11"
+            fill="#8b949e"
+            font-size="11">
             TypeScript
         </text>
-
-        <!-- Background bar -->
-        <rect x="130" y="80" width="240" height="16" rx="8" fill="url(#barBg)"/>
-
-        <!-- Animated progress bar -->
-        
-        <rect x="130" y="80" width="0" height="16" rx="8" fill="url(#barGrad)">
-            <animate attributeName="width" from="0" to="96.38399999999999" dur="0.9s" fill="freeze" />
-        </rect>
-        
-
-        <!-- Percentage -->
-        <text x="378" y="93" fill="#8b949e" font-size="12" font-weight="600">
-            40.2%
-        </text>
-        
-        <!-- Language dot -->
-        <circle cx="24" cy="118" r="5" fill="#f1e05a" />
-
-        <!-- Language label -->
-        <text x="36" y="123" fill="#c9d1d9" font-size="13" font-weight="500">
+    
+        <circle
+            cx="84"
+            cy="8"
+            r="4"
+            fill="#f1e05a"
+        />
+        <text
+            x="92"
+            y="11"
+            fill="#8b949e"
+            font-size="11">
             JavaScript
         </text>
-
-        <!-- Background bar -->
-        <rect x="130" y="110" width="240" height="16" rx="8" fill="url(#barBg)"/>
-
-        <!-- Animated progress bar -->
-        
-        <rect x="130" y="110" width="0" height="16" rx="8" fill="url(#barGrad)">
-            <animate attributeName="width" from="0" to="87.144" dur="0.9s" fill="freeze" />
-        </rect>
-        
-
-        <!-- Percentage -->
-        <text x="378" y="123" fill="#8b949e" font-size="12" font-weight="600">
-            36.3%
-        </text>
-        
-        <!-- Language dot -->
-        <circle cx="24" cy="148" r="5" fill="#3572A5" />
-
-        <!-- Language label -->
-        <text x="36" y="153" fill="#c9d1d9" font-size="13" font-weight="500">
+    
+        <circle
+            cx="4"
+            cy="24"
+            r="4"
+            fill="#3572A5"
+        />
+        <text
+            x="12"
+            y="27"
+            fill="#8b949e"
+            font-size="11">
             Python
         </text>
-
-        <!-- Background bar -->
-        <rect x="130" y="140" width="240" height="16" rx="8" fill="url(#barBg)"/>
-
-        <!-- Animated progress bar -->
-        
-        <rect x="130" y="140" width="0" height="16" rx="8" fill="url(#barGrad)">
-            <animate attributeName="width" from="0" to="26.712000000000003" dur="0.9s" fill="freeze" />
-        </rect>
-        
-
-        <!-- Percentage -->
-        <text x="378" y="153" fill="#8b949e" font-size="12" font-weight="600">
-            11.1%
-        </text>
-        
-        <!-- Language dot -->
-        <circle cx="24" cy="178" r="5" fill="#e34c26" />
-
-        <!-- Language label -->
-        <text x="36" y="183" fill="#c9d1d9" font-size="13" font-weight="500">
+    
+        <circle
+            cx="84"
+            cy="24"
+            r="4"
+            fill="#e34c26"
+        />
+        <text
+            x="92"
+            y="27"
+            fill="#8b949e"
+            font-size="11">
             HTML
         </text>
-
-        <!-- Background bar -->
-        <rect x="130" y="170" width="240" height="16" rx="8" fill="url(#barBg)"/>
-
-        <!-- Animated progress bar -->
-        
-        <rect x="130" y="170" width="0" height="16" rx="8" fill="url(#barGrad)">
-            <animate attributeName="width" from="0" to="10.032" dur="0.9s" fill="freeze" />
-        </rect>
-        
-
-        <!-- Percentage -->
-        <text x="378" y="183" fill="#8b949e" font-size="12" font-weight="600">
-            4.2%
-        </text>
-        
-        <!-- Language dot -->
-        <circle cx="24" cy="208" r="5" fill="#a91e50" />
-
-        <!-- Language label -->
-        <text x="36" y="213" fill="#c9d1d9" font-size="13" font-weight="500">
+    
+        <circle
+            cx="4"
+            cy="40"
+            r="4"
+            fill="#a91e50"
+        />
+        <text
+            x="12"
+            y="43"
+            fill="#8b949e"
+            font-size="11">
             EJS
         </text>
-
-        <!-- Background bar -->
-        <rect x="130" y="200" width="240" height="16" rx="8" fill="url(#barBg)"/>
-
-        <!-- Animated progress bar -->
-        
-        <rect x="130" y="200" width="0" height="16" rx="8" fill="url(#barGrad)">
-            <animate attributeName="width" from="0" to="6.912" dur="0.9s" fill="freeze" />
-        </rect>
-        
-
-        <!-- Percentage -->
-        <text x="378" y="213" fill="#8b949e" font-size="12" font-weight="600">
-            2.9%
-        </text>
-        
-        <!-- Language dot -->
-        <circle cx="24" cy="238" r="5" fill="#563d7c" />
-
-        <!-- Language label -->
-        <text x="36" y="243" fill="#c9d1d9" font-size="13" font-weight="500">
+    
+        <circle
+            cx="84"
+            cy="40"
+            r="4"
+            fill="#563d7c"
+        />
+        <text
+            x="92"
+            y="43"
+            fill="#8b949e"
+            font-size="11">
             CSS
         </text>
-
-        <!-- Background bar -->
-        <rect x="130" y="230" width="240" height="16" rx="8" fill="url(#barBg)"/>
-
-        <!-- Animated progress bar -->
-        
-        <rect x="130" y="230" width="0" height="16" rx="8" fill="url(#barGrad)">
-            <animate attributeName="width" from="0" to="6.384" dur="0.9s" fill="freeze" />
-        </rect>
-        
-
-        <!-- Percentage -->
-        <text x="378" y="243" fill="#8b949e" font-size="12" font-weight="600">
-            2.7%
-        </text>
-        
-        <!-- Language dot -->
-        <circle cx="24" cy="268" r="5" fill="#844FBA" />
-
-        <!-- Language label -->
-        <text x="36" y="273" fill="#c9d1d9" font-size="13" font-weight="500">
+    
+        <circle
+            cx="4"
+            cy="56"
+            r="4"
+            fill="#844FBA"
+        />
+        <text
+            x="12"
+            y="59"
+            fill="#8b949e"
+            font-size="11">
             HCL
         </text>
-
-        <!-- Background bar -->
-        <rect x="130" y="260" width="240" height="16" rx="8" fill="url(#barBg)"/>
-
-        <!-- Animated progress bar -->
-        
-        <rect x="130" y="260" width="0" height="16" rx="8" fill="url(#barGrad)">
-            <animate attributeName="width" from="0" to="3.456" dur="0.9s" fill="freeze" />
-        </rect>
-        
-
-        <!-- Percentage -->
-        <text x="378" y="273" fill="#8b949e" font-size="12" font-weight="600">
-            1.4%
-        </text>
-        
-        <!-- Language dot -->
-        <circle cx="24" cy="298" r="5" fill="#89e051" />
-
-        <!-- Language label -->
-        <text x="36" y="303" fill="#c9d1d9" font-size="13" font-weight="500">
+    
+        <circle
+            cx="84"
+            cy="56"
+            r="4"
+            fill="#89e051"
+        />
+        <text
+            x="92"
+            y="59"
+            fill="#8b949e"
+            font-size="11">
             Shell
         </text>
-
-        <!-- Background bar -->
-        <rect x="130" y="290" width="240" height="16" rx="8" fill="url(#barBg)"/>
-
-        <!-- Animated progress bar -->
-        
-        <rect x="130" y="290" width="0" height="16" rx="8" fill="url(#barGrad)">
-            <animate attributeName="width" from="0" to="0.9839999999999999" dur="0.9s" fill="freeze" />
-        </rect>
-        
-
-        <!-- Percentage -->
-        <text x="378" y="303" fill="#8b949e" font-size="12" font-weight="600">
-            0.4%
-        </text>
-        
+    
+    </g>
+    
+    </g>
 
 </svg>

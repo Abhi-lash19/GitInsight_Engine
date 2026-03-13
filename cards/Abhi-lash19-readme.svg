@@ -1,5 +1,5 @@
 
-<svg viewBox="0 0 900 752" width="100%" xmlns="http://www.w3.org/2000/svg">
+<svg viewBox="0 0 900 1262" width="100%" xmlns="http://www.w3.org/2000/svg">
 
 <rect width="100%" height="100%" rx="20" fill="#0d1117" stroke="#30363d" />
 
@@ -40,8 +40,8 @@
 
 <text x="0" y="0">Productivity: 100</text>
 <text x="0" y="18">Activity Level: High</text>
-<text x="0" y="36">Churn Ratio: 0.637</text>
-<text x="0" y="54">Avg Commits/Week: 7.12</text>
+<text x="0" y="36">Churn Ratio: 0.629</text>
+<text x="0" y="54">Avg Commits/Week: 7.15</text>
 
 </g>
   </g>
@@ -78,9 +78,9 @@
     
 <g transform="translate(20,50)" fill="#c9d1d9" font-size="13">
 
-<text x="0" y="0">Lines Added: 100068</text>
-<text x="0" y="18">Lines Deleted: 63790</text>
-<text x="0" y="36">Net Lines: 36278</text>
+<text x="0" y="0">Lines Added: 101900</text>
+<text x="0" y="18">Lines Deleted: 64124</text>
+<text x="0" y="36">Net Lines: 37776</text>
 
 </g>
   </g>
@@ -116,7 +116,155 @@
   <g transform="translate(0,0)" clip-path="url(#clip-32-240)">
     
 <g transform="translate(20,50)" fill="#c9d1d9" font-size="13">
-<text x="0" y="0">apollo-graphql-federation-demo: 121</text><text x="0" y="18">GitInsight_Engine: 81</text><text x="0" y="36">express-typescript-backend: 76</text><text x="0" y="54">3d-portfolio: 74</text>
+
+    <g>
+      
+      <text
+        x="0"
+        y="18"
+        fill="#c9d1d9"
+        font-size="12">
+        apollo-graphql-feder…
+      </text>
+
+      <rect
+        x="120"
+        y="12"
+        width="200"
+        height="8"
+        rx="4"
+        fill="#30363d"
+      />
+
+      <rect
+        x="120"
+        y="12"
+        width="200"
+        height="8"
+        rx="4"
+        fill="#58a6ff"
+      />
+      
+      
+      <text
+        x="328"
+        y="18"
+        fill="#8b949e"
+        font-size="11"
+        text-anchor="start">
+        100%
+      </text>
+    
+      <text
+        x="0"
+        y="42"
+        fill="#c9d1d9"
+        font-size="12">
+        GitInsight_Engine
+      </text>
+
+      <rect
+        x="120"
+        y="36"
+        width="200"
+        height="8"
+        rx="4"
+        fill="#30363d"
+      />
+
+      <rect
+        x="120"
+        y="36"
+        width="137.19008264462812"
+        height="8"
+        rx="4"
+        fill="#58a6ff"
+      />
+      
+      
+      <text
+        x="328"
+        y="42"
+        fill="#8b949e"
+        font-size="11"
+        text-anchor="start">
+        69%
+      </text>
+    
+      <text
+        x="0"
+        y="66"
+        fill="#c9d1d9"
+        font-size="12">
+        express-typescript-b…
+      </text>
+
+      <rect
+        x="120"
+        y="60"
+        width="200"
+        height="8"
+        rx="4"
+        fill="#30363d"
+      />
+
+      <rect
+        x="120"
+        y="60"
+        width="125.6198347107438"
+        height="8"
+        rx="4"
+        fill="#58a6ff"
+      />
+      
+      
+      <text
+        x="328"
+        y="66"
+        fill="#8b949e"
+        font-size="11"
+        text-anchor="start">
+        63%
+      </text>
+    
+      <text
+        x="0"
+        y="90"
+        fill="#c9d1d9"
+        font-size="12">
+        3d-portfolio
+      </text>
+
+      <rect
+        x="120"
+        y="84"
+        width="200"
+        height="8"
+        rx="4"
+        fill="#30363d"
+      />
+
+      <rect
+        x="120"
+        y="84"
+        width="122.31404958677685"
+        height="8"
+        rx="4"
+        fill="#58a6ff"
+      />
+      
+      
+      <text
+        x="328"
+        y="90"
+        fill="#8b949e"
+        font-size="11"
+        text-anchor="start">
+        61%
+      </text>
+    
+    </g>
+    
 </g>
   </g>
 
@@ -151,7 +299,268 @@
   <g transform="translate(0,0)" clip-path="url(#clip-458-240)">
     
 <g transform="translate(20,50)" fill="#c9d1d9" font-size="13">
-<text x="0" y="0">TypeScript: 40.16%</text><text x="0" y="18">JavaScript: 36.31%</text><text x="0" y="36">Python: 11.13%</text><text x="0" y="54">HTML: 4.18%</text><text x="0" y="72">EJS: 2.88%</text>
+
+        
+    <g>
+      
+      <text
+        x="0"
+        y="18"
+        fill="#c9d1d9"
+        font-size="12">
+        TypeScript
+      </text>
+
+      <rect
+        x="120"
+        y="12"
+        width="180"
+        height="8"
+        rx="4"
+        fill="#30363d"
+      />
+
+      <rect
+        x="120"
+        y="12"
+        width="180"
+        height="8"
+        rx="4"
+        fill="#58a6ff"
+      />
+      
+      
+      <text
+        x="308"
+        y="18"
+        fill="#8b949e"
+        font-size="11"
+        text-anchor="start">
+        100%
+      </text>
+    
+      <text
+        x="0"
+        y="42"
+        fill="#c9d1d9"
+        font-size="12">
+        JavaScript
+      </text>
+
+      <rect
+        x="120"
+        y="36"
+        width="180"
+        height="8"
+        rx="4"
+        fill="#30363d"
+      />
+
+      <rect
+        x="120"
+        y="36"
+        width="174.02604033699257"
+        height="8"
+        rx="4"
+        fill="#58a6ff"
+      />
+      
+      
+      <text
+        x="308"
+        y="42"
+        fill="#8b949e"
+        font-size="11"
+        text-anchor="start">
+        97%
+      </text>
+    
+      <text
+        x="0"
+        y="66"
+        fill="#c9d1d9"
+        font-size="12">
+        Python
+      </text>
+
+      <rect
+        x="120"
+        y="60"
+        width="180"
+        height="8"
+        rx="4"
+        fill="#30363d"
+      />
+
+      <rect
+        x="120"
+        y="60"
+        width="49.85958641817717"
+        height="8"
+        rx="4"
+        fill="#58a6ff"
+      />
+      
+      
+      <text
+        x="308"
+        y="66"
+        fill="#8b949e"
+        font-size="11"
+        text-anchor="start">
+        28%
+      </text>
+    
+      <text
+        x="0"
+        y="90"
+        fill="#c9d1d9"
+        font-size="12">
+        HTML
+      </text>
+
+      <rect
+        x="120"
+        y="84"
+        width="180"
+        height="8"
+        rx="4"
+        fill="#30363d"
+      />
+
+      <rect
+        x="120"
+        y="84"
+        width="18.703089098800103"
+        height="8"
+        rx="4"
+        fill="#58a6ff"
+      />
+      
+      
+      <text
+        x="308"
+        y="90"
+        fill="#8b949e"
+        font-size="11"
+        text-anchor="start">
+        10%
+      </text>
+    
+      <text
+        x="0"
+        y="114"
+        fill="#c9d1d9"
+        font-size="12">
+        EJS
+      </text>
+
+      <rect
+        x="120"
+        y="108"
+        width="180"
+        height="8"
+        rx="4"
+        fill="#30363d"
+      />
+
+      <rect
+        x="120"
+        y="108"
+        width="12.912943579269848"
+        height="8"
+        rx="4"
+        fill="#58a6ff"
+      />
+      
+      
+      <text
+        x="308"
+        y="114"
+        fill="#8b949e"
+        font-size="11"
+        text-anchor="start">
+        7%
+      </text>
+    
+    </g>
+    
+        
+    <g>
+      
+        <circle
+            cx="4"
+            cy="148"
+            r="4"
+            fill="#3178c6"
+        />
+        <text
+            x="12"
+            y="151"
+            fill="#c9d1d9"
+            font-size="11">
+            TypeScript
+        </text>
+    
+        <circle
+            cx="84"
+            cy="148"
+            r="4"
+            fill="#f1e05a"
+        />
+        <text
+            x="92"
+            y="151"
+            fill="#c9d1d9"
+            font-size="11">
+            JavaScript
+        </text>
+    
+        <circle
+            cx="4"
+            cy="164"
+            r="4"
+            fill="#3572A5"
+        />
+        <text
+            x="12"
+            y="167"
+            fill="#c9d1d9"
+            font-size="11">
+            Python
+        </text>
+    
+        <circle
+            cx="84"
+            cy="164"
+            r="4"
+            fill="#e34c26"
+        />
+        <text
+            x="92"
+            y="167"
+            fill="#c9d1d9"
+            font-size="11">
+            HTML
+        </text>
+    
+        <circle
+            cx="4"
+            cy="180"
+            r="4"
+            fill="#a91e50"
+        />
+        <text
+            x="12"
+            y="183"
+            fill="#c9d1d9"
+            font-size="11">
+            EJS
+        </text>
+    
+    </g>
+    
+    
 </g>
   </g>
 
@@ -3155,7 +3564,7 @@ y="48"
 width="6"
 height="6"
 rx="1"
-fill="#21262d"
+fill="#39d353"
 />
 </g>
 
@@ -3193,7 +3602,191 @@ fill="#21262d"
   <g transform="translate(0,0)" clip-path="url(#clip-32-580)">
     
 <g transform="translate(20,50)" fill="#c9d1d9" font-size="13">
-<text x="0" y="0">3d-portfolio: 342.6</text><text x="0" y="18">apollo-graphql-feder…: 31.1</text><text x="0" y="36">Abhi-lash19: 19.4</text><text x="0" y="54">infra-deploy-aws: 7.1</text><text x="0" y="72">MonitorPro: 6.4</text>
+
+    <g>
+      
+      <text
+        x="0"
+        y="18"
+        fill="#c9d1d9"
+        font-size="12">
+        3d-portfolio
+      </text>
+
+      <rect
+        x="120"
+        y="12"
+        width="200"
+        height="8"
+        rx="4"
+        fill="#21262d"
+      />
+
+      <rect
+        x="120"
+        y="12"
+        width="200"
+        height="8"
+        rx="4"
+        fill="#58a6ff"
+      />
+      
+      
+      <text
+        x="328"
+        y="18"
+        fill="#8b949e"
+        font-size="11"
+        text-anchor="start">
+        100%
+      </text>
+    
+      <text
+        x="0"
+        y="42"
+        fill="#c9d1d9"
+        font-size="12">
+        apollo-graphql-feder…
+      </text>
+
+      <rect
+        x="120"
+        y="36"
+        width="200"
+        height="8"
+        rx="4"
+        fill="#21262d"
+      />
+
+      <rect
+        x="120"
+        y="36"
+        width="18.175448839585464"
+        height="8"
+        rx="4"
+        fill="#58a6ff"
+      />
+      
+      
+      <text
+        x="328"
+        y="42"
+        fill="#8b949e"
+        font-size="11"
+        text-anchor="start">
+        9%
+      </text>
+    
+      <text
+        x="0"
+        y="66"
+        fill="#c9d1d9"
+        font-size="12">
+        Abhi-lash19
+      </text>
+
+      <rect
+        x="120"
+        y="60"
+        width="200"
+        height="8"
+        rx="4"
+        fill="#21262d"
+      />
+
+      <rect
+        x="120"
+        y="60"
+        width="11.717997372646328"
+        height="8"
+        rx="4"
+        fill="#58a6ff"
+      />
+      
+      
+      <text
+        x="328"
+        y="66"
+        fill="#8b949e"
+        font-size="11"
+        text-anchor="start">
+        6%
+      </text>
+    
+      <text
+        x="0"
+        y="90"
+        fill="#c9d1d9"
+        font-size="12">
+        infra-deploy-aws
+      </text>
+
+      <rect
+        x="120"
+        y="84"
+        width="200"
+        height="8"
+        rx="4"
+        fill="#21262d"
+      />
+
+      <rect
+        x="120"
+        y="84"
+        width="4.145380236461831"
+        height="8"
+        rx="4"
+        fill="#58a6ff"
+      />
+      
+      
+      <text
+        x="328"
+        y="90"
+        fill="#8b949e"
+        font-size="11"
+        text-anchor="start">
+        2%
+      </text>
+    
+      <text
+        x="0"
+        y="114"
+        fill="#c9d1d9"
+        font-size="12">
+        MonitorPro
+      </text>
+
+      <rect
+        x="120"
+        y="108"
+        width="200"
+        height="8"
+        rx="4"
+        fill="#21262d"
+      />
+
+      <rect
+        x="120"
+        y="108"
+        width="3.713326521675668"
+        height="8"
+        rx="4"
+        fill="#58a6ff"
+      />
+      
+      
+      <text
+        x="328"
+        y="114"
+        fill="#8b949e"
+        font-size="11"
+        text-anchor="start">
+        2%
+      </text>
+    
+    </g>
+    
 </g>
   </g>
 
@@ -3234,6 +3827,819 @@ fill="#21262d"
 <text x="0" y="36">Forks: 0</text>
 <text x="0" y="54">Productivity: 100</text>
 
+</g>
+  </g>
+
+</g>
+
+<g transform="translate(32, 750)">
+
+  <defs>
+    <clipPath id="clip-32-750">
+      <rect width="390" height="140" rx="14"/>
+    </clipPath>
+  </defs>
+
+  <rect
+    width="390"
+    height="140"
+    rx="14"
+    fill="#0d1117"
+    stroke="#30363d"
+  />
+
+  <text
+    x="20"
+    y="30"
+    fill="#58a6ff"
+    font-size="17"
+    font-weight="600">
+    Commit Trend
+  </text>
+
+  <!--clip content so nothing overflows card -->
+  <g transform="translate(0,0)" clip-path="url(#clip-32-750)">
+    
+<g transform="translate(20,50)" fill="#c9d1d9" font-size="13">
+
+        
+    <g>
+      
+        <text
+            x="0"
+            y="14"
+            fill="#c9d1d9"
+            font-size="12">
+            Last 12 weeks
+        </text>
+        <text
+            x="200"
+            y="14"
+            fill="#ffffff"
+            font-size="14"
+            font-weight="600"
+            text-anchor="end">
+            332
+        </text>
+    
+        <text
+            x="0"
+            y="34"
+            fill="#c9d1d9"
+            font-size="12">
+            Average
+        </text>
+        <text
+            x="200"
+            y="34"
+            fill="#ffffff"
+            font-size="14"
+            font-weight="600"
+            text-anchor="end">
+            28/week
+        </text>
+    
+        <text
+            x="0"
+            y="54"
+            fill="#c9d1d9"
+            font-size="12">
+            Peak
+        </text>
+        <text
+            x="200"
+            y="54"
+            fill="#ffffff"
+            font-size="14"
+            font-weight="600"
+            text-anchor="end">
+            59/week
+        </text>
+    
+    </g>
+    
+        
+    <g>
+      <line
+        x1="0"
+        y1="60"
+        x2="280"
+        y2="60"
+        stroke="#30363d"
+        stroke-width="1"
+      />
+      <polyline
+        fill="none"
+        stroke="#58a6ff"
+        stroke-width="1.5"
+        points="0,60 25.454545454545453,55.471698113207545 50.90909090909091,27.169811320754718 76.36363636363636,28.30188679245283 101.81818181818181,54.339622641509436 127.27272727272727,43.0188679245283 152.72727272727272,43.0188679245283 178.1818181818182,0 203.63636363636363,35.09433962264151 229.09090909090907,12.452830188679243 254.54545454545453,21.509433962264154 280,45.283018867924525"
+      />
+    </g>
+    
+    
+</g>
+  </g>
+
+</g>
+
+<g transform="translate(458, 750)">
+
+  <defs>
+    <clipPath id="clip-458-750">
+      <rect width="390" height="140" rx="14"/>
+    </clipPath>
+  </defs>
+
+  <rect
+    width="390"
+    height="140"
+    rx="14"
+    fill="#0d1117"
+    stroke="#30363d"
+  />
+
+  <text
+    x="20"
+    y="30"
+    fill="#58a6ff"
+    font-size="17"
+    font-weight="600">
+    Repository Growth
+  </text>
+
+  <!--clip content so nothing overflows card -->
+  <g transform="translate(0,0)" clip-path="url(#clip-458-750)">
+    
+<g transform="translate(20,50)" fill="#c9d1d9" font-size="13">
+
+        
+    <g>
+      
+        <text
+            x="0"
+            y="14"
+            fill="#c9d1d9"
+            font-size="12">
+            Top Repo
+        </text>
+        <text
+            x="200"
+            y="14"
+            fill="#ffffff"
+            font-size="14"
+            font-weight="600"
+            text-anchor="end">
+            CoreGPT
+        </text>
+    
+        <text
+            x="0"
+            y="34"
+            fill="#c9d1d9"
+            font-size="12">
+            Growth Score
+        </text>
+        <text
+            x="200"
+            y="34"
+            fill="#ffffff"
+            font-size="14"
+            font-weight="600"
+            text-anchor="end">
+            0.06
+        </text>
+    
+        <text
+            x="0"
+            y="54"
+            fill="#c9d1d9"
+            font-size="12">
+            Age
+        </text>
+        <text
+            x="200"
+            y="54"
+            fill="#ffffff"
+            font-size="14"
+            font-weight="600"
+            text-anchor="end">
+            16 days
+        </text>
+    
+    </g>
+    
+        
+    <g>
+      
+      <line
+        x1="8"
+        y1="66"
+        x2="272"
+        y2="66"
+        stroke="#30363d"
+        stroke-width="1"
+      />
+      <path
+        d="M8,0 L74,66 L140,66 L206,66 L272,66"
+        fill="none"
+        stroke="#388bfd"
+        stroke-width="1.5"
+      />
+      
+      <text
+        x="8"
+        y="78"
+        fill="#8b949e"
+        font-size="11"
+        text-anchor="middle">
+        CoreGPT
+      </text>
+      <text
+        x="74"
+        y="78"
+        fill="#8b949e"
+        font-size="11"
+        text-anchor="middle">
+        favathlete
+      </text>
+      <text
+        x="140"
+        y="78"
+        fill="#8b949e"
+        font-size="11"
+        text-anchor="middle">
+        Python-Fas...
+      </text>
+      <text
+        x="206"
+        y="78"
+        fill="#8b949e"
+        font-size="11"
+        text-anchor="middle">
+        jenkins-ek...
+      </text>
+      <text
+        x="272"
+        y="78"
+        fill="#8b949e"
+        font-size="11"
+        text-anchor="middle">
+        x-o-game
+      </text>
+    </g>
+    
+    
+</g>
+  </g>
+
+</g>
+
+<g transform="translate(32, 920)">
+
+  <defs>
+    <clipPath id="clip-32-920">
+      <rect width="390" height="140" rx="14"/>
+    </clipPath>
+  </defs>
+
+  <rect
+    width="390"
+    height="140"
+    rx="14"
+    fill="#0d1117"
+    stroke="#30363d"
+  />
+
+  <text
+    x="20"
+    y="30"
+    fill="#58a6ff"
+    font-size="17"
+    font-weight="600">
+    Contribution Streak
+  </text>
+
+  <!--clip content so nothing overflows card -->
+  <g transform="translate(0,0)" clip-path="url(#clip-32-920)">
+    
+<g transform="translate(20,50)" fill="#c9d1d9" font-size="13">
+
+    <g>
+      
+        <text
+            x="0"
+            y="14"
+            fill="#c9d1d9"
+            font-size="12">
+            Current Streak
+        </text>
+        <text
+            x="200"
+            y="14"
+            fill="#ffffff"
+            font-size="14"
+            font-weight="600"
+            text-anchor="end">
+            64 days
+        </text>
+    
+        <text
+            x="0"
+            y="34"
+            fill="#c9d1d9"
+            font-size="12">
+            Longest Streak
+        </text>
+        <text
+            x="200"
+            y="34"
+            fill="#ffffff"
+            font-size="14"
+            font-weight="600"
+            text-anchor="end">
+            64 days
+        </text>
+    
+        <text
+            x="0"
+            y="54"
+            fill="#c9d1d9"
+            font-size="12">
+            Active Days
+        </text>
+        <text
+            x="200"
+            y="54"
+            fill="#ffffff"
+            font-size="14"
+            font-weight="600"
+            text-anchor="end">
+            64 days
+        </text>
+    
+    </g>
+    
+</g>
+  </g>
+
+</g>
+
+<g transform="translate(458, 920)">
+
+  <defs>
+    <clipPath id="clip-458-920">
+      <rect width="390" height="140" rx="14"/>
+    </clipPath>
+  </defs>
+
+  <rect
+    width="390"
+    height="140"
+    rx="14"
+    fill="#0d1117"
+    stroke="#30363d"
+  />
+
+  <text
+    x="20"
+    y="30"
+    fill="#58a6ff"
+    font-size="17"
+    font-weight="600">
+    Commit Activity Timeline
+  </text>
+
+  <!--clip content so nothing overflows card -->
+  <g transform="translate(0,0)" clip-path="url(#clip-458-920)">
+    
+<g transform="translate(20,50)" fill="#c9d1d9" font-size="13">
+
+    <g>
+      
+      <text
+        x="0"
+        y="12"
+        fill="#c9d1d9"
+        font-size="12">
+        Mon
+      </text>
+
+      <rect
+        x="40"
+        y="6"
+        width="120"
+        height="8"
+        rx="4"
+        fill="#30363d"
+      />
+
+      <rect
+        x="40"
+        y="6"
+        width="66"
+        height="8"
+        rx="4"
+        fill="#388bfd"
+      />
+    
+      <text
+        x="0"
+        y="30"
+        fill="#c9d1d9"
+        font-size="12">
+        Tue
+      </text>
+
+      <rect
+        x="40"
+        y="24"
+        width="120"
+        height="8"
+        rx="4"
+        fill="#30363d"
+      />
+
+      <rect
+        x="40"
+        y="24"
+        width="120"
+        height="8"
+        rx="4"
+        fill="#388bfd"
+      />
+    
+      <text
+        x="0"
+        y="48"
+        fill="#c9d1d9"
+        font-size="12">
+        Wed
+      </text>
+
+      <rect
+        x="40"
+        y="42"
+        width="120"
+        height="8"
+        rx="4"
+        fill="#30363d"
+      />
+
+      <rect
+        x="40"
+        y="42"
+        width="69.6"
+        height="8"
+        rx="4"
+        fill="#388bfd"
+      />
+    
+      <text
+        x="0"
+        y="66"
+        fill="#c9d1d9"
+        font-size="12">
+        Thu
+      </text>
+
+      <rect
+        x="40"
+        y="60"
+        width="120"
+        height="8"
+        rx="4"
+        fill="#30363d"
+      />
+
+      <rect
+        x="40"
+        y="60"
+        width="109.2"
+        height="8"
+        rx="4"
+        fill="#388bfd"
+      />
+    
+      <text
+        x="0"
+        y="84"
+        fill="#c9d1d9"
+        font-size="12">
+        Fri
+      </text>
+
+      <rect
+        x="40"
+        y="78"
+        width="120"
+        height="8"
+        rx="4"
+        fill="#30363d"
+      />
+
+      <rect
+        x="40"
+        y="78"
+        width="68.39999999999999"
+        height="8"
+        rx="4"
+        fill="#388bfd"
+      />
+    
+      <text
+        x="0"
+        y="102"
+        fill="#c9d1d9"
+        font-size="12">
+        Sat
+      </text>
+
+      <rect
+        x="40"
+        y="96"
+        width="120"
+        height="8"
+        rx="4"
+        fill="#30363d"
+      />
+
+      <rect
+        x="40"
+        y="96"
+        width="52.8"
+        height="8"
+        rx="4"
+        fill="#388bfd"
+      />
+    
+      <text
+        x="0"
+        y="120"
+        fill="#c9d1d9"
+        font-size="12">
+        Sun
+      </text>
+
+      <rect
+        x="40"
+        y="114"
+        width="120"
+        height="8"
+        rx="4"
+        fill="#30363d"
+      />
+
+      <rect
+        x="40"
+        y="114"
+        width="80.4"
+        height="8"
+        rx="4"
+        fill="#388bfd"
+      />
+    
+    </g>
+    
+</g>
+  </g>
+
+</g>
+
+<g transform="translate(32, 1090)">
+
+  <defs>
+    <clipPath id="clip-32-1090">
+      <rect width="390" height="140" rx="14"/>
+    </clipPath>
+  </defs>
+
+  <rect
+    width="390"
+    height="140"
+    rx="14"
+    fill="#0d1117"
+    stroke="#30363d"
+  />
+
+  <text
+    x="20"
+    y="30"
+    fill="#58a6ff"
+    font-size="17"
+    font-weight="600">
+    Activity Graph
+  </text>
+
+  <!--clip content so nothing overflows card -->
+  <g transform="translate(0,0)" clip-path="url(#clip-32-1090)">
+    
+<g transform="translate(20,50)" fill="#c9d1d9" font-size="13">
+
+        
+    <g>
+      
+        <text
+            x="0"
+            y="14"
+            fill="#c9d1d9"
+            font-size="12">
+            Total (16w)
+        </text>
+        <text
+            x="200"
+            y="14"
+            fill="#ffffff"
+            font-size="14"
+            font-weight="600"
+            text-anchor="end">
+            351
+        </text>
+    
+        <text
+            x="0"
+            y="34"
+            fill="#c9d1d9"
+            font-size="12">
+            Average
+        </text>
+        <text
+            x="200"
+            y="34"
+            fill="#ffffff"
+            font-size="14"
+            font-weight="600"
+            text-anchor="end">
+            22/week
+        </text>
+    
+        <text
+            x="0"
+            y="54"
+            fill="#c9d1d9"
+            font-size="12">
+            Peak
+        </text>
+        <text
+            x="200"
+            y="54"
+            fill="#ffffff"
+            font-size="14"
+            font-weight="600"
+            text-anchor="end">
+            59/week
+        </text>
+    
+    </g>
+    
+        
+    <g>
+      
+      <line
+        x1="8"
+        y1="66"
+        x2="272"
+        y2="66"
+        stroke="#30363d"
+        stroke-width="1"
+      />
+      <path
+        d="M8,61.44827586206897 L25.6,59.172413793103445 L43.2,60.310344827586206 L60.800000000000004,66 L78.4,60.310344827586206 L96,55.758620689655174 L113.60000000000001,27.310344827586214 L131.20000000000002,28.44827586206896 L148.8,54.62068965517241 L166.4,43.241379310344826 L184,43.241379310344826 L201.60000000000002,0 L219.20000000000002,35.27586206896552 L236.8,12.517241379310349 L254.40000000000003,21.620689655172413 L272,45.51724137931035"
+        fill="none"
+        stroke="#238636"
+        stroke-width="1.5"
+      />
+      
+      <text
+        x="8"
+        y="78"
+        fill="#8b949e"
+        font-size="11"
+        text-anchor="middle">
+        37
+      </text>
+      <text
+        x="25.6"
+        y="78"
+        fill="#8b949e"
+        font-size="11"
+        text-anchor="middle">
+        48
+      </text>
+      <text
+        x="43.2"
+        y="78"
+        fill="#8b949e"
+        font-size="11"
+        text-anchor="middle">
+        49
+      </text>
+      <text
+        x="60.800000000000004"
+        y="78"
+        fill="#8b949e"
+        font-size="11"
+        text-anchor="middle">
+        50
+      </text>
+      <text
+        x="78.4"
+        y="78"
+        fill="#8b949e"
+        font-size="11"
+        text-anchor="middle">
+        51
+      </text>
+      <text
+        x="96"
+        y="78"
+        fill="#8b949e"
+        font-size="11"
+        text-anchor="middle">
+        52
+      </text>
+      <text
+        x="113.60000000000001"
+        y="78"
+        fill="#8b949e"
+        font-size="11"
+        text-anchor="middle">
+        01
+      </text>
+      <text
+        x="131.20000000000002"
+        y="78"
+        fill="#8b949e"
+        font-size="11"
+        text-anchor="middle">
+        02
+      </text>
+      <text
+        x="148.8"
+        y="78"
+        fill="#8b949e"
+        font-size="11"
+        text-anchor="middle">
+        03
+      </text>
+      <text
+        x="166.4"
+        y="78"
+        fill="#8b949e"
+        font-size="11"
+        text-anchor="middle">
+        04
+      </text>
+      <text
+        x="184"
+        y="78"
+        fill="#8b949e"
+        font-size="11"
+        text-anchor="middle">
+        05
+      </text>
+      <text
+        x="201.60000000000002"
+        y="78"
+        fill="#8b949e"
+        font-size="11"
+        text-anchor="middle">
+        07
+      </text>
+      <text
+        x="219.20000000000002"
+        y="78"
+        fill="#8b949e"
+        font-size="11"
+        text-anchor="middle">
+        08
+      </text>
+      <text
+        x="236.8"
+        y="78"
+        fill="#8b949e"
+        font-size="11"
+        text-anchor="middle">
+        09
+      </text>
+      <text
+        x="254.40000000000003"
+        y="78"
+        fill="#8b949e"
+        font-size="11"
+        text-anchor="middle">
+        10
+      </text>
+      <text
+        x="272"
+        y="78"
+        fill="#8b949e"
+        font-size="11"
+        text-anchor="middle">
+        11
+      </text>
+    </g>
+    
+    
 </g>
   </g>
 

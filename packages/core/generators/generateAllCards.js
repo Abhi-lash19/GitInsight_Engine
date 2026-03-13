@@ -13,6 +13,13 @@ const { renderHeatmapCard } = require("./heatmapCard");
 const { renderImpactCard } = require("./impactCard");
 const { renderReadmeDashboard } = require("./readmeDashboardCard");
 
+// Advanced analytics cards
+const { renderCommitSparklineCard } = require("./commitSparklineCard");
+const { renderRepoGrowthCard } = require("./repoGrowthCard");
+const { renderStreakCard } = require("./streakCard");
+const { renderCommitTimelineCard } = require("./commitTimelineCard");
+const { renderActivityGraphCard } = require("./activityGraphCard");
+
 /**
  * Generate all cards + README snippet
  */
@@ -31,6 +38,13 @@ function generateAllCards(username, stats) {
     const impactSvg = renderImpactCard(stats, { theme });
     const dashboardSvg = renderReadmeDashboard(stats, { theme });
 
+    // Advanced analytics cards
+    const commitSparklineSvg = renderCommitSparklineCard(stats, { theme });
+    const repoGrowthSvg = renderRepoGrowthCard(stats, { theme });
+    const streakSvg = renderStreakCard(stats, { theme });
+    const commitTimelineSvg = renderCommitTimelineCard(stats, { theme });
+    const activityGraphSvg = renderActivityGraphCard(stats, { theme });
+
     saveSVG(username, "overview", overviewSvg);
     saveSVG(username, "languages", languageSvg);
     saveSVG(username, "insights", insightsSvg);
@@ -39,6 +53,13 @@ function generateAllCards(username, stats) {
     saveSVG(username, "heatmap", heatmapSvg);
     saveSVG(username, "impact", impactSvg);
     saveSVG(username, "readme", dashboardSvg);
+
+    // Save advanced analytics cards
+    saveSVG(username, "commitSparkline", commitSparklineSvg);
+    saveSVG(username, "repoGrowth", repoGrowthSvg);
+    saveSVG(username, "streak", streakSvg);
+    saveSVG(username, "commitTimeline", commitTimelineSvg);
+    saveSVG(username, "activityGraph", activityGraphSvg);
 
     generateReadmeSnippet(username);
 

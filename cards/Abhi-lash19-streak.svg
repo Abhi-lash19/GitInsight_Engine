@@ -10,26 +10,26 @@
     <rect width="100%" height="100%" rx="16" fill="url(#bg)" stroke="#30363d"/>
 
     <text x="24" y="44" fill="#58a6ff" font-size="20" font-weight="600">
-        Code Statistics
+        Contribution Streak
     </text>
 
     
         <text x="24" y="80" fill="#c9d1d9" font-size="15">
-            Lines Added:
+            Current Streak:
         </text>
         <text x="396" y="80" fill="#ffffff" font-size="15" text-anchor="end">
-            101900
+            64 days
         </text>
         <text x="24" y="108" fill="#c9d1d9" font-size="15">
-            Lines Deleted:
+            Longest Streak:
         </text>
         <text x="396" y="108" fill="#ffffff" font-size="15" text-anchor="end">
-            64124
+            64 days
         </text>
         <text x="24" y="136" fill="#c9d1d9" font-size="15">
-            Net Lines:
+            Total Active Days:
         </text>
         <text x="396" y="136" fill="#ffffff" font-size="15" text-anchor="end">
-            37776
+            64 days
         </text>
 </svg>
