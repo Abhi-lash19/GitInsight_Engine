@@ -21,6 +21,13 @@ const codeStatsPlugin = require("./cards/codestats.plugin");
 const heatmapPlugin = require("./cards/heatmap.plugin");
 const impactPlugin = require("./cards/impact.plugin");
 
+// Advanced analytics card plugins
+const commitSparklinePlugin = require("./cards/commitSparkline.plugin");
+const repoGrowthPlugin = require("./cards/repoGrowth.plugin");
+const streakPlugin = require("./cards/streak.plugin");
+const commitTimelinePlugin = require("./cards/commitTimeline.plugin");
+const activityGraphPlugin = require("./cards/activityGraph.plugin");
+
 let loaded = false;
 
 /**
@@ -41,6 +48,12 @@ function loadPlugins() {
         codeStatsPlugin,
         heatmapPlugin,
         impactPlugin,
+        // Advanced analytics plugins
+        commitSparklinePlugin,
+        repoGrowthPlugin,
+        streakPlugin,
+        commitTimelinePlugin,
+        activityGraphPlugin,
     ];
 
     if (loaded) {

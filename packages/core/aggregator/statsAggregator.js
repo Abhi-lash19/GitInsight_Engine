@@ -14,7 +14,9 @@ function buildStats(
     totalContributions,
     trafficStats,
     codeStats,
-    advancedStats = {}
+    advancedStats = {},
+    contributions = [],
+    repositories = []
 ) {
     const insights = calculateInsights({
         totalCommits: advancedStats.totalCommits,
@@ -22,6 +24,28 @@ function buildStats(
         codeStats,
         repos,
     });
+
+    // Extract commits from repositories (limit to 200 per repo)
+    const commits = [];
+    repositories.forEach(repo => {
+        if (repo.commits && Array.isArray(repo.commits)) {
+            const limitedCommits = repo.commits.slice(0, 200);
+            limitedCommits.forEach(commit => {
+                commits.push({
+                    repo: repo.name,
+                    date: commit.date
+                });
+            });
+        }
+    });
+
+    // Build repositories array with required fields
+    const repositoriesData = repositories.map(repo => ({
+        name: repo.name,
+        stars: repo.stargazers_count || 0,
+        forks: repo.forks_count || 0,
+        createdAt: repo.createdAt
+    }));
 
     return {
         username,
@@ -40,6 +64,10 @@ function buildStats(
         })),
         ...advancedStats,
         insights,
+        // New fields for extended analytics
+        contributions,
+        commits,
+        repositories: repositoriesData,
     };
 }
 

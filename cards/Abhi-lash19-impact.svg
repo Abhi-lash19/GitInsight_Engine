@@ -1,6 +1,5 @@
 
-<svg width="100%" viewBox="0 0 460 390" xmlns="http://www.w3.org/2000/svg">
-
+<svg width="420" height="220" viewBox="0 0 420 220" xmlns="http://www.w3.org/2000/svg">
     <defs>
         <linearGradient id="cardBg" x1="0" y1="0" x2="1" y2="1">
             <stop offset="0%" stop-color="#0d1117"/>
@@ -8,222 +7,217 @@
         </linearGradient>
     </defs>
 
+    <!-- Card background -->
     <rect width="100%" height="100%" rx="16" fill="url(#cardBg)" stroke="#30363d" />
 
-    <text x="24" y="38" fill="#58a6ff" font-size="20" font-weight="600">
+    <!-- Title -->
+    <text x="24" y="44" fill="#58a6ff" font-size="20" font-weight="600">
         Repo Impact Ranking
     </text>
 
+    <!-- Progress bars -->
+    <g transform="translate(24, 80)">
+        
+    <g>
+      
+      <text
+        x="0"
+        y="18"
+        fill="#c9d1d9"
+        font-size="12">
+        3d-portfolio
+      </text>
+
+      <rect
+        x="120"
+        y="12"
+        width="320"
+        height="8"
+        rx="4"
+        fill="#21262d"
+      />
+
+      <rect
+        x="120"
+        y="12"
+        width="320"
+        height="8"
+        rx="4"
+        fill="#58a6ff"
+      />
+      
+      
     
-            <text x="24" y="86" fill="#c9d1d9" font-size="13">
-                3d-portfolio
-            </text>
+      <text
+        x="0"
+        y="42"
+        fill="#c9d1d9"
+        font-size="12">
+        apollo-graphql-federation…
+      </text>
 
-            <!-- Background bar -->
-            <rect
-                x="250"
-                y="70"
-                width="170"
-                height="22"
-                rx="8"
-                fill="#21262d"
-            />
+      <rect
+        x="120"
+        y="36"
+        width="320"
+        height="8"
+        rx="4"
+        fill="#21262d"
+      />
 
-            <!-- Progress bar -->
-            <rect x="250" y="70" width="0" height="22" rx="8" fill="#58a6ff">
-                        <animate attributeName="width" from="0" to="170" dur="0.8s" fill="freeze" />
-                       </rect>
+      <rect
+        x="120"
+        y="36"
+        width="29.08071814333674"
+        height="8"
+        rx="4"
+        fill="#58a6ff"
+      />
+      
+      
+    
+      <text
+        x="0"
+        y="66"
+        fill="#c9d1d9"
+        font-size="12">
+        Abhi-lash19
+      </text>
 
-            <!-- Score -->
-            <text
-                x="414"
-                y="86"
-                fill="#c9d1d9"
-                font-size="12"
-                text-anchor="end"
-            >
-                342.6
-            </text>
-        
-            <text x="24" y="126" fill="#c9d1d9" font-size="13">
-                apollo-graphql-federation-demo
-            </text>
+      <rect
+        x="120"
+        y="60"
+        width="320"
+        height="8"
+        rx="4"
+        fill="#21262d"
+      />
 
-            <!-- Background bar -->
-            <rect
-                x="250"
-                y="110"
-                width="170"
-                height="22"
-                rx="8"
-                fill="#21262d"
-            />
+      <rect
+        x="120"
+        y="60"
+        width="18.748795796234127"
+        height="8"
+        rx="4"
+        fill="#58a6ff"
+      />
+      
+      
+    
+      <text
+        x="0"
+        y="90"
+        fill="#c9d1d9"
+        font-size="12">
+        infra-deploy-aws
+      </text>
 
-            <!-- Progress bar -->
-            <rect x="250" y="110" width="0" height="22" rx="8" fill="#58a6ff">
-                        <animate attributeName="width" from="0" to="15.449131513647643" dur="0.8s" fill="freeze" />
-                       </rect>
+      <rect
+        x="120"
+        y="84"
+        width="320"
+        height="8"
+        rx="4"
+        fill="#21262d"
+      />
 
-            <!-- Score -->
-            <text
-                x="414"
-                y="126"
-                fill="#c9d1d9"
-                font-size="12"
-                text-anchor="end"
-            >
-                31.1
-            </text>
-        
-            <text x="24" y="166" fill="#c9d1d9" font-size="13">
-                Abhi-lash19
-            </text>
+      <rect
+        x="120"
+        y="84"
+        width="6.632608378338929"
+        height="8"
+        rx="4"
+        fill="#58a6ff"
+      />
+      
+      
+    
+      <text
+        x="0"
+        y="114"
+        fill="#c9d1d9"
+        font-size="12">
+        MonitorPro
+      </text>
 
-            <!-- Background bar -->
-            <rect
-                x="250"
-                y="150"
-                width="170"
-                height="22"
-                rx="8"
-                fill="#21262d"
-            />
+      <rect
+        x="120"
+        y="108"
+        width="320"
+        height="8"
+        rx="4"
+        fill="#21262d"
+      />
 
-            <!-- Progress bar -->
-            <rect x="250" y="150" width="0" height="22" rx="8" fill="#58a6ff">
-                        <animate attributeName="width" from="0" to="9.647642679900745" dur="0.8s" fill="freeze" />
-                       </rect>
+      <rect
+        x="120"
+        y="108"
+        width="5.941322434681069"
+        height="8"
+        rx="4"
+        fill="#58a6ff"
+      />
+      
+      
+    
+      <text
+        x="0"
+        y="138"
+        fill="#c9d1d9"
+        font-size="12">
+        ScribeAI
+      </text>
 
-            <!-- Score -->
-            <text
-                x="414"
-                y="166"
-                fill="#c9d1d9"
-                font-size="12"
-                text-anchor="end"
-            >
-                19.4
-            </text>
-        
-            <text x="24" y="206" fill="#c9d1d9" font-size="13">
-                infra-deploy-aws
-            </text>
+      <rect
+        x="120"
+        y="132"
+        width="320"
+        height="8"
+        rx="4"
+        fill="#21262d"
+      />
 
-            <!-- Background bar -->
-            <rect
-                x="250"
-                y="190"
-                width="170"
-                height="22"
-                rx="8"
-                fill="#21262d"
-            />
+      <rect
+        x="120"
+        y="132"
+        width="3.6806305648810387"
+        height="8"
+        rx="4"
+        fill="#58a6ff"
+      />
+      
+      
+    
+      <text
+        x="0"
+        y="162"
+        fill="#c9d1d9"
+        font-size="12">
+        CoreGPT
+      </text>
 
-            <!-- Progress bar -->
-            <rect x="250" y="190" width="0" height="22" rx="8" fill="#58a6ff">
-                        <animate attributeName="width" from="0" to="3.5235732009925558" dur="0.8s" fill="freeze" />
-                       </rect>
+      <rect
+        x="120"
+        y="156"
+        width="320"
+        height="8"
+        rx="4"
+        fill="#21262d"
+      />
 
-            <!-- Score -->
-            <text
-                x="414"
-                y="206"
-                fill="#c9d1d9"
-                font-size="12"
-                text-anchor="end"
-            >
-                7.1
-            </text>
-        
-            <text x="24" y="246" fill="#c9d1d9" font-size="13">
-                MonitorPro
-            </text>
-
-            <!-- Background bar -->
-            <rect
-                x="250"
-                y="230"
-                width="170"
-                height="22"
-                rx="8"
-                fill="#21262d"
-            />
-
-            <!-- Progress bar -->
-            <rect x="250" y="230" width="0" height="22" rx="8" fill="#58a6ff">
-                        <animate attributeName="width" from="0" to="3.1563275434243176" dur="0.8s" fill="freeze" />
-                       </rect>
-
-            <!-- Score -->
-            <text
-                x="414"
-                y="246"
-                fill="#c9d1d9"
-                font-size="12"
-                text-anchor="end"
-            >
-                6.4
-            </text>
-        
-            <text x="24" y="286" fill="#c9d1d9" font-size="13">
-                ScribeAI
-            </text>
-
-            <!-- Background bar -->
-            <rect
-                x="250"
-                y="270"
-                width="170"
-                height="22"
-                rx="8"
-                fill="#21262d"
-            />
-
-            <!-- Progress bar -->
-            <rect x="250" y="270" width="0" height="22" rx="8" fill="#58a6ff">
-                        <animate attributeName="width" from="0" to="1.955334987593052" dur="0.8s" fill="freeze" />
-                       </rect>
-
-            <!-- Score -->
-            <text
-                x="414"
-                y="286"
-                fill="#c9d1d9"
-                font-size="12"
-                text-anchor="end"
-            >
-                3.9
-            </text>
-        
-            <text x="24" y="326" fill="#c9d1d9" font-size="13">
-                CoreGPT
-            </text>
-
-            <!-- Background bar -->
-            <rect
-                x="250"
-                y="310"
-                width="170"
-                height="22"
-                rx="8"
-                fill="#21262d"
-            />
-
-            <!-- Progress bar -->
-            <rect x="250" y="310" width="0" height="22" rx="8" fill="#58a6ff">
-                        <animate attributeName="width" from="0" to="1.2754342431761787" dur="0.8s" fill="freeze" />
-                       </rect>
-
-            <!-- Score -->
-            <text
-                x="414"
-                y="326"
-                fill="#c9d1d9"
-                font-size="12"
-                text-anchor="end"
-            >
-                2.6
-            </text>
-        
+      <rect
+        x="120"
+        y="156"
+        width="2.400817398919866"
+        height="8"
+        rx="4"
+        fill="#58a6ff"
+      />
+      
+      
+    
+    </g>
+    
+    </g>
 
 </svg>

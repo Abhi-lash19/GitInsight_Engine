@@ -1,5 +1,5 @@
 
-<svg width="420" height="300" viewBox="0 0 420 300" xmlns="http://www.w3.org/2000/svg">
+<svg width="420" height="244" viewBox="0 0 420 244" xmlns="http://www.w3.org/2000/svg">
     <defs>
         <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
             <stop offset="0%" stop-color="#0d1117"/>
@@ -10,50 +10,38 @@
     <rect width="100%" height="100%" rx="16" fill="url(#bg)" stroke="#30363d"/>
 
     <text x="24" y="44" fill="#58a6ff" font-size="20" font-weight="600">
-        Developer Insights
+        Repository Growth
     </text>
 
     
         <text x="24" y="80" fill="#c9d1d9" font-size="15">
-            Productivity Score:
+            CoreGPT:
         </text>
         <text x="396" y="80" fill="#ffffff" font-size="15" text-anchor="end">
-            100
+            0.06/day
         </text>
         <text x="24" y="108" fill="#c9d1d9" font-size="15">
-            Activity Level:
+            favathlete:
         </text>
         <text x="396" y="108" fill="#ffffff" font-size="15" text-anchor="end">
-            High
+            0.00/day
         </text>
         <text x="24" y="136" fill="#c9d1d9" font-size="15">
-            Churn Ratio:
+            Python-FastApi-AWS:
         </text>
         <text x="396" y="136" fill="#ffffff" font-size="15" text-anchor="end">
-            0.629
+            0.00/day
         </text>
         <text x="24" y="164" fill="#c9d1d9" font-size="15">
-            Avg Commits/Week:
+            jenkins-eks-automation:
         </text>
         <text x="396" y="164" fill="#ffffff" font-size="15" text-anchor="end">
-            7.15
+            0.00/day
         </text>
         <text x="24" y="192" fill="#c9d1d9" font-size="15">
-            Most Active Week:
+            x-o-game:
         </text>
         <text x="396" y="192" fill="#ffffff" font-size="15" text-anchor="end">
-            47
-        </text>
-        <text x="24" y="220" fill="#c9d1d9" font-size="15">
-            Repo Impact:
-        </text>
-        <text x="396" y="220" fill="#ffffff" font-size="15" text-anchor="end">
-            422.47
-        </text>
-        <text x="24" y="248" fill="#c9d1d9" font-size="15">
-            Total Commits:
-        </text>
-        <text x="396" y="248" fill="#ffffff" font-size="15" text-anchor="end">
-            628
+            0.00/day
         </text>
 </svg>

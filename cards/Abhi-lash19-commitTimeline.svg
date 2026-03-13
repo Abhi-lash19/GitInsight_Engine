@@ -10,50 +10,50 @@
     <rect width="100%" height="100%" rx="16" fill="url(#bg)" stroke="#30363d"/>
 
     <text x="24" y="44" fill="#58a6ff" font-size="20" font-weight="600">
-        Developer Insights
+        Commit Activity Timeline
     </text>
 
     
         <text x="24" y="80" fill="#c9d1d9" font-size="15">
-            Productivity Score:
+            Monday:
         </text>
         <text x="396" y="80" fill="#ffffff" font-size="15" text-anchor="end">
-            100
+            55 commits
         </text>
         <text x="24" y="108" fill="#c9d1d9" font-size="15">
-            Activity Level:
+            Tuesday:
         </text>
         <text x="396" y="108" fill="#ffffff" font-size="15" text-anchor="end">
-            High
+            100 commits
         </text>
         <text x="24" y="136" fill="#c9d1d9" font-size="15">
-            Churn Ratio:
+            Wednesday:
         </text>
         <text x="396" y="136" fill="#ffffff" font-size="15" text-anchor="end">
-            0.629
+            58 commits
         </text>
         <text x="24" y="164" fill="#c9d1d9" font-size="15">
-            Avg Commits/Week:
+            Thursday:
         </text>
         <text x="396" y="164" fill="#ffffff" font-size="15" text-anchor="end">
-            7.15
+            91 commits
         </text>
         <text x="24" y="192" fill="#c9d1d9" font-size="15">
-            Most Active Week:
+            Friday:
         </text>
         <text x="396" y="192" fill="#ffffff" font-size="15" text-anchor="end">
-            47
+            57 commits
         </text>
         <text x="24" y="220" fill="#c9d1d9" font-size="15">
-            Repo Impact:
+            Saturday:
         </text>
         <text x="396" y="220" fill="#ffffff" font-size="15" text-anchor="end">
-            422.47
+            44 commits
         </text>
         <text x="24" y="248" fill="#c9d1d9" font-size="15">
-            Total Commits:
+            Sunday:
         </text>
         <text x="396" y="248" fill="#ffffff" font-size="15" text-anchor="end">
-            628
+            67 commits
         </text>
 </svg>
